@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form & Input tag</title>
+  </head>
+  <body>
+    <h1>form tag 종류</h1>
+    <!-- form tag : 사용자로부터 입력받는 요소(input, select, textarea) 감싸는 태그
+                    화면에 드러나지 않는 추상적 태그 (양식) -->
+    <!-- form attribute : action, method(GET, POST) -> '서버'와 연관된 내용(백엔드 추후) -->
+    <!-- input type="name" : server와 관련 -->
+    <form>
+      Text 1
+      <input type="text" />
+      Text 2
+      <input type="text" disabled />
+      <!-- disabled : 수정 불가 -->
+
+      <br />
+      <!-- 웹 접근성에 적합 (사용자가 편리하게 사용할 수 있음) -->
+      <label for="email">이메일</label>
+      <!-- label 태그의 for 속성 & input 태그의 id 속성이 동일할 경우 : label 클릭하면 input에 포커싱 -->
+      <input type="email" id="email" />
+
+      <br />
+      <!-- textarea : 여러 줄 입력받음 -->
+      <textarea
+        cols="30"
+        rows="3"
+        placeholder="문의사항을 입력해주세요"
+      ></textarea>
+
+      <br />
+
+      <input type="color" />
+      <input type="range" />
+      <input type="file" />
+      <input type="number" />
+      <input type="date" />
+      <input type="datetime-local" />
+
+      <!-- checkbox, radio는 같은 name 속성값을 부여해서, 카테고리화 해줘야 함 -->
+      <h5>HOBBY ?</h5>
+      <!-- name : 서버에서 같은 카테고리로 인식
+           value : 서버에 값 넘겨줌 -->
+      <input
+        type="checkbox"
+        name="interest"
+        value="badminton"
+        checked
+      />배드민턴
+      <!-- checked : default 로 체크됨 -->
+      <input type="checkbox" name="interest" value="basketball" />농구
+      <input type="checkbox" name="interest" value="movie" />영화
+      <input type="checkbox" name="interest" value="reading" />독서
+
+      <br />
+      <h5>당신의 성별은 ?</h5>
+      <!-- name 입력해줘야 radio 버튼 제대로 작동함 -->
+      <!-- value 입력해야 user가 어떤 값을 선택했는지, back에서 연동해서 그 값을 받아올 수 있음 -->
+      <input type="radio" name="gender" value="female" id="genderF" />
+      <label for="genderF">여자</label>
+      <!-- genderF : label 태그의 for 속성 & input 태그의 id 속성이 동일할 경우 - 여자 클릭해도 radio 체크됨 -->
+      <input type="radio" name="gender" value="male" /> 남자
+
+      <br />
+      <!-- 단순한 버튼 -->
+      <input type="button" value="버튼 1" />
+      <button type="button">버튼 2</button>
+
+      <br />
+      <!-- 폼을 제출하는 버튼 -->
+      <input type="submit" value="제출1" />
+      <button type="submit">제출 2</button>
+
+      <br />
+      <select name="flower" id="">
+        <!-- optgroup : 선택지 그룹화 -->
+        <optgroup label="red-flower">
+          <option value="a">장미</option>
+          <option value="b">동백꽃</option>
+          <option value="c" selected>무궁화</option>
+        </optgroup>
+        <optgroup label="white-flower">
+          <option value="e">벚꽃</option>
+          <option value="f">매화</option>
+          <option value="g">목련</option>
+        </optgroup>
+      </select>
+    </form>
+  </body>
+</html>
