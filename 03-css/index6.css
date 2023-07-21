@@ -1,0 +1,60 @@
+/* body에 기본적으로 여백이 들어있어서 없애줌 */
+body {
+  margin: 0;
+  padding: 0;
+  height: 2000px;
+}
+
+div {
+  width: 100px;
+  height: 100px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 100px;
+}
+
+/* 
+1. static : 기본값 
+- inline 요소 : 왼 => 오
+- block 요소 : 위 => 아래
+*/
+.position-static {
+  background: pink;
+  position: static;
+}
+
+/* 
+2. relative : 상대 위치 
+- "원래 있어야 하는 위치" 기준으로부터 top/bottom/left/right씩 이동
+*/
+.position-relative {
+  background: aquamarine;
+  position: relative;
+  bottom: 200px;
+  /* 아래로부터 이동 */
+}
+
+/* 
+3. absolute : 절대 위치
+- "position 속성을 갖는 제일 가까운 조상(부모)" 기준
+- 없다면 body 기준
+- '특정 요소'를 기준 삼아서, top bottom right left 이동
+*/
+.position-absolute {
+  background: gold;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
+/* 
+4. fixed : 고정 위치
+- viewport(브라우저 화면전체) 기준으로 특정 위치 배정
+- scroll 해도 움직이지 않음
+*/
+.position-fixed {
+  background: coral;
+  position: fixed;
+  top: 0;
+  right: 0;
+}

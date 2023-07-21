@@ -1,0 +1,49 @@
+/* 1. 하위 선택자 : 공백(띄어쓰기) */
+
+/* 하위(후손) 선택자 */
+body section {
+  border: 1px solid blue;
+}
+
+body section h2 {
+  border: 1px solid green;
+}
+
+/* 2. 자식 선택자 : > */
+.first > h2 {
+  color: white;
+  background: navy;
+}
+
+.second > h2 {
+  color: navy;
+  background: white;
+}
+
+/* 3. 인접 형제 선택자 : + */
+/* 바로 뒤에 있어야 함 ! ---> 바로 뒤에 있는 span 주석처리 해야 적용됨 */
+#kong + li {
+  background: aqua;
+}
+
+/* 4. 일반 형제 선택자 : ~ */
+/* span 주석처리 안해도 적용됨 */
+#kong ~ li {
+  /* color: red; */
+  /* color: #ff0000; */
+  color: rgb(255, 0, 0);
+}
+
+/* CSS 색상 */
+/* 
+1. 색상 키워드 : red, blue, green, ...
+
+2. 16진수 코드 (#xxxxxx)
+0~9 , a b c d e f : 16개의 기호로 표현
+#ffffff : R(ff) G(ff) B(ff) --> white
+#000000 : R(ff) G(ff) B(ff) --> black
+
+3. rgb(0~255, 0~255, 0~255)
+- rgb(255, 255, 255) : white
+- rgb(0, 0, 0) : black
+*/

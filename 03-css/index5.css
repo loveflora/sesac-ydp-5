@@ -1,0 +1,41 @@
+body {
+  /* 
+    
+    웹 폰트
+    - 모든 브라우저에서 보는 폰트를 통일
+    - 폰트를 다운로드하는게 아니라, link 태그에 걸려있는 주소에서 폰트를 가져오는 방식
+    - 보통 기본 폰트는 body에 작성
+    
+    */
+
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+div {
+  /* 색상 */
+  color: royalblue;
+  /* background: linear-gradient(70deg, blue, pink); */
+  /* background: linear-gradient(to right, blue, pink); */
+
+  text-align: justify;
+  /* 양쪽정렬 */
+
+  /* px, 1.2(default) */
+  line-height: 3;
+
+  /* 크기 */
+  width: 600px;
+  height: 200px;
+
+  border: solid 4px greenyellow;
+
+  /* 여백 */
+  margin: 30px;
+  padding: 10px;
+
+  /* 박스모델 */
+  /* content (default) : only */
+  /* border-box : content + padding + border */
+  box-sizing: content-box;
+  box-sizing: border-box;
+}

@@ -1,0 +1,19 @@
+/* 전체 선택자 */
+* {
+  color: navy;
+}
+
+/* 태그 선택자 */
+h1 {
+  background: pink;
+}
+
+/* 클래스 선택자 */
+.second {
+  background: aquamarine;
+}
+
+/* id */
+#first {
+  background: brown;
+}

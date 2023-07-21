@@ -1,0 +1,90 @@
+div1 {
+  width: 100px;
+  height: 100px;
+  background: aquamarine;
+}
+
+/* hover : 요소에 마우스 올렸을 때 */
+.div1:hover {
+  background: hotpink;
+  height: 150px;
+}
+
+/* active : 요소를 마우스로 클릭하고 있을 때 */
+.div1:active {
+  background: brown;
+  /*  hover도 포함된거라 - hover의 height도 먹음 */
+  width: 150px;
+}
+
+/* :focus 요소에 focus가 되었을 때 */
+input:focus {
+  background: blueviolet;
+  color: white;
+  outline-color: yellowgreen;
+}
+
+.links > a:hover {
+  background: coral;
+}
+
+.links > a:visited {
+  color: #ccc;
+}
+
+/* 요소 상황에 따른 가상 선택자 */
+.zoo > * {
+  background: green;
+  color: white;
+}
+
+/* 요소:last-child --- 요소가 마지막 요소라면 */
+.zoo > li:last-child {
+  background: black;
+}
+
+/* 첫번째 요소라면 */
+.zoo > *:first-child {
+  background: red;
+}
+
+/* 요소:not(div) --- div가 아닌 모든 요소 */
+.zoo > *:not(div) {
+  background: pink;
+}
+
+/* 요소:nth-child(n) --- n번째 요소 */
+/* 수식이어도 ㄱㅊ */
+.zoo > *:nth-child(2n) {
+  background: aqua;
+}
+
+.box::before {
+  content: "택시~ ";
+  color: red;
+}
+
+.box::after {
+  content: "빨리!";
+  color: blue;
+}
+
+.box {
+  color: orange !important;
+}
+
+.box {
+  color: aqua;
+}
+
+[disabled] {
+  background: red;
+}
+
+[placeholder="이름"] {
+  background: orange;
+}
+
+input:not(placeholder) {
+  background: blue;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 참조방식</title>
+    <!-- 3. 외부 (링크) -->
+    <link rel="stylesheet" href="./index1.css" />
+    <!-- 
+    li {
+        color: blue;
+        }
+ -->
+
+    <!-- 2. 내부 -->
+    <style>
+      ul {
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. 인라인 방식 -->
+    <h1 style="color: blueviolet">CSS 사용법</h1>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+.img1 {
+  transform: skewY(30deg);
+  width: 300px;
+  position: relative;
+  top: 80px;
+  left: 60px;
+  z-index: 3;
+}
+
+.img2 {
+  transform: skewY(30deg);
+  width: 300px;
+  position: relative;
+  top: 120px;
+  right: 60px;
+  z-index: 2;
+}
+
+.img3 {
+  transform: skewY(30deg);
+  width: 300px;
+  position: relative;
+  top: 100px;
+  right: 150px;
+  z-index: 1;
+}

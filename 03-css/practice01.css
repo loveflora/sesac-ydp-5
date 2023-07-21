@@ -1,0 +1,47 @@
+.title {
+  background: black;
+  height: 20px;
+  color: white;
+}
+
+div.red {
+  background: red;
+  width: 20px;
+  height: 20px;
+}
+
+.orange {
+  background: orange;
+  width: 40px;
+  height: 20px;
+}
+
+.yellow {
+  background: yellow;
+  width: 60px;
+  height: 20px;
+}
+
+.green {
+  background: green;
+  width: 80px;
+  height: 20px;
+}
+
+.blue {
+  background: blue;
+  width: 100px;
+  height: 20px;
+}
+
+.navy {
+  background: navy;
+  width: 120px;
+  height: 20px;
+}
+
+.purple {
+  background: purple;
+  width: 140px;
+  height: 20px;
+}
