@@ -117,14 +117,17 @@ console.log(x); // undefined
 // [QUIZ] 변수
 // Q1. 코드 실행시 q1 변수는 어떤 값이 될까?
 let q1 = 3;
-q1 - 2;
+
+console.log(q1 - 2);
 // 1
 
 // Q2. 다음 코드 실행시 q2 변수는 어떤 값이 될까?
 let q2 = 10;
 q2 = q2 + 5; // 15
-q2 = q2 - 2; // 8
+q2 = q2 - 2; // 13
+console.log(q2);
 
 // Q3. 다음 코드 실행시 q3 변수는 어떤 값이 될까?
 const q3 = 1;
-q3 = q3 + 1; // 2
+q3 = q3 + 1; // error
+console.log(q3 + 1);
