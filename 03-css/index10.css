@@ -1,0 +1,56 @@
+.d-inline1 {
+  display: inline;
+  background: blue;
+}
+
+.d-inline2 {
+  display: inline;
+  background: red;
+}
+
+.d-block1 {
+  display: block;
+  background: blue;
+  width: 500px;
+}
+
+.d-block2 {
+  display: block;
+  background: red;
+  width: 400px;
+}
+
+/* block은 무조건 개행처리 */
+
+.d-inline-block1 {
+  display: inline-block;
+  background: blue;
+}
+
+.d-inline-block2 {
+  display: inline-block;
+  background: red;
+  width: 200px;
+  height: 300px;
+  margin: 20px;
+}
+
+.d-none {
+  display: none;
+  background: green;
+  width: 200px;
+  height: 300px;
+}
+
+.box {
+  visibility: hidden;
+  /* visibility: visible; */
+  background: violet;
+  width: 200px;
+  height: 300px;
+}
+
+/* 
+display: none ---> 공간 없음
+visibility: hidden ---> 공간 있음
+*/

@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+}
+
+h5 {
+  text-align: center;
+}
+
+ul {
+  /* 초기화 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding-left: 10px;
+}
+
+header {
+  background-color: lightgrey;
+  height: 40px;
+  margin-bottom: 40px;
+  display: flex;
+  /* 나란히 */
+  align-items: center;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.menu {
+  display: flex;
+}
+
+/** 개별 설정 */
+
+.header1 {
+  justify-content: space-between;
+}
+
+.logo {
+  justify-content: flex-start;
+}
+
+.header2 ul {
+  justify-content: space-between;
+}
+
+.header3 {
+  justify-content: space-between;
+}
+
+.header4 {
+  justify-content: space-between;
+}
+
+.nav {
+  display: flex;
+}
+
+.title {
+  padding-left: 10px;
+}
