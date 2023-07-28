@@ -96,15 +96,14 @@ let date2 = new Date('2023', '06', '17'); // 1월이 0부터 시작함 MM(0~11)
 console.log(date2);
 
 // 관련 메서드
-console.table(date1.getFullYear());
-console.table(date1.getMonth()); // 0 ~ 11 주의
-console.table(date1.getDate());
-console.table(date1.getHours());
-console.table(date1.getMinutes());
-console.table(date1.getSeconds());
-console.table(date1.getMilliseconds());
-console.table(date1.getDay()); // 0 일 ~ 6 토
-// # table이 뭐지...?
+console.log(date1.getFullYear());
+console.log(date1.getMonth()); // 0 ~ 11 주의
+console.log(date1.getDate());
+console.log(date1.getHours());
+console.log(date1.getMinutes());
+console.log(date1.getSeconds());
+console.log(date1.getMilliseconds());
+console.log(date1.getDay()); // 0 일 ~ 6 토
 
 // 퀴즈 : getDay()
 // Date 객체 이용해 오늘 요일,
@@ -115,3 +114,16 @@ let day = today.getDay();
 console.log(today);
 
 (day === 0) | (day === 6) ? console.log('주말') : console.log('평일');
+
+//=== Math 객체 ===
+
+// 난수 퀴즈
+// 1 ~ 100
+console.log(Math.floor(Math.random() * 100 + 1));
+// 0 <= * < 100
+// 1 <= * < 101
+
+// 20 ~ 22
+console.log(Math.floor(Math.random() * 3 + 20));
+// 0 <= * < 3
+// 20 <= * < 23
