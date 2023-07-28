@@ -173,4 +173,6 @@ for (let key in me) {
   console.log(key, me[key]);
   // key: key
   // value: me[key] --> 점 표기법이 아닌, 대괄호 표기법으로 각 값에 접근
+  // ,, 점 표기법 : 'me.key'인데, key에 'key'라는 값이 없어서 사용 못함.
+  // ,, 대괄호 표기법 : key가 변수에 저장되어 있을 때 주로 사용
 }
