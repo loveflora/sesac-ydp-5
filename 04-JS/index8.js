@@ -164,3 +164,13 @@ console.log(overThree);
 // 2. 글자에 'a' 포함 단어만 필터링
 const includeA = word.filter((e) => e.includes('a'));
 console.log(includeA);
+
+// $ for in 반복문
+// @ 객체의 key를 반복할 수 있는 구문
+
+const me = { name: 'John', gender: 'F', hobby: 'movie' };
+for (let key in me) {
+  console.log(key, me[key]);
+  // key: key
+  // value: me[key] --> 점 표기법이 아닌, 대괄호 표기법으로 각 값에 접근
+}
