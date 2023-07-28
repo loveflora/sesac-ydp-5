@@ -87,3 +87,80 @@ console.log(arr2.join('-'));
 console.log('hello'.split(''));
 console.log('hello'.split('').reverse());
 console.log('hello'.split('').reverse().join(''));
+
+// === 배열에서 반복문 반복 ===
+// ; 1) 기본 for문
+// ; 2) for of 문
+// ; 3) forEach() 메서드
+
+const arr = [1, 2, 5, 6, 7];
+const alphabets = ['a', 'b', 'c', 'd', 'e'];
+
+for (let a = 0; a < arr.length; a++) {
+  console.log(arr[a]);
+}
+
+for (let alpha of alphabets) {
+  console.log(alpha);
+}
+
+alphabets.forEach(function (alpha, idx) {
+  // (1) alpha : currentValue (반복하는 현재요소)
+  // (2) idx : currentValue의 index
+  // (3) arr : forEach를 호출한 배열
+  console.log(alpha, idx, arr);
+});
+
+// ; 배열의 합
+let numbers = [1, 2, 3, 4, 5, 6];
+var sum1 = 0;
+var sum2 = 0;
+var sum3 = 0;
+
+for (let i = 0; i < numbers.length; i++) {
+  console.log(numbers[i]);
+  sum1 += numbers[i];
+}
+
+for (let num of numbers) {
+  sum2 += num;
+}
+
+numbers.forEach((num) => {
+  sum3 += num;
+});
+
+console.log(sum1, sum2, sum3);
+
+console.log('-------');
+
+// === map, filter, find 메서드 ===
+// ] 1) map()
+// -- 배열 내 모든 원소에 대해 연산한 결과를 모아 '새로운 배열'로 반환
+// forEach와 비교해보기
+const arr4 = [1, 2, 3, 4, 5];
+const mapResult = arr4.map(function (e) {
+  return e * 2;
+});
+console.log(mapResult);
+
+// ] 2) filter()
+// -- 주어진 함수의 조건을 통과하는 요소를 모아, '새로운 배열'로 반환
+// -- O : 요소 '유지'
+// -- x : 요소 '버림'
+const filterResult = arr4.filter((e) => e > 2);
+console.log(filterResult);
+
+// ] 3) find()
+// -- 특정 조건을 만족하는 첫번째 요소 찾아서, '값'으로 반환
+const findResult = arr4.find((e) => e > 2);
+console.log(findResult);
+
+// 퀴즈
+const word = ['dog', 'cat', 'rabbit', 'apple', 'wow'];
+// 1. 글자 수 3개 초과 필터링
+const overThree = word.filter((e) => e.length > 3);
+console.log(overThree);
+// 2. 글자에 'a' 포함 단어만 필터링
+const includeA = word.filter((e) => e.includes('a'));
+console.log(includeA);
