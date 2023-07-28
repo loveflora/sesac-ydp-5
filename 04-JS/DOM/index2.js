@@ -1,64 +1,128 @@
-console.log(document);
-console.log(document.head);
-console.log(document.body);
-console.log(document.title);
-console.log(document.URL);
-// console.log(document.domain); // domain 취소선 : 쓰지 않는 것을 권장
+const div1 = document.getElementById('div1');
+console.log(div1);
 
-//=== document 객체 이용해서 HTML 요소 선택 (DOM) ===
-//; 1. getElementById
-console.log(document.getElementById('red'));
-console.log(document.getElementById('green'));
+//=== 1. 태그 내부 내용 변경 ===
+//; 1) innerHTML : 태그 사용O
+div1.innerHTML = '여기는 <b>첫번째</b> 태그';
+console.log(div1);
+//-- 2) innerText : 태그가 문자(기호) 그대로 노출 (b 태그 그대로 노출)
+// div1.innerText = '여기는 <b>첫번째</b> 태그';
+// console.log(div1);
+//-- 3) innerContent (b 태그 그대로 노출)
+// div1.innerContent = '여기는 <b>첫번째</b> 태그';
+// console.log(div1);
 
-//; 2. getElementsClassName
-console.log(document.getElementsByClassName('pink')); // 유사배열 (인덱싱은 되는데, forEach는 안됨)
-console.log(document.getElementsByClassName('pink')[1]);
+//=== 2. 속성(attribute) ===
+//-- 1) 속성 값 '설정' : setAttribute(속성명, 변경할 속성값)
+const naver = document.getElementById('naver');
+naver.setAttribute('href', 'https://www.google.com');
 
-//; 3. getElementsByTagName
-console.log(document.getElementsByTagName('div'));
+const pooh = document.getElementById('pooh');
+pooh.setAttribute('src', './img/cat.jpeg');
 
-//; 4. getElementsByName
-console.log(document.getElementsByName('id'));
+//-- 2) 속성 값 '얻기' : getAttribute(속성명)
+console.log(document.getElementById('pooh').getAttribute('src'));
 
-//; 5. querySelector (CSS selector)
-//-- 장점 : 메소드 이름 안바꿔도 됨
-//-- 처음 발견한 하나만 가지고 옴
-console.log(document.querySelector('.pink'));
-console.log(document.querySelector('.others'));
-console.log(document.querySelector('#green'));
-console.log(document.querySelector('div'));
-console.log(document.querySelector('[name="id"]')); // [attribute]
+// 참고) 속성 접근 (.) 연산자로도 가능
+console.log(document.getElementById('pooh').id);
+console.log(document.getElementById('naver').href);
 
-//; 6. querySelectorAll (CSS selector)
-console.log(document.querySelectorAll('.pink'));
-console.log(document.querySelectorAll('.others'));
-console.log(document.querySelectorAll('#green'));
-console.log(document.querySelectorAll('div'));
-console.log(document.querySelectorAll('[name="id"]'));
+// 참고) . 연산자로 속성에 접근하고 = 할당 연산자로 속성 값 변경 가능
+document.getElementById('naver').href = '#';
 
-console.log(document.querySelectorAll('.pink')[0]);
-console.log(document.querySelectorAll('.pink')[1]);
-console.log(document.querySelectorAll('.pink')[2]);
-console.log(document.querySelectorAll('.pink')[3]);
+//=== 3. CSS 지정 ===
+const h1 = document.querySelector('h1');
+const list = document.querySelectorAll('ul > li'); // 유사 배열
 
-//] 유사배열
-//-- HTMLCollection, NodeList
-// [] 식으로 생긴 배열을 의미하나, 배열은 아님 !
-// index, length 가짐
-// 배열과 달리, 사용가능한 메서드가 제한
-
-//,, NodeList --> forEach() 반복문 사용 O
-document.querySelectorAll('.pink').forEach((e) => console.log(e));
-
-//,, HTMLCollection --> forEach() 사용 X
-// 반복해야 한다 ? Array 변경 //ll Array.from()
-// document.getElementsByClassName('.pink').forEach((e) => console.log(e));   //: error
-Array.from(document.getElementsByClassName('pink')).forEach((e) =>
-  console.log(e)
-);
-
-//,, for of 반복문도 가능 O
-const pinks = document.querySelectorAll('.pink');
-for (let pink of pinks) {
-  console.log(pink);
+//; 1) style 속성
+// style 속성 이용해 CSS 지정 가능
+// style.XXX (XXX : camelCase)
+// list[0].style.backgroundColor = 'purple';
+// list[0].style.fontSize = '20px';
+// list[0].style.color = 'yellow';
+for (let li of list) {
+  li.style.backgroundColor = 'purple';
+  li.style.fontSize = '20px';
+  li.style.color = 'yellow';
 }
+
+//; 2) classList 활용
+// xxx.classList.add
+// xxx.classList.remove
+// xxx.classList.contains : 유무 확인 (T/F)
+// xxx.classList.toggle : 있으면 제거, 없으면 추가
+h1.classList.add('add-h1');
+// h1.classList.remove('add-h1');
+console.log(h1.classList.contains('add-h1'));
+
+h1.classList.contains('add-h1')
+  ? (h1.innerText = 'add-h1 클래스 있음')
+  : (h1.innerText = 'add-h1 클래스 없음');
+
+h1.classList.toggle('add-h1');
+
+//=== 4. 요소 찾기 ===
+// 계층 구조 (형제, 자식, 부모, 조상, 자손)
+const friends = document.querySelector('#friends');
+const tigger = document.querySelector('#tigger');
+
+//; 1) 자식 요소
+console.log(friends.children); // 유사배열 --> 자식 모두 선택
+console.log(friends.children[0]);
+
+//; 2) 부모 요소
+console.log(tigger.parentNode);
+console.log(tigger.parentNode.parentNode);
+
+//; 3) 형제 요소
+console.log(tigger.previousElementSibling);
+console.log(tigger.nextElementSibling);
+console.log(tigger.nextElementSibling.nextElementSibling);
+
+//=== 5. 요소 생성, 추가, 삭제 ===
+const container = document.querySelector('.container');
+
+//; 1) 생성
+const p = document.createElement('p'); // 요소 생성
+// js로 <p></p> 태그 생성
+console.log(p);
+p.innerText = '새로 추가된 p 요소입니다.';
+p.style.fontWeight = 700;
+p.style.backgroundColor = 'red';
+
+//; 2) 추가
+//-- (1) x.append(y)
+//-- ((1)) x.add(y) : x 요소의 맨 마지막 자식으로 y 요소 추가
+container.append(p);
+
+const p2 = document.createElement('p'); // 요소 생성
+const p3 = document.createElement('p'); // 요소 생성
+p2.innerHTML = 'p2';
+p3.innerHTML = 'p3';
+p2.classList.add('p-2');
+p3.classList.add('p-3');
+
+container.append(p2, p3); // 여러개 추가도 가능 !
+//: appendChild 는 한 번에 하나만 추가가능
+
+//-- ((2)) x.prepend(y) : x요소의 맨 처음 자식으로 y요소 추가
+const li1 = document.createElement('li');
+li1.textContent = '처음';
+friends.prepend(li1);
+const li0 = document.createElement('li');
+li0.innerHTML = '<b>친구들을 소개합니다</b>';
+friends.prepend(li0);
+
+//-- (2) x.appendChild(y)
+div1.appendChild(p);
+// div1 태그의 자식으로 p 추가
+
+//; 3) 삭제
+//-- (1) x.remove(y) : x요소 삭제
+const firstLi = document.querySelector('li');
+console.log(firstLi);
+// firstLi.remove();
+
+//-- (2) x.removeChild(y) : x의 자식요소인 y가 삭제
+const ul = firstLi.parentNode;
+ul.removeChild(firstLi);
