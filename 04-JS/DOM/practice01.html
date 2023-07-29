@@ -4,21 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="./practice01.js"></script>
+    <script defer src="./practice01.js"></script>
   </head>
   <body>
     <h1>간단한 계산기 만들기</h1>
-    값1:<input type="text" id="원하는 아이디" />
+    값1:<input type="text" id="num1" />
     <br />
-    값2:<input />
+    값2:<input type="text" id="num2" />
     <br />
-    연산자:<input />
+    연산자:<input type="text" id="operator" />
     <br />
-    결과:<input />
+    결과:<input type="text" id="result" />
     <br />
     <br />
-    <button>계산하기</button>
-    <button>초기화</button>
-    <h1>방명록 만들기</h1>
+    <button id="calculated">계산하기</button>
+    <button id="reset">초기화</button>
   </body>
 </html>
