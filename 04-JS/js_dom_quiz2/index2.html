@@ -27,6 +27,31 @@
       // - [ ] <li> 태그를 새로 만들고, "아이디 - 댓글내용" 형식이 되도록 설정합니다.
       // - [ ] <ul class="comment-list"> 태그에 li를 추가합니다.
       // - [ ] 아이디 input과 댓글 input을 초기화해야 합니다.
+
+      function addHandler() {
+        const ul = document.querySelector("ul");
+        const li = document.createElement("li");
+        const userid = document.querySelector("#userid");
+        const comment = document.querySelector("#comment");
+
+        ul.append(li);
+        li.classList.add("comment-list");
+        li.innerHTML = `${userid.value} - ${comment.value}`;
+
+        userid.value = "";
+        comment.value = "";
+      }
+
+      const button = document.querySelector("button");
+
+      button.addEventListener("click", () => {
+        document
+          .querySelector("form")
+          .addEventListener("submit", (e) => e.preventDefault());
+
+        addHandler();
+        // addEventListener 안에 addEventListener 또 써도 되나요...?
+      });
     </script>
   </body>
 </html>
