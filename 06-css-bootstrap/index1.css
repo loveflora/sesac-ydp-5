@@ -1,0 +1,11 @@
+.border {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(133, 204, 20, 0.253);
+}
+
+.my_center {
+  background-color: hotpink;
+  width: 300px;
+}
