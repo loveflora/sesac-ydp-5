@@ -1,0 +1,29 @@
+@media (min-width: 500px) {
+  body {
+    background-color: skyblue;
+  }
+}
+
+@media (max-width: 300px) {
+  body {
+    background-color: orange;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 500px) {
+  body {
+    background-color: none;
+  }
+}
+
+@media (max-height: 300px) {
+  p {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+}
+
+@media (min-height: 500px) {
+  p {
+    background-color: green;
+  }
+}
