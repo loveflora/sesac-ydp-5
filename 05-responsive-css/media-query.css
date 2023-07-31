@@ -1,0 +1,57 @@
+.header {
+  background-color: palegoldenrod;
+}
+
+.main {
+  background-color: aqua;
+  display: flex;
+}
+
+.section {
+  background: cornflowerblue;
+  width: 80%;
+}
+
+.aside {
+  background-color: hotpink;
+  width: 20%;
+}
+
+.footer {
+  background-color: chartreuse;
+}
+
+@media (max-width: 480px) {
+  /* vw 480px 이하일 때 */
+
+  .header {
+    height: 60px;
+  }
+
+  .main {
+    flex-direction: column-reverse;
+  }
+
+  .aside {
+    width: 100%;
+    /* display: none; */
+  }
+
+  .section {
+    width: 100%;
+  }
+}
+
+/* 가로가 더 길면 */
+@media screen and (orientation: landscape) {
+  body {
+    background-color: bisque;
+  }
+}
+
+/* 세로가 더 길면 */
+@media screen and (orientation: portrait) {
+  body {
+    background-color: tomato;
+  }
+}
