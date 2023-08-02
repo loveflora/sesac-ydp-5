@@ -139,17 +139,31 @@ function setBgColor() {
   this.style.backgroundColor = 'royalblue';
 }
 
-for (let btn of btns) {
-  btn.addEventListener('click', setBgColor);
+function setBgColor2(elem, color) {
+  elem.style.backgroundColor = color;
+}
 
+for (let btn of btns) {
+  //) 1)
+  // btn.addEventListener('click', setBgColor);
+  //) 2)
   // btn.addEventListener('click', function () {
   //   console.log(this);
   //   this.style.backgroundColor = 'royalblue';
   // });
+
+  //) 3)
+  btn.addEventListener('click', function () {
+    setBgColor2(this, 'yellow');
+  });
 }
 
 for (let span of spans) {
   span.addEventListener('click', setBgColor);
+
+  span.addEventListener('click', function () {
+    setBgColor2(this, 'red');
+  });
 
   // span.addEventListener('click', function () {
   //   console.log(this);
