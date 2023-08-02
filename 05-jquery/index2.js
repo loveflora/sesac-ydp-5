@@ -178,57 +178,44 @@ function emptyJquery() {
 function findParent() {
   // child2 클래스 갖는 요소의 부모 요소
   console.log(document.querySelector('.child2').parentElement);
+  $('.child1').parent().css('color', 'red');
+}
+
+function findParents() {
+  $('.child1').parents().css('color', 'red');
 }
 
 function findNext() {
   // child2 클래스 갖는 요소의 다음 형제 요소
   console.log(document.querySelector('.child2').nextSibling);
+  $('.child2').next().css('color', 'red');
 }
 
 function findPrev() {
   // child2 클래스 갖는 요소의 이전 형제 요소
   console.log(document.querySelector('.child2').previousSibling);
+  $('.child2').prev().css('color', 'red');
 }
 
 function findChildren() {
   // parent 클래스 갖는 요소의 자식 요소
   console.log(document.querySelector('.parent').children);
+  $('.parent').children().css('color', 'red');
 }
 
-//-- jquery
-// function findParent() {
-//   $('.child1').parent().css('color', 'red');
-// }
-
-// function findParents() {
-//   $('.child1').parents().css('color', 'red');
-// }
-
-// function findNext() {
-//   $('.child2').next().css('color', 'red');
-// }
-
-// function findPrev() {
-//   $('.child2').prev().css('color', 'red');
-// }
-
-// function findChildren() {
-//   $('.parent').children().css('color', 'red');
-// }
-
 // //++ 클래스 조작하기
-// function addClass() {
-//   $('.color-blue').addClass('fs-50');
-// }
+function addClass() {
+  $('.color-blue').addClass('fs-50');
+}
 
 function removeClass() {
-  $('.color-blue').removeClass('color-blue');
+  $('.color-blue').removeClass('fs-50');
 }
 
 function hasClass() {
-  console.log($('.color-blue').hasClass('color-blue'));
+  console.log($('.color-blue').hasClass('fs-50'));
 }
 
 function toggleClass() {
-  console.log($('#hi').toggleClass('color-blue'));
+  console.log($('#hi').toggleClass('bg-pink'));
 }
