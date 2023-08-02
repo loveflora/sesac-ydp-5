@@ -145,7 +145,8 @@ function setBgColor2(elem, color) {
 
 for (let btn of btns) {
   //) 1)
-  // btn.addEventListener('click', setBgColor);
+  //# btn.addEventListener('click', setBgColor);
+
   //) 2)
   // btn.addEventListener('click', function () {
   //   console.log(this);
@@ -156,6 +157,7 @@ for (let btn of btns) {
   btn.addEventListener('click', function () {
     setBgColor2(this, 'yellow');
   });
+  //# 매개변수 있으면 콜백함수 형식 ,,,
 }
 
 for (let span of spans) {
