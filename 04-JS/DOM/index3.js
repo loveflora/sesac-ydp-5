@@ -72,6 +72,17 @@ input.addEventListener('keydown', function (e) {
   }
 });
 
+// 1. keyup
+// 키보드에서 손을 땠을 때 실행
+
+// 2. keydown
+// 키보드를 눌렀을 때 실행
+// 키보드를 누르고 있을 때 한번만 실행됨
+
+// 3. keypress
+// 키보드를 눌렀을 때 실행
+// 키보드를 누르고 있을 때 계속 실행됨
+
 //_ (2) form 이벤트
 const todoForm = document.getElementById('todo-form');
 const todos = document.querySelector('.todos');
