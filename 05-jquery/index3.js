@@ -145,7 +145,7 @@ function setBgColor2(elem, color) {
 
 for (let btn of btns) {
   //) 1)
-  //# btn.addEventListener('click', setBgColor);
+  // btn.addEventListener('click', setBgColor);
 
   //) 2)
   // btn.addEventListener('click', function () {
@@ -157,7 +157,9 @@ for (let btn of btns) {
   btn.addEventListener('click', function () {
     setBgColor2(this, 'yellow');
   });
-  //# 매개변수 있으면 콜백함수 형식 ,,,
+  //ll 매개변수 있으면 콜백함수 형식 ...
+  //ll 왜냐하면 'btn.addEventListener('click', 함수(a,b))' 이렇게 써버리면 클릭 안해도 함수가 바로 실행이 됨
+  //ll 익명함수로 한 번 더 감싸서 바로 실행이 되지 않고, 이벤트가 발생할 경우 실행이 되도록 함.
 }
 
 for (let span of spans) {
