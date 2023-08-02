@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap</title>
+
+    <!-- Bootstrap CDN (css) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./index3.css" />
+    <!-- Bootstrap CDN (js) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
+      <div
+        class="bg-dark p-4"
+        style="display: flex; justify-content: space-around"
+      >
+        <div style="display: flex; flex-direction: column">
+          <h5 class="text-body-emphasis h4">Womans</h5>
+          <span class="text-body-secondary">레깅스</span>
+          <span class="text-body-secondary">조거팬츠</span>
+          <span class="text-body-secondary">상의</span>
+          <span class="text-body-secondary">아우터</span>
+          <span class="text-body-secondary">하의</span>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <h5 class="text-body-emphasis h4">Mans</h5>
+          <span class="text-body-secondary">상의</span>
+          <span class="text-body-secondary">아우터</span>
+          <span class="text-body-secondary">하의</span>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <h5 class="text-body-emphasis h4">Golf</h5>
+          <span class="text-body-secondary">의상</span>
+          <span class="text-body-secondary">용품</span>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <h5 class="text-body-emphasis h4">Community</h5>
+          <span class="text-body-secondary">이벤트</span>
+          <span class="text-body-secondary">공지사항</span>
+          <span class="text-body-secondary">고객센터</span>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-dark bg-black">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarToggleExternalContent"
+          aria-controls="navbarToggleExternalContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon" style="color: black"></span>
+        </button>
+        <img src="./img/logo.jpeg" style="color: white; width: 60px" />
+      </div>
+    </nav>
+    <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="./img/img01.jpeg" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src="./img/img02.jpg" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src="./img/img03.jpg" class="d-block w-100" alt="..." />
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExample"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExample"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div style="width: 100%; height: 100px"></div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="card">
+          <img
+            src="https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto,fl_lossy,c_fill,g_auto/05f7e85f5b8c431fbf59aeef0047a600_9366/bw-%ED%94%84%EB%A6%AC%EB%AF%B8%EC%96%B4.jpg"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">BW 프리미어</h5>
+            <p class="card-text">Lifestyle</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img
+            src="https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto,fl_lossy,c_fill,g_auto/47b82e0122d9438b8ab725170310d1ef_9366/%ED%8E%84-%ED%8A%B8%EB%A0%88%ED%8F%AC%EC%9D%BC-%ED%8B%B0.jpg"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">Pearl Trail T-shirt</h5>
+            <p class="card-text">White</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img
+            src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e6a5c04e38b24754b255fb426ae0938d_9366/DRESS_TIGHT_White_IU0646_HM1.jpg"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">Dress Tight</h5>
+            <p class="card-text">Cream White / Multicolor</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img
+            src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/59f4c96b4e8e4a3aa614e9a695c6168c_9366/Black_IJ8251_21_model.jpg"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">Essential Lip Tank Top</h5>
+            <p class="card-text">Black</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img
+            src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/9285d52b608944f2b812de83a85be101_9366/Island_Club_Blue_IU0645_HM1.jpg"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">Island Club All Over Print Bra</h5>
+            <p class="card-text">Blue Tint / Multicolor</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img
+            src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b9b70c265034466ab891901d59762937_9366/SST_Brown_ID4280_01_standard.jpg"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">Adi Form SST Boots</h5>
+            <p class="card-text">Wonder Taupe / Wonder Taupe / Core Black</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="width: 100%; height: 100px"></div>
+    <div
+      style="
+        width: 100%;
+        height: 300px;
+        background-color: lightgrey;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div style="width: 400px; display: flex; justify-content: space-between">
+        <p style="color: gray">FAQ</p>
+        <p style="color: gray">|</p>
+        <p style="color: gray">Sitemap</p>
+        <p style="color: gray">|</p>
+        <p style="color: gray">Media</p>
+
+        <p style="color: gray">|</p>
+        <p style="color: gray">Contact</p>
+      </div>
+      <p style="color: gray">ⓒ adidas Korea, LLC. All Rights Reserved</p>
+    </div>
+  </body>
+</html>
