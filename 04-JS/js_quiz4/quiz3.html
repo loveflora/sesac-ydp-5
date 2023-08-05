@@ -20,7 +20,7 @@
         padding: 2px;
         border-radius: 3px;
         background-color: #ededed;
-        font-family: 'Noto Sans Mono', monospace;
+        font-family: "Noto Sans Mono", monospace;
         font-weight: 500;
       }
 
@@ -38,23 +38,40 @@
   <body>
     <h1>퀴즈3. 배열 연습하기</h1>
     <ul>
-        <li>배열 <code>fruits</code>는 다음과 같이 정의해주세요.<br>
-            <img src="./image/quiz3-1.png" alt="보기">
-        </li>
-        <li>첫 번째 원소 <code>coffee</code>는 과일이 아니므로 <b>배열에서 제거</b>해주세요.</li>
-        <li>맨 마지막 원소 <code>pasta</code>도 과일이 아니므로 <b>배열에서 제거</b>해주세요.</li>
-        <li><code>pineapple</code>을 <b>맨 마지막 원소로 추가</b>해주세요.</li>
-        <li><code>orange</code>을 <b>맨 첫번째 원소로 추가</b>해주세요.</li>
-        <li>배열에서 사용가능한 <strong>메서드를 이용</strong>해 코드를 작성해주세요.</li>
+      <li>
+        배열 <code>fruits</code>는 다음과 같이 정의해주세요.<br />
+        <img src="./image/quiz3-1.png" alt="보기" />
+      </li>
+      <li>
+        첫 번째 원소 <code>coffee</code>는 과일이 아니므로
+        <b>배열에서 제거</b>해주세요.
+      </li>
+      <li>
+        맨 마지막 원소 <code>pasta</code>도 과일이 아니므로
+        <b>배열에서 제거</b>해주세요.
+      </li>
+      <li><code>pineapple</code>을 <b>맨 마지막 원소로 추가</b>해주세요.</li>
+      <li><code>orange</code>을 <b>맨 첫번째 원소로 추가</b>해주세요.</li>
+      <li>
+        배열에서 사용가능한 <strong>메서드를 이용</strong>해 코드를
+        작성해주세요.
+      </li>
 
-        <li>
-            출력 결과 예시: 
-            <img src="./image/quiz3-2.png" alt="보기">
-        </li>
+      <li>
+        출력 결과 예시:
+        <img src="./image/quiz3-2.png" alt="보기" />
+      </li>
     </ul>
 
     <script>
       // TODO: 문제 조건을 만족하는 js 코드 작성
-    </script> 
+      const fruits = ["coffee", "blueberry", "apple", "pasta"];
+      console.log(fruits);
+      fruits.shift();
+      fruits.pop();
+      fruits.push("pineapple");
+      fruits.unshift("orange");
+      console.log(fruits);
+    </script>
   </body>
 </html>

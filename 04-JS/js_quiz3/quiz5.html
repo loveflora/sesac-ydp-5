@@ -20,7 +20,7 @@
         padding: 2px;
         border-radius: 3px;
         background-color: #ededed;
-        font-family: 'Noto Sans Mono', monospace;
+        font-family: "Noto Sans Mono", monospace;
         font-weight: 500;
       }
 
@@ -90,41 +90,111 @@
     <br />
 
     <script>
-      function drawStars() {
+      function drawStars(row) {
         // TODO: drawStars() 함수 내부 코드를 채워주세요.
+        // row i row-i
+        // 3 0 3
+        // 3 1 2
+        // 3 2 1
+
+        // 3
+        // 2
+        // 1
+        for (let i = 0; i < row; i++) {
+          console.log("*".repeat(row - i));
+        }
       }
 
-      function drawStars2() {
+      function drawStars2(row) {
         // TODO: drawStars2() 함수 내부 코드를 채워주세요.
+        // row i row-i
+        // 3 2 1
+        // 3 1 2
+        // 3 0 3
+
+        for (let i = row - 1; i >= 0; i--) {
+          console.log(" ".repeat(i) + "*".repeat(row - i));
+        }
       }
 
-      function drawStars3() {
+      function drawStars3(row) {
         // TODO: drawStars3() 함수 내부 코드를 채워주세요.
+
+        // row i row-i
+        // 3 2 1
+        // 3 1 2
+        // 3 0 3
+        for (let i = row - 1; i >= 0; i--) {
+          console.log(
+            " ".repeat(i) + "*".repeat(row - i) + "*".repeat(row - i - 1),
+          );
+        }
       }
 
-      function drawStars4() {
+      function drawStars4(row) {
         // TODO: drawStars4() 함수 내부 코드를 채워주세요.
+
+        // row i row-i
+        // 3 2 1
+        // 3 1 2
+        // 3 0 3
+        for (let i = row - 1; i >= 0; i--) {
+          console.log(
+            " ".repeat(i) + "*".repeat(row - i) + "*".repeat(row - i - 1),
+          );
+        }
+
+        // row i row-i
+        // 3 1 2
+        // 3 2 1
+
+        for (let j = 1; j < row; j++) {
+          console.log(
+            " ".repeat(j) +
+              "*".repeat(row - j) +
+              "*".repeat(row - j - 1) +
+              " ".repeat(j),
+          );
+        }
       }
 
-      function drawStars5() {
+      function drawStars5(row) {
         // TODO: drawStars5() 함수 내부 코드를 채워주세요.
+
+        // row i row-i
+        // 3 2 1
+        // 3 1 2
+        // 3 0 3
+        for (let i = row - 1; i >= 0; i--) {
+          console.log(" ".repeat(i) + "*".repeat(row));
+        }
       }
 
       // TODO: 해당 html 파일을 실행한 브라우저 콘솔창에서 drawStars ~ drawStars5 함수를 호출해주세요!
-      // drawStars(3);
-      // drawStars(5);
+      console.log("drawStars(3)");
+      drawStars(3);
+      console.log("drawStars(5)");
+      drawStars(5);
 
-      // drawStars2(3);
-      // drawStars2(5);
+      console.log("drawStars2(3)");
+      drawStars2(3);
+      console.log("drawStars2(5)");
+      drawStars2(5);
 
-      // drawStars3(3);
-      // drawStars3(5);
+      console.log("drawStars3(3)");
+      drawStars3(3);
+      console.log("drawStars3(5)");
+      drawStars3(5);
 
-      // drawStars4(3);
-      // drawStars4(5);
+      console.log("drawStars4(3)");
+      drawStars4(3);
+      console.log("drawStars4(5)");
+      drawStars4(5);
 
-      // drawStars5(3);
-      // drawStars5(5);
+      console.log("drawStars5(3)");
+      drawStars5(3);
+      console.log("drawStars5(5)");
+      drawStars5(5);
     </script>
   </body>
 </html>
