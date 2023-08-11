@@ -124,12 +124,13 @@ const values = [10, 20, 30, 40, 50, 60];
 
 //. ...rest는 마지막에 있어야 함
 function get(a, b, ...rest) {
+  // 호출 '받는' : rest (모으는, 먼저 할당 후 끌어모음)
   console.log('a >>', a); // 10
   console.log('b >>', b); // 20
   console.log('rest >>', rest); // [30, 40, 50, 60]
 }
 
-get(...values);
+get(...values); // 호출 '하는' : spread (펼침)
 
 //; 2. 객체에서 rest
 const icecream = {
@@ -143,7 +144,7 @@ const { flavor, ...rest } = icecream;
 console.log(flavor); // choco
 console.log(rest); // {company: 'lotte', price: 1000}
 
-//; 배열에서 rest
+//; 3. 배열에서 rest
 const num = [1, 2, 3, 4, 5, 6, 7, 8];
 const [one1, two1, ...rest2] = num;
 console.log(one1); // 1
