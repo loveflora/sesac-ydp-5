@@ -70,3 +70,82 @@ const lectureInfo = {
 
 const result = getInfo(lectureInfo);
 console.log(result); // SESAC x CODINGOn 강의는 WEB 개발을 공부합니다. 수업의 리더는 Sean 입니다.
+
+//=== spread 연산자 ===
+//-- 반복가능한 객체에 대해 단일 요소로 압축을 해제하는 역할 (객체 값을 펼침)
+// 호출'하는' 함수의 파라미터에 사용
+//] 1. spread in array
+const a = [1, 2, 3];
+const b = [4, 5];
+
+const spread = [...a, ...b]; // [1, 2, 3, 4, 5]
+console.log(spread);
+
+//] 2. spread in string
+const c = [...'HELLO']; // ['H', 'E', 'L', 'L', 'O']
+const d = 'WELCOME'.split(''); // ['W', 'E', 'L', 'O', 'M', 'E']
+console.log(c);
+console.log(d);
+
+//] 3. spread in object
+const chip = {
+  base: 'chip',
+  company: 'lotte',
+};
+
+const potatoChip = {
+  //   base: 'chip',
+  //   company: 'lotte',
+  ...chip,
+  flavor: 'potato',
+};
+
+const sweetChip = {
+  ...chip,
+  flavor: 'sweet potato',
+};
+
+console.log(potatoChip);
+console.log(sweetChip);
+
+const word1 = 'abc';
+const word2 = 'xyz';
+
+console.log([...word1, ...word2]);
+// word1.concat(word2); // 'abcxyz'
+// word1 + word2; // 'abcxyz'
+
+//=== rest 파라미터 ===
+// 나머지
+// 호출'받는' 함수의 파라미터에 사용
+// 호출하는 함수의 파라미터 순서에 맞춰 값 설정 후 남은 파라미터 값을 배열로 설정ㄴ
+//; 1. 함수에서 rest
+const values = [10, 20, 30, 40, 50, 60];
+
+//. ...rest는 마지막에 있어야 함
+function get(a, b, ...rest) {
+  console.log('a >>', a); // 10
+  console.log('b >>', b); // 20
+  console.log('rest >>', rest); // [30, 40, 50, 60]
+}
+
+get(...values);
+
+//; 2. 객체에서 rest
+const icecream = {
+  company: 'lotte',
+  flavor: 'choco',
+  price: 1000,
+};
+
+const { flavor, ...rest } = icecream;
+
+console.log(flavor); // choco
+console.log(rest); // {company: 'lotte', price: 1000}
+
+//; 배열에서 rest
+const num = [1, 2, 3, 4, 5, 6, 7, 8];
+const [one1, two1, ...rest2] = num;
+console.log(one1); // 1
+console.log(two1); // 2
+console.log(rest2); // [3, 4, 5, 6, 7, 8]
