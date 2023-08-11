@@ -27,10 +27,16 @@ const pwFromDB = '1234qwer';
 app.get('/', (req, res) => {
   //-- response.send(x) : x를 클라이언트한테 응답
   //) res.send('<h1>Hello Express!</h1>'));
-  // res.render('index');
-  // } // index.ejs 파일 렌더링
+  // res.render('filename');  // filename.ejs 파일 찾아서 렌더링
 
-  res.render('index', { userId: idFromDB, userPw: pwFromDB });
+  // }
+  res.render('index', {
+    userId: idFromDB,
+    userPw: pwFromDB,
+    btns: ['버튼1', '버튼2', '버튼3'],
+    me: { name: 'kim', msg: '반갑습니다' },
+    isLogin: true,
+  });
 });
 
 // '/sesac' 경로(서버주소: 포트번호/sesac)로 들어왔을 때 메세지 보이기
