@@ -20,11 +20,15 @@ app.set('views', './views'); // 템플릿 엔진 파일을 저장할 위치 등�
 //; app.use : 미들웨어 등록
 // 미들웨어 : 요청이 들어옴에 따라 응답까지의 중간 과정을 함수로 분리한 것
 // - 서버와 클라이언트를 이어주는 중간 작업
+// 정적파일 (image, css, js) --> static/
 app.use('/public', express.static(__dirname + '/static'));
+// '/public' : 실행이 될 주소
+
+app.use('/views', express.static(__dirname + '/views'));
 
 // 폴더경로
-console.log(__dirname); // /Users/user/Documents/sesac-ydp-5/06-3-express
-console.log(__dirname + '/static'); // /Users/user/Documents/sesac-ydp-5/06-3-express/static
+// console.log(__dirname); // /Users/user/Documents/sesac-ydp-5/06-3-express
+// console.log(__dirname + '/static'); // /Users/user/Documents/sesac-ydp-5/06-3-express/static
 
 //ll (임시) DB에서 가져온 회원 정보 (id, pw)
 const idFromDB = 'banana';
