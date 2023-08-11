@@ -17,17 +17,21 @@ const PORT = 8080;
 app.set('view engine', 'ejs'); // express에서 사용할 템플릿 엔진 종류(ejs) 등록
 app.set('views', './views'); // 템플릿 엔진 파일을 저장할 위치 등록
 
+//ll (임시) DB에서 가져온 회원 정보 (id, pw)
+const idFromDB = 'banana';
+const pwFromDB = '1234qwer';
+
 //; app.get(경로, 해당 경로로 들어왔을 때 실행할 함수)
 //-- '/' root 경로 : 서버주소의 포트번호/ (localhost:8080/)
 // res.send : 응답을 보냅니다
-app.get(
-  '/',
-  (req, res) => {
-    //-- response.send(x) : x를 클라이언트한테 응답
-    //) res.send('<h1>Hello Express!</h1>'));
-    res.render('index');
-  } // index.ejs 파일 렌더링
-);
+app.get('/', (req, res) => {
+  //-- response.send(x) : x를 클라이언트한테 응답
+  //) res.send('<h1>Hello Express!</h1>'));
+  // res.render('index');
+  // } // index.ejs 파일 렌더링
+
+  res.render('index', { userId: idFromDB, userPw: pwFromDB });
+});
 
 // '/sesac' 경로(서버주소: 포트번호/sesac)로 들어왔을 때 메세지 보이기
 app.get('/sesac', (req, res) => res.send('<h1>Hello Sesac!</h1>'));
