@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('./includes/common', {title: '홈'}) %>
+    <%- include('./includes/common', {title: 'Home'}) %>
     <!-- index.ejs에서만 적용하고 싶은 home.css -->
     <link rel="stylesheet" href="/public/css/home.css" />
   </head>
@@ -14,11 +14,11 @@
     <!-- 주석 안먹어서 따로 # 붙여야 함 -->
 
     <!--++ 객체 가져오기 -->
-    <% const userId = 'ejs파일' %>
+    <% const userId = '세화' %>
     <!-- ejs 안에서 변수 선언한게 우선순위가 더 높음 -->
 
-    <h1>HELLO ! EXPRESS</h1>
-    <p>안녕하세요 <%= userId%>님 ! 환영합니다.</p>
+    <h1>안녕하세요 <%= userId%>님 ! 환영합니다.</h1>
+    <p></p>
     <!-- 변경되어서 userId는 'ejs파일'로 찍힘 -->
     <p>당신의 PW는 <%= userPw%>입니다.</p>
 

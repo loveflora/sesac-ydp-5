@@ -1,4 +1,28 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .header {
-  background-color: #222;
-  color: #eee;
+  background-color: black;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 50px;
+}
+
+a {
+  text-decoration: none;
+  text-decoration-line: none;
+  color: white;
 }

@@ -1,5 +1,7 @@
 h1 {
-  font-size: 30px;
-  color: purple;
+  text-align: center;
+  font-size: 26px;
+  color: rgb(165, 138, 42);
   background-color: gold;
+  padding: 10px;
 }
