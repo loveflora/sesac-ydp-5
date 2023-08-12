@@ -1,7 +1,7 @@
 //=== class ===
 //-- 객체 생성 템플릿 => 객체를 만들기 위해 사용!
 
-const { createGunzip } = require('zlib');
+const { createGunzip } = require("zlib");
 
 // 집이라는 현실 세계의 객체를 만들어보자!
 /* 
@@ -35,16 +35,16 @@ class House {
 }
 
 // 클래스(틀)를 이용해 객체를 찍어보자 (생산해보자)
-const house1 = new House(1990, '롯데캐슬', 1);
-console.log('house1 >>', house1); // { year: 1990, name: '롯데캐슬', window: 1 }
+const house1 = new House(1990, "롯데캐슬", 1);
+console.log("house1 >>", house1); // { year: 1990, name: '롯데캐슬', window: 1 }
 console.log(typeof house1); // object
 console.log(house1.year); // 1990
 house1.getAge(); // 2023
 house1.getWindow(); // 1
 
 // house2 : 2007년에 지어진 '자이', 창문 10개
-const house2 = new House(2007, '자이', 10);
-console.log('house2 >>', house2);
+const house2 = new House(2007, "자이", 10);
+console.log("house2 >>", house2);
 console.log(house2.year);
 house2.getAge();
 house2.getWindow();
@@ -71,7 +71,7 @@ class Apartment extends House {
   }
 }
 
-const apt1 = new Apartment(2022, '레미안', 3, 20, 'KCC');
+const apt1 = new Apartment(2022, "레미안", 3, 20, "KCC");
 console.log(apt1);
 console.log(apt1.getAptInfo()); // 2022에 지어진 레미안 아파트의 총 층수는 20 이며, 창문의 개수는 3개 입니다!
 
@@ -127,9 +127,11 @@ let rec = new Rectangle(3, 4);
 let tri = new Triangle(3, 4);
 let cir = new Circle(1, 1, 3);
 
-console.log('사각형 넓이 : ', rec.getArea()); // 12
-console.log('사각형 대각선 길이 : ', rec.getDiagonal()); // 5
+console.log("사각형 넓이 : ", rec.getArea()); // 12
+console.log("사각형 대각선 길이 : ", rec.getDiagonal()); // 5
 
-console.log('삼각형 넓이 : ', tri.getArea()); // 6
+console.log("삼각형 넓이 : ", tri.getArea()); // 6
 
-console.log('원 넓이 : ', cir.getArea());
+console.log("원 넓이 : ", cir.getArea());
+
+// 개발 블로그 작성하기
