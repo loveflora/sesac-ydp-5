@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>프로미스 예시</h1>
+
+    <script>
+      // 1. 1초 뒤에 body 태그 색상을 빨간색으로 변경 (setTimeout)
+      // setTimeout(function () {
+      //   document.body.style.backgroundColor = 'red';
+      // }, 1000);
+
+      // 2. 1초 뒤에 body 태그의 색상을 빨 -> 1초 뒤 주황 -> ... -> 1초 뒤에 파란색
+      function bgColor(color) {
+        return new Promise(function (resolve, reject) {
+          // 실행할 코드
+          setTimeout(function () {
+            document.body.style.backgroundColor = color;
+            resolve();
+          }, 1000);
+          //
+        });
+      }
+
+      bgColor('red')
+        .then(function () {
+          return bgColor('orange');
+        })
+        .then(function () {
+          return bgColor('yellow');
+        })
+        .then(function () {
+          return bgColor('green');
+        })
+        .then(function () {
+          return bgColor('blue');
+        });
+    </script>
+  </body>
+</html>
