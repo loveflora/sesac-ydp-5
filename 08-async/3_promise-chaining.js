@@ -42,6 +42,7 @@
 
 //-- 장점 2.
 //) 예외처리 간편
+//) 마지막 catch 구문에서 한 번에 예외처리 가능
 
 function add(n1, n2) {
   return new Promise(function (resolve, reject) {
