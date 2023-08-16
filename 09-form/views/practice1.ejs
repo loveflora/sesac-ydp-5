@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <h3>Get 요청</h3>
+    <form action="/getForm" method="get">
+      <input
+        type="text"
+        name="id"
+        placeholder="ID는 최소 3글자"
+        required
+        minlength="3"
+      />
+      <!-- required 속성 : form 요소에 값이 반드시 들어가야 하는지 여부를 결정 (값 비어있으면 '제출' 버튼 눌러도 작동안됨) -->
+      <!-- pattern 속성 : 폼 요소에 값 입력되었을 때, 그 입력된 값에 대한 검증을 의미 -->
+      <input
+        type="password"
+        name="pw"
+        placeholder="PW는 최소 4글자"
+        required
+        minlength="4"
+      />
+      <input type="email" name="email" placeholder="EMAIL" required />
+      <input type="number" name="grade" placeholder="GRADE" />
+      <button>제출</button>
+    </form>
+    <!-- 문제 1. get 요청 form에서 grade 항목은 필수 값이 아님 => grade 인풋 값을 넣지 않고, 폼 제출 시 학년에 대한 div 데이터가 노출되는 상황  -->
+    <!-- 문제 2. post 요청 폼에서 email, grade 항목은 존재하지도 않았으나, => 폼 제출하면 학년, 이메일에 대한 div 데이터가 노출되고 있음 -->
+
+    <!-- 해결1. get요청 결과, post요청 결과 ejs 를 각각 만든다 -->
+    <!-- 해결2. ejs 문법으로 "조건문"을 사용하여 데이터가 존재할 때만 해당 정보를 보여줌. -->
+    <!-- - id, pw 무조건 넘어오도록 했으니 -> 조건문 필요x -->
+    <!-- - email, grade는 조건문을 이용해 값이 존재할 때만 나타나도록 -->
+    <h3>Post 요청</h3>
+    <form action="/postForm" method="post">
+      <input
+        type="text"
+        name="id"
+        placeholder="ID"
+        pattern="^([a-zA-Z0-9가-힣]){4,}$"
+        title="아이디는 대소문자, 한글, 숫자로
+      구성된 4자 이상이어야 합니다."
+      />
+      <!-- required 없으므로 '제출' 버튼 누르면 제출됨 -->
+      <input
+        type="password"
+        name="pw"
+        placeholder="PW"
+        pattern="^([a-z0-9]){8,12}$"
+        title="비밀번호는 영어 소문자와 숫자로 구성된 8자리 이상, 12자리 이하이어야 합니다."
+      />
+      <button>제출</button>
+    </form>
+
+    <h3>Get으로 정보 받기</h3>
+    <form action="/signup" method="get">
+      이름<input type="text" name="name" />
+      <fieldset>
+        <legend>성별</legend>
+        <!-- value에 값 안넣어주면 'on'이라고 뜸 -->
+        <input type="radio" name="gender" value="남자" />남자
+        <input type="radio" name="gender" value="여자" />여자
+      </fieldset>
+
+      <fieldset>
+        <legend>생년월일</legend>
+        <select type="select" name="year">
+          <% for(let i = 1901; i < 2040;i++) { %>
+          <option><%= i %></option>
+          <% } %>
+        </select>
+
+        <select type="select" name="month">
+          <% for(let i = 1; i <= 12;i++) { %>
+          <option><%= i %></option>
+          <% } %></select
+        >월
+        <select type="select" name="day">
+          <% for(let i = 1; i <= 31;i++) { %>
+          <option><%= i %></option>
+          <% } %></select
+        >일
+      </fieldset>
+      <fieldset>
+        <legend>관심사</legend>
+        <input type="checkbox" name="interest" value="여행" /> 여행
+        <input type="checkbox" name="interest" value="패션" /> 패션
+        <input type="checkbox" name="interest" value="음식" /> 음식
+      </fieldset>
+      <button>회원가입</button>
+    </form>
+  </body>
+</html>

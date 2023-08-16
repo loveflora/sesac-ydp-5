@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <form action="/postForm2" method="post">
+      이름<input type="text" name="name" required />
+      <fieldset>
+        <legend>성별</legend>
+        <!-- value에 값 안넣어주면 'on'이라고 뜸 -->
+        <input type="radio" name="gender" value="남자" required />남자
+        <input type="radio" name="gender" value="여자" required />여자
+      </fieldset>
+
+      <fieldset>
+        <legend>생년월일</legend>
+        <select type="select" name="year">
+          <% for(let i = 1901; i < 2040;i++) { %>
+          <option><%= i %></option>
+          <% } %>
+        </select>
+
+        <select type="select" name="month">
+          <% for(let i = 1; i <= 12;i++) { %>
+          <option><%= i %></option>
+          <% } %></select
+        >월
+        <select type="select" name="day">
+          <% for(let i = 1; i <= 31;i++) { %>
+          <option><%= i %></option>
+          <% } %></select
+        >일
+      </fieldset>
+      <fieldset>
+        <legend>관심사</legend>
+        <input type="checkbox" name="interest" value="여행" /> 여행
+        <input type="checkbox" name="interest" value="패션" /> 패션
+        <input type="checkbox" name="interest" value="음식" /> 음식
+      </fieldset>
+      <fieldset>
+        <legend>선택</legend>
+        좋아하는 색상
+        <input type="color" name="color" value="color" /> <br />
+        좋아하는 숫자
+        <input type="number" name="number" value="number" />
+      </fieldset>
+      <button>회원가입</button>
+    </form>
+  </body>
+</html>

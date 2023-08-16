@@ -21,5 +21,10 @@
       입니다.
     </div>
     <div>관심사는 <span><%= userInfo.interest %></span>입니다.</div>
+    <% if(userInfo.color) { %>
+    <div>좋아하는 색상은 <span><%= userInfo.color %></span> 입니다.</div>
+    <% } %> <% if(userInfo.number) { %>
+    <div>좋아하는 숫자는 <span><%= userInfo.number %></span> 입니다.</div>
+    <% } %>
   </body>
 </html>

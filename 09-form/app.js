@@ -24,7 +24,11 @@ app.get('/', (req, res) => {
   //) res.render(ejs파일경로, 데이터)
   // - ejs 파일 경로 : views/ 폴더 내부 ejs 파일의 주소
   // - 데이터 : 뷰에 넣어줄 정보
-  res.render('index', { title: '폼 전송을 연습해보자 !' });
+  res.render('index');
+});
+
+app.get('/practice1', (req, res) => {
+  res.render('practice1', { title: '폼 전송을 연습해보자 !' });
 });
 
 //] GET '/getForm' => 임의의 메세지 전송
@@ -39,6 +43,10 @@ app.get('/getForm', (req, res) => {
 app.get('/signup', (req, res) => {
   res.render('signup', { title: 'Sign Up', userInfo: req.query });
   console.log(req.query);
+});
+
+app.get('/practice2', (req, res) => {
+  res.render('practice2', { title: '폼 전송을 연습해보자 !' });
 });
 
 //] POST '/postForm' => 임의의 메세지 전송
@@ -56,6 +64,10 @@ app.post('/postForm', (req, res) => {
   //   res.send('post 요청 성공 !');
   //,, 2) response 방법 2
   res.render('result', { title: 'POST 요청', userInfo: req.body });
+});
+
+app.post('/postForm2', (req, res) => {
+  res.render('signup', { title: 'POST 요청', userInfo: req.body });
 });
 
 // 새로고침은 index 메인페이지에서 할 것 !

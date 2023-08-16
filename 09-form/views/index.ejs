@@ -6,53 +6,13 @@
     <title>Document</title>
   </head>
   <body>
-    <h1><%= title %></h1>
-
-    <h3>Get 요청</h3>
-    <form action="/getForm" method="get">
-      <input type="text" name="id" placeholder="ID" />
-      <input type="password" name="pw" placeholder="PW" />
-      <button>제출</button>
-    </form>
-    <h3>Post 요청</h3>
-    <form action="/postForm" method="post">
-      <input type="text" name="id" placeholder="ID" />
-      <input type="password" name="pw" placeholder="PW" />
-      <button>제출</button>
-    </form>
-
-    <h3>Get으로 정보 받기</h3>
-    <form action="/signup" method="get">
-      이름<input type="text" name="name" />
-      <fieldset>
-        <legend>성별</legend>
-        <!-- value에 값 안넣어주면 'on'이라고 뜸 -->
-        <input type="radio" name="gender" value="남자" />남자
-        <input type="radio" name="gender" value="여자" />여자
-      </fieldset>
-
-      <fieldset>
-        <legend>생년월일</legend>
-        <select type="select" name="year">
-          <% for(let i = 2000; i < 2099;i++) { %>
-          <option><%= i %></option>
-          <% } %>
-        </select>
-
-        <select type="select" name="month">
-          <option value="1">1</option></select
-        >월
-        <select type="select" name="day">
-          <option value="1">1</option></select
-        >일
-      </fieldset>
-      <fieldset>
-        <legend>관심사</legend>
-        <input type="checkbox" name="interest" value="여행" /> 여행
-        <input type="checkbox" name="interest" value="패션" /> 패션
-        <input type="checkbox" name="interest" value="음식" /> 음식
-      </fieldset>
-      <button>회원가입</button>
-    </form>
+    <h1>실습 파일</h1>
+    <a href="/practice1">실습1</a>
+    <!-- 파일 경로가 아니라, 포트번호 대로 싸야 함 ! -->
+    <!-- app.get('/practice1', (req, res) => { -->
+    <!-- res.render('practice1', { title: '폼 전송을 연습해보자 !' }); -->
+    <!-- }); -->
+    <!-- 위 코드와 일치하게 ! -->
+    <a href="/practice2">실습2</a>
   </body>
 </html>
