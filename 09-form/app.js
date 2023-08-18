@@ -8,6 +8,7 @@ const PORT = 8000;
 
 app.set('view engine', 'ejs');
 app.set('/views', 'views');
+
 //; 미들웨어 middleware
 //-- 요청(req)과 응답(res) 중간에서 작업하는 코드
 // app.use() 사용해서 등록
