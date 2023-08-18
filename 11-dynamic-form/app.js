@@ -22,6 +22,34 @@ app.get('/', (req, res) => {
   res.render('dynamic');
 });
 
+//] 실습하기
+// 실습1
+app.get('/practice1', (req, res) => {
+  res.render('practice1');
+});
+
+app.get('/practice1/axios', (req, res) => {
+  console.log(req.query);
+  res.send(req.query);
+});
+
+// 실습2
+app.get('/practice2', (req, res) => {
+  res.render('practice2');
+});
+
+app.get('/practice2/axios', (req, res) => {
+  console.log(req.query);
+  res.send(req.query);
+});
+
+app.post('/practice2/axios', (req, res) => {
+  console.log(req.body);
+  // res.send(req.body);
+
+  res.send({ id: req.body.id, pw: req.body.pw, msg: '반가워 !' });
+});
+
 //] ajax
 // ajax로 서버에 get 요청하면
 // 서버가 응답 보냄
@@ -61,11 +89,13 @@ app.post('/fetch', (req, res) => {
   res.send(req.body);
 });
 
+//-- send 는 아래와 같이 표현가능
 // res.send(req.body)
 // res.send("안뇽")
 // res.send("<h1>안뇽</h1>");
 // res.send(['apple', 'banana']);
 
+//-- json 은 아래만 가능
 // res.json(req.body)
 
 //; PORT

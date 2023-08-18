@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습 1</title>
+
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>axios get 회원가입</h1>
+    <form name="signUp">
+      <label for="username">이름</label>
+      <input type="text" name="username" id="username" />
+      <br />
+
+      <fieldset>
+        <legend>성별</legend>
+        <input type="radio" name="gender" id="male" value="male" />
+        <label for="male">남자</label>
+        <input type="radio" name="gender" id="female" value="female" />
+        <label for="female">여자</label>
+      </fieldset>
+      <br />
+
+      <fieldset>
+        <legend>생년월일</legend>
+        <select name="birthYear" id="year">
+          <% for (let i = 0; i < 50; i++) { %>
+          <option value="<%= 2010 - i %>"><%= 2010 - i %></option>
+          <% } %>
+        </select>
+        <label for="year">년</label>
+        <select name="birthMonth" id="month">
+          <% for (let i = 1; i < 13; i++) { %>
+          <option value="<%= i %>"><%= i %></option>
+          <% } %>
+        </select>
+        <label for="month">월</label>
+        <select name="birthDay" id="day">
+          <% for (let i = 1; i < 31; i++) { %>
+          <option value="<%= i %>"><%= i %></option>
+          <% } %>
+        </select>
+        <label for="day">일</label>
+      </fieldset>
+      <!-- select, radio, option 은 value 값이 있어야 함 -->
+      <br />
+
+      <fieldset>
+        <legend>관심사</legend>
+        <input type="checkbox" name="hobby" id="travel" value="travel" />
+        <label for="travle">여행</label>
+        <input type="checkbox" name="hobby" id="fashion" value="fashion" />
+        <label for="fashion">패션</label>
+        <input type="checkbox" name="hobby" id="food" value="food" />
+        <label for="food">음식</label>
+      </fieldset>
+
+      <button type="button" onclick="ajaxGet()">회원가입</button>
+    </form>
+
+    <!-- 동적 폼 전송 결과를 보여줄 곳 -->
+    <div class="result"></div>
+
+    <script>
+      const resultBox = document.querySelector('div.result');
+
+      async function ajaxGet() {
+        console.log('ajaxGet 함수 호출 !');
+
+        // form 선택
+        const form = document.forms['signUp'];
+        console.dir(form);
+
+        // hobby 유사배열 - checked === true
+        // !!!!!!!!!!! 배열 할당 !!!!! true
+
+        const hobbies = form.hobby;
+        let arr = [];
+
+        console.log(hobbies);
+
+        for (let hobby of hobbies) {
+          if (hobby.checked) {
+            arr.push(hobby.value);
+          }
+        }
+
+        // 요청에 실어서 보낼터 변수
+        const data = {
+          name: form.username.value,
+          gender: form.gender.value,
+          birthYear: form.birthYear.value,
+          birthMonth: form.birthMonth.value,
+          birthDay: form.birthDay.value,
+          hobby: arr,
+        };
+
+        console.log(data);
+
+        try {
+          const response = await axios({
+            method: 'get',
+            url: '/practice1/axios',
+            params: data,
+          });
+
+          console.log('response : ' + response);
+
+          const { name, gender, birthYear, birthMonth, birthDay, hobby } =
+            response.data;
+
+          resultBox.textContent = `GET /ajax 요청 완료 !
+            ${name}님의 성별은 ${gender}입니다.
+            생년월일은 ${birthYear}년 ${birthMonth}월 ${birthDay}일 입니다.
+            취미는 ${hobby}입니다.
+            `;
+        } catch (err) {
+          console.log('Error!', err);
+          resultBox.textContent = '알 수 없는 에러 발생 ! 다시 시도해주세요.';
+        }
+      }
+    </script>
+  </body>
+</html>
