@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
   res.render('dynamic');
 });
 
+//] ajax
 // ajax로 서버에 get 요청하면
 // 서버가 응답 보냄
 app.get('/ajax', (req, res) => {
@@ -36,6 +37,38 @@ app.post('/ajax', (req, res) => {
   res.send(req.body);
 });
 
+//] axios
+app.get('/axios', (req, res) => {
+  console.log(req.query);
+  res.send(req.query);
+});
+
+app.post('/axios', (req, res) => {
+  console.log(req.body);
+  // res.send(req.body);
+
+  res.send({ name: req.body.name, gender: req.body.gender, msg: '반가워 !' });
+});
+
+//] fetch
+app.get('/fetch', (req, res) => {
+  console.log(req.query);
+  res.send(req.query);
+});
+
+app.post('/fetch', (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+});
+
+// res.send(req.body)
+// res.send("안뇽")
+// res.send("<h1>안뇽</h1>");
+// res.send(['apple', 'banana']);
+
+// res.json(req.body)
+
+//; PORT
 app.listen(PORT, () => {
   console.log(`${PORT} is open !`);
 });
