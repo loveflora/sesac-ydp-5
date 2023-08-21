@@ -35,6 +35,8 @@ const uploadDetail = multer({
 app.set("view engine", "ejs");
 app.set("/views", express.static(__dirname + "/views"));
 
+app.use("/uploads", express.static(__dirname + "/uploads"));
+
 //; 미들웨어 등록
 app.use(express.urlencoded({ extended: true })); //) post 요청으로 들어오는 모든 형식의 데이터를 파싱(분해)
 app.use(express.json()); //) json 형식으로 데이터를 주고 받음
@@ -99,6 +101,12 @@ app.post(
     res.send("하나의 인풋에 여러 파일 업로드 완료!");
   },
 );
+
+//] 4. 동적 폼 전송
+app.post("/dynamicFile", uploadDetail.single("dynamicUserFile"), (req, res) => {
+  console.log(req.file);
+  res.send(req.file);
+});
 
 //; PORT
 app.listen(PORT, () => {
