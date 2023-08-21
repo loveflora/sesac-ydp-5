@@ -46,13 +46,13 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-//-- 1. single() : 하나의 파일을 업로드
+//] 1. single() : 하나의 파일을 업로드
 // upload.single('userfile')
 // 클라이언트의 요청이 들어오면 multer 설정(upload 변수)에 따라 파일을 업로드 한 후, req.file 객체 생성
 // single() 인자는 input 태그의 name 속성과 일치시켜야 함
 // app.post("/upload", upload.single("userfile"), (req, res) => {
 app.post("/upload", uploadDetail.single("userfile"), (req, res) => {
-  console.log(req.file);
+  console.log(req.file); // { req.file }
   // req.file : 파일 업로드 정보
   console.log("------");
   console.log(req.body);
@@ -73,6 +73,32 @@ app.post("/upload", uploadDetail.single("userfile"), (req, res) => {
 // }
 // ------
 // [Object: null prototype] { userfile: '' }
+
+//] 2. array() : 여러 파일을 한 번에 업로드
+// uploadDetail.array('userfiles'): 클라이언트 요청이 들어오면
+// multer 설정(uploadDetail 변수)에 따라 파일을 업로드한 후, req.files 객체 생성
+app.post("/upload/array", uploadDetail.array("userfiles"), (req, res) => {
+  console.log(req.files); // [{ 파일1_정보 }, { 파일2_정보 }, ... ] : 배열 형태로 각 파일 정보를 출력
+  // req.file : 파일 업로드 정보
+  console.log("------");
+  console.log(req.body);
+  // req.body : 파일 외의 정보들
+
+  res.send("하나의 인풋에 여러 파일 업로드 완료!");
+});
+
+//] 3. fields() : 여러 파일을 각각 인풋에 업로드
+// req.files에서 파일 정보를 확인
+// fields() 매개 변수로 input 태그의 name을 각각 넣기
+app.post(
+  "/upload/fields",
+  uploadDetail.fields([{ name: "userfile1" }, { name: "userfile2" }]),
+  (req, res) => {
+    console.log(req.files); // { userfile1: [ {파일_정보} ], userfile2: [ {파일_정보} ]} 객체 안에 배열 형태로 각 파일 정보
+    console.log(req.body);
+    res.send("하나의 인풋에 여러 파일 업로드 완료!");
+  },
+);
 
 //; PORT
 app.listen(PORT, () => {
