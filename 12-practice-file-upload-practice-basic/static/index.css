@@ -1,0 +1,26 @@
+/* TODO: CSS 파일 정의 */
+body {
+  background-color: rgba(0, 0, 0, 0.9);
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  background-color: white;
+  width: 300px;
+  height: 300px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  flex-direction: column;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}

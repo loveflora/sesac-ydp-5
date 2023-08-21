@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습 결과 예시</title>
+
+    <!-- TODO: CSS 연결 -->
+    <link rel="stylesheet" href="../static/index.css" />
+  </head>
+
+  <body>
+    <!-- TODO: 결과 페이지 완성 -->
+    <div class="box">
+      <!-- 업로드한 이미지를 보여줄 img 태그 요소 -->
+      <img src="<%= file %>" alt="" width="200" />
+      <div><%= data.id %> 님 환영합니다 !</div>
+      <br />
+      <div class="info">
+        <span>비밀번호 : <%= data.pw %> </span>
+        <span>이름 : <%= data.user %> </span>
+        <span>나이 :<%= data.age %> </span>
+      </div>
+    </div>
+  </body>
+</html>
