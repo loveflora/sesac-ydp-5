@@ -19,7 +19,7 @@
 
       <fieldset>
         <legend>성별</legend>
-        <input type="radio" name="gender" id="male" value="male" />
+        <input type="radio" name="gender" id="male" value="male" required />
         <label for="male">남자</label>
         <input type="radio" name="gender" id="female" value="female" />
         <label for="female">여자</label>
@@ -86,14 +86,14 @@
     <div class="result signIn"></div>
 
     <script>
-      const signUpResultBox = document.querySelector('div.signUp');
-      const signInResultBox = document.querySelector('div.signIn');
+      const signUpResultBox = document.querySelector("div.signUp");
+      const signInResultBox = document.querySelector("div.signIn");
 
       async function ajaxGet() {
-        console.log('ajaxGet 함수 호출 !');
+        console.log("ajaxGet 함수 호출 !");
 
         // form 선택
-        const form = document.forms['signUp'];
+        const form = document.forms["signUp"];
         console.dir(form);
 
         // 요청에 실어서 보낼터 변수
@@ -103,37 +103,37 @@
 
         try {
           const response = await axios({
-            method: 'get',
-            url: '/practice2/axios',
+            method: "get",
+            url: "/practice2/axios",
             params: data,
           });
 
-          console.log('response : ' + response);
+          console.log("response : " + response);
 
           const { name, gender, birthYear, birthMonth, birthDay, hobby } =
             response.data;
 
-          signUpResultBox.style.color = 'blue';
-          signUpResultBox.style.fontWeight = 'bold';
+          signUpResultBox.style.color = "blue";
+          signUpResultBox.style.fontWeight = "bold";
 
           signUpResultBox.textContent = `
               ${name}님 환영합니다! 가입이 완료되었습니다.🎉
               `;
 
           if (!name) {
-            signUpResultBox.textContent = '이름은 필수 값입니다!';
+            signUpResultBox.textContent = "이름은 필수 값입니다!";
           }
         } catch (err) {
-          console.log('Error!', err);
-          resultBox.textContent = '알 수 없는 에러 발생 ! 다시 시도해주세요.';
+          console.log("Error!", err);
+          resultBox.textContent = "알 수 없는 에러 발생 ! 다시 시도해주세요.";
         }
       }
 
       async function ajaxPost() {
-        console.log('ajaxPost 함수 호출 !');
+        console.log("ajaxPost 함수 호출 !");
 
         // form 선택
-        const form = document.forms['signIn'];
+        const form = document.forms["signIn"];
 
         // 요청에 실어서 보낼 데이터 변수
         const data = {
@@ -145,25 +145,25 @@
 
         try {
           const response = await axios({
-            method: 'post',
-            url: '/practice2/axios',
+            method: "post",
+            url: "/practice2/axios",
             data: data,
           });
 
           console.log(response.data);
 
           const { id, pw } = response.data;
-          signInResultBox.style.fontWeight = 'bold';
+          signInResultBox.style.fontWeight = "bold";
 
-          if (id === 'banana' && pw === '4321') {
-            signInResultBox.style.color = 'blue';
+          if (id === "banana" && pw === "4321") {
+            signInResultBox.style.color = "blue";
             signInResultBox.textContent = `${id}님! 로그인 성공 ! 😁`;
           } else {
-            signInResultBox.style.color = 'red';
-            signInResultBox.textContent = '아이디 또는 패스워드 오류😢';
+            signInResultBox.style.color = "red";
+            signInResultBox.textContent = "아이디 또는 패스워드 오류😢";
           }
         } catch (err) {
-          console.log('Error!', err);
+          console.log("Error!", err);
         }
       }
     </script>

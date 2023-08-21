@@ -32,7 +32,7 @@
       <input type="text" id="name" name="name" />
       <br />
       성별
-      <input type="radio" name="gender" value="m" id="male" checked />
+      <input type="radio" name="gender" value="m" id="male" required />
       <label for="male">남</label>
       <input type="radio" name="gender" value="f" id="female" />
       <label for="female">여</label>
@@ -77,12 +77,12 @@
       // ====================== API ======================
       // =================================================
 
-      const img = document.querySelector('img');
+      const img = document.querySelector("img");
 
       async function changeImg() {
         const res = await axios({
-          method: 'get',
-          url: 'https://api.thecatapi.com/v1/images/search',
+          method: "get",
+          url: "https://api.thecatapi.com/v1/images/search",
         });
         const { data } = res;
         img.src = data[0].url; // img 태그의 src 속성을 open api에서 받아온 랜덤 이미지 주소로 변경
@@ -93,15 +93,15 @@
       // ============================================
       // =================== AJAX ===================
       // ============================================
-      const resultBox = document.querySelector('div.result');
+      const resultBox = document.querySelector("div.result");
 
       // ------------------- GET -------------------
 
       function ajaxGet() {
-        console.log('ajaxGet 함수 호출 !');
+        console.log("ajaxGet 함수 호출 !");
 
         // form 선택
-        const form = document.forms['register'];
+        const form = document.forms["register"];
         console.log(form);
 
         // form 객체 요소 확인
@@ -124,8 +124,8 @@
 
         // Ajax로 서버에 Get 요청 보내기
         $.ajax({
-          type: 'GET', // 요청의 종류 (=form의 method 속성)
-          url: '/ajax', // 요청의 경로 (=form의 action 속성)
+          type: "GET", // 요청의 종류 (=form의 method 속성)
+          url: "/ajax", // 요청의 경로 (=form의 action 속성)
           data: data, // 요청에 실어보낼 데이터 (=서버가 받게 될 데이터)
 
           // '/ajax' 경로로 data 내용 담아서 'GET' 요청 보냄
@@ -145,9 +145,9 @@
       // ------------------- POST -------------------
 
       function ajaxPost() {
-        console.log('ajaxPost 함수 호출 !');
+        console.log("ajaxPost 함수 호출 !");
 
-        const form = document.forms['register'];
+        const form = document.forms["register"];
         // form's' : 's' 붙이는거 잊지 말기 !
         const data = {
           name: form.name.value,
@@ -155,8 +155,8 @@
         }; // 서버로 보낼 데이터를 만듦
 
         $.ajax({
-          type: 'POST',
-          url: '/ajax',
+          type: "POST",
+          url: "/ajax",
           data: data,
           success: function (data) {
             console.log(data);
@@ -220,37 +220,53 @@
       // 퀴즈 2. axios 요청 처리를 async/await로 변경 !
       // !!! async랑 await 위치를 몰랐다....
       async function axiosGet() {
-        console.log('axiosGet 함수 호출 !');
+        console.log("axiosGet 함수 호출 !");
 
-        const form = document.forms['register'];
+        const form = document.forms["register"];
         const data = {
           name: form.name.value,
           gender: form.gender.value,
         };
 
-        console.log('axiosGet 함수 호출 !');
+        console.log("axiosGet 함수 호출 !");
 
         try {
           // try : 성공할 때 !
 
-          // !!! async랑 await 위치를 몰랐다....
-          // axios가 끝나야 데이터가 담기게끔 !
-          const response = await axios({
-            method: 'get',
-            url: `/axios/?name=${form.name.value}&gender=${form.gender.value}`,
-          }); // response : 서버의 응답결과
+          // 폼 유효성 검사
+          // name input에 입력된 값이 없다면, '이름을 입력해주세요!'
+          // gender radio btn을 선택하지 않았다면, '성별을 선택해주세요!'
+          // 둘 다 입력이 잘 되었다면, axios로 back에 요청 날리기
 
-          console.log(response);
-          console.log(response.data);
+          if (!form.name.checkValidity()) {
+            resultBox.textContent = "이름을 입력해주세요!";
+          } else if (!form.name.gender[0]) {
+            resultBox.textContent = "성별을 선택해주세요!";
+          } else {
+            // !!! async랑 await 위치를 몰랐다....
+            // axios가 끝나야 데이터가 담기게끔 !
+            const response = await axios({
+              method: "get",
+              url: `/axios/?name=${form.name.value}&gender=${form.gender.value}`,
+            }); // response : 서버의 응답결과
 
-          const { name, gender } = response.data;
-          resultBox.textContent = `GET /ajax 요청 완료 ! ${name}님은 ${gender}이시죠?`;
+            console.log(response);
+            console.log(response.data);
+
+            const { name, gender } = response.data;
+            resultBox.textContent = `GET /ajax 요청 완료 ! ${name}님은 ${gender}이시죠?`;
+          }
         } catch (err) {
           // catch : 에러 발생 시 !
-          console.log('Error!', err);
-          resultBox.textContent = '알 수 없는 에러 발생 ! 다시 시도해주세요.';
+          console.log("Error!", err);
+          resultBox.textContent = "알 수 없는 에러 발생 ! 다시 시도해주세요.";
         }
       }
+
+      console.log(form.name.checkValidity());
+      // 같은 name으로 묶인 radio btn은 하나만 선택되더라도 True를 반환
+      console.log(form.gender[0].checkValidity());
+      console.log(form.gender[1].checkValidity());
 
       // ------------------- POST -------------------
       // ------- 1) then, catch : 프로미스 체이닝 -------
@@ -283,8 +299,8 @@
 
       // 퀴즈 3. axios 요청 처리를 async/await로 변경 !
       async function axiosPost() {
-        console.log('axiosPost 함수 호출 !');
-        const form = document.forms['register'];
+        console.log("axiosPost 함수 호출 !");
+        const form = document.forms["register"];
         const data = {
           name: form.name.value,
           gender: form.gender.value,
@@ -292,8 +308,8 @@
 
         try {
           const response = await axios({
-            method: 'POST',
-            url: '/axios',
+            method: "POST",
+            url: "/axios",
             data: data,
           });
 
@@ -304,9 +320,9 @@
 
           resultBox.textContent = `POST /ajax 요청 완료 ! ${name}님은 ${gender}이시죠? 메세지 : ${msg}`;
         } catch {
-          (err) => console.log('Error!', err);
+          (err) => console.log("Error!", err);
 
-          resultBox.textContent = '알 수 없는 에러 발생 ! 다시 시도해주세요.';
+          resultBox.textContent = "알 수 없는 에러 발생 ! 다시 시도해주세요.";
         }
       }
 
@@ -319,9 +335,9 @@
       // ------------------- GET -------------------
 
       function fetchGet() {
-        console.log('fetchGet 함수 호출 !');
+        console.log("fetchGet 함수 호출 !");
 
-        const form = document.forms['register'];
+        const form = document.forms["register"];
         // fetch('/fetch'); // fetch는 default로 get 방식으로 작동 (options 생략 가능)
         fetch(`/fetch?name=${form.name.value}&gender=${form.gender.value}`)
           .then((res) => {
@@ -343,9 +359,9 @@
       // ------------------- POST -------------------
 
       function fetchPost() {
-        console.log('fetchPost 함수 호출 !');
+        console.log("fetchPost 함수 호출 !");
 
-        const form = document.forms['register'];
+        const form = document.forms["register"];
         const data = {
           name: form.name.value,
           gender: form.gender.value,
@@ -355,10 +371,10 @@
         // 1) method 옵션 post 지정
         // 2) headers 키 JSON 포맷 사용 선언
         // 3) body 키 서버로 보낼 데이터
-        fetch('/fetch', {
-          method: 'POST',
+        fetch("/fetch", {
+          method: "POST",
           header: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
           // 'data: data' 라고 안함 !
@@ -373,7 +389,7 @@
             (res) => {
               console.log(res);
               return res.json();
-            }
+            },
           )
           .then((res) => {
             console.log(data);
