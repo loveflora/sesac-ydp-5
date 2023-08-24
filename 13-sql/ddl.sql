@@ -76,4 +76,69 @@ alter table product change new_column new_column2 int;   -- 컬럼명 변경
 alter table product drop new_column2;
 
 
+-- 실습
+create table member(
+	id VARCHAR(20) PRIMARY KEY NOT NULL,
+    name VARCHAR(5) NOT NULL,
+    age INT,
+    gender VARCHAR(2) NOT NULL,
+    email VARCHAR(50),
+    promotion VARCHAR(2) DEFAULT "x"
+);
 
+desc member;
+
+create table user (
+	id VARCHAR(10) PRIMARY KEY NOT NULL,
+    pw VARCHAR(20) NOT NULL,
+    name VARCHAR(5) NOT NULL,
+    gender enum('F','M','') default '',
+    birthday date not null,
+    age int(3) not null default 0
+);
+
+desc user;
+
+
+insert into user values
+	('hong1234', '8o4bkg', '홍길동', 'M', '1990-01-31', 33),
+	('sexysung', '87awjkdf', '성춘향', 'F', '1992-03-31', 31),
+	('power70', 'qxur8sda', '변사또', 'M', '1970-05-02', 53),
+	('hanjo', 'jk48fn4', '한조', 'M', '1994-01-31', 33),
+	('widowmaker', '38ewifh3', '위도우', 'F', '1976-06-27', 47),
+	('dvadva', 'k3f3ah', '송하나', 'F', '2001-06-03', 22),
+	('jungkrat', '4ifha7f', '정크랫', 'M', '1999-11-11', 24);
+    
+    
+
+select * from user;
+
+
+
+SELECT * FROM USER;
+
+SELECT * FROM USER ORDER BY BIRTHDAY ASC;
+SELECT * FROM USER WHERE GENDER = 'M' ORDER BY NAME DESC;
+
+
+SELECT ID, NAME FROM USER WHERE BIRTHDAY LIKE '199%';
+
+SELECT * FROM USER WHERE BIRTHDAY LIKE '%-06-%' ORDER BY BIRTHDAY ASC;
+
+SELECT * FROM USER WHERE GENDER = 'M' AND BIRTHDAY LIKE '197%';
+
+SELECT *FROM USER ORDER BY AGE DESC LIMIT 3;
+
+SELECT * FROM USER WHERE AGE BETWEEN 25 AND 50;
+
+UPDATE USER SET PW = '12345678' WHERE ID = 'hong1234';
+select * from user where pw = '12345678';
+
+DELETE FROM USER WHERE ID = 'jungkrat';
+
+
+-- 확인용
+        
+DROP TABLE MEMBER;
+DESC MEMBER;
+DESC USER;
