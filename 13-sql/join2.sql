@@ -74,3 +74,8 @@ SELECT * FROM instructor I RIGHT OUTER JOIN teaches T ON I.id=T.id;
 -- >> natural join
 -- 같은 값을 갖는 항목끼리 결합. 같은 값 없다면 해당 항목 제외
 SELECT * FROM instructor NATURAL JOIN teaches;
+
+
+
+
+
