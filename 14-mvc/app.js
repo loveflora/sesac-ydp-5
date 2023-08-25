@@ -1,4 +1,5 @@
-// 기본 설정
+//=== MVC refactoring ===
+
 const express = require('express');
 const app = express();
 const PORT = 8000;
