@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습</title>
+
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h2>axios post 로그인</h2>
+
+    <form name="signIn">
+      <label for="userId">아이디</label>
+      <input type="text" name="userId" id="ID" />
+      <br />
+
+      <label for="userPw">비밀번호</label>
+      <input type="password" name="userPw" id="PW" />
+      <br />
+
+      <button type="button" onclick="ajaxPost()">회원가입</button>
+    </form>
+
+    <!-- 동적 폼 전송 결과를 보여줄 곳 -->
+    <div class="result signIn"></div>
+
+    <script>
+      const signInResultBox = document.querySelector("div.signIn");
+
+      async function ajaxPost() {
+        console.log("ajaxPost 함수 호출 !");
+
+        // form 선택
+        const form = document.forms["signIn"];
+
+        // 요청에 실어서 보낼 데이터 변수
+        const data = {
+          id: form.userId.value,
+          pw: form.userPw.value,
+        };
+
+        console.log(data);
+
+        try {
+          const response = await axios({
+            method: "post",
+            url: "/index/axios",
+            data: data,
+          });
+
+          console.log(response.data);
+
+          // 비교할 값
+          const { realId, realPw } = response.data.info;
+
+          // 입력 값
+          const { id, pw } = response.data.userData;
+
+          signInResultBox.style.fontWeight = "bold";
+
+          if (id === realId && pw === realPw) {
+            signInResultBox.style.color = "blue";
+            signInResultBox.textContent = `${id}님! 로그인 성공 ! 😁`;
+          } else {
+            signInResultBox.style.color = "red";
+            signInResultBox.textContent = "아이디 또는 패스워드 오류😢";
+          }
+        } catch (err) {
+          console.log("Error!", err);
+        }
+      }
+    </script>
+  </body>
+</html>
