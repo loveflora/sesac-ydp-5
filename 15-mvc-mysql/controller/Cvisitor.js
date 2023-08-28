@@ -15,16 +15,14 @@ exports.main = (req, res) => {
 //; GET /visitor
 // localhost:PORT/visitor
 exports.getVisitors = (req, res) => {
-  console.log(Visitor.getVisitors());
-  res.render('visitor', { data: Visitor.getVisitors() });
+  // console.log(Visitor.getVisitors());
+
+  //-- [ 변경 전 ]
+  // res.render('visitor', { data: Visitor.getVisitors() });
+
+  //-- [ 변경 후 ]
+  Visitor.getVisitors1((result) => {
+    console.log('controller >>', result);
+    res.render('visitor', { data: result });
+  });
 };
-
-// exports.getAxios = (req, res) => {
-//   console.log(req.query);
-//   res.send(req.query);
-// };
-
-// exports.postAxios = (req, res) => {
-//   const info = Info.getInfo();
-//   res.send({ userData: req.body, info: info });
-// };

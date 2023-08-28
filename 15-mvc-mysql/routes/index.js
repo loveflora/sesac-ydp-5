@@ -11,6 +11,6 @@ router.get('/', controller.main);
 
 //; GET /visitor
 // localhost:PORT/visitor
-router.get('/visitor', controller.getVisitors);
+router.get('/visitors', controller.getVisitors);
 
 module.exports = router;
