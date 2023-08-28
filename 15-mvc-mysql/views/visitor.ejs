@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습</title>
+
+    <!-- axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h2>axios post 로그인</h2>
+
+    <form name="signIn">
+      <fieldset>
+        <legend>방명록 등록</legend>
+        <!-- <label for="userPw">비밀번호</label> -->
+        <input
+          type="text"
+          name="userName"
+          id="name"
+          placeholder="사용자 이름"
+        />
+        <br />
+        <input type="text" name="content" id="content" placeholder="방명록" />
+        <br />
+        <button type="button">등록</button>
+      </fieldset>
+
+      <table border="1" cellspacing="0">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>작성자</th>
+            <th>방명록</th>
+            <th>수정</th>
+            <th>삭제</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- data : DB에서 가지고 오는 데이터 - 새로고침해도 데이터 남아 있음 -->
+          <% for (let d of data) { %>
+          <tr id="tr_<%= d.id %>">
+            <td><%= d.id %></td>
+            <td><%= d.name %></td>
+            <td><%= d.comment %></td>
+            <td>
+              <button type="button">수정</button>
+            </td>
+            <td>
+              <button type="button">삭제</button>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+    </form>
+
+    <!-- 동적 폼 전송 결과를 보여줄 곳 -->
+    <div class="result signIn"></div>
+
+    <script>
+      const signInResultBox = document.querySelector('div.signIn');
+
+      async function ajaxPost() {
+        console.log('ajaxPost 함수 호출 !');
+
+        // form 선택
+        const form = document.forms['signIn'];
+
+        // 요청에 실어서 보낼 데이터 변수
+        const data = {
+          id: form.userId.value,
+          pw: form.userPw.value,
+        };
+
+        console.log(data);
+      }
+    </script>
+  </body>
+</html>
