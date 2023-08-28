@@ -10,11 +10,14 @@ use mvc;
 desc visitor;
 -- 테이블 구조 확인 
 
+drop table visitor;
+
 create table visitor(
-	id int PRIMARY KEY NOT NULL,
+	id int PRIMARY KEY NOT NULL auto_increment,
     name VARCHAR(10) NOT NULL,
     comment mediumtext
 );
+-- 변경 후, 테이블 삭제 후 다시 생성 !
 
 insert into visitor values (1, '김나나', '안녕하세요'), (2, '김하하', '반갑습니다');
 

@@ -26,3 +26,40 @@ exports.getVisitors = (req, res) => {
     res.render('visitor', { data: result });
   });
 };
+
+//; POST /visitor
+exports.postVisitor = (req, res) => {
+  console.log(req.body);
+  //   data: {
+  //   name: form.name.value,
+  //   comment: form.comment.value,
+  // },
+
+  //.. model
+  // exports.postVisitor = (data, callback) => {
+  // 매개변수
+  // 1) data : 프론트에서 유저가 입력한 값 (req.body)
+  // 2) callback : query 실행 후 호출할 함수
+  //   conn.query(
+  //     `insert into visitor values (null, ${data.name}, ${data.comment})`,
+  //     (err, rows) => {
+  //       if (err) {
+  //         throw err;
+  //       }
+
+  //       console.log('model >>', rows);
+  //       callback(rows.insertId);
+  //     }
+  //.   );
+  // };
+  //.. 1) data : req.body
+  //.. 2) callback : (insertId)=>{...}
+  Visitor.postVisitor(req.body, (insertId) => {
+    console.log('controller >>', req.body);
+    // 프론트로 보낼 데이터
+    // res.send({ result: true });
+
+    const { name, comment } = req.body;
+    res.send({ id: insertId, name: name, comment: comment });
+  });
+};

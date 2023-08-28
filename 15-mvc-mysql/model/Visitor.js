@@ -37,3 +37,23 @@ exports.getVisitors1 = (callback) => {
     // });
   });
 };
+
+exports.postVisitor = (data, callback) => {
+  // 매개변수
+  // 1) data : 프론트에서 유저가 입력한 값 (req.body)
+  // 2) callback : query 실행 후 호출할 함수
+
+  const { name, comment } = data;
+
+  conn.query(
+    `insert into visitor values (null, "${name}", "${comment}")`,
+    (err, rows) => {
+      if (err) {
+        throw err;
+      }
+
+      console.log('model >>', rows);
+      callback(rows.insertId);
+    }
+  );
+};
