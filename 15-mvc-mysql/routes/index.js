@@ -17,4 +17,7 @@ router.get('/visitors', controller.getVisitors);
 // 프론트에서 요청이 왔을 때
 router.post('/visitor', controller.postVisitor);
 
+//; DELETE /visitor
+router.delete('/visitor', controller.deleteVisitor);
+
 module.exports = router;

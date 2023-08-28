@@ -57,3 +57,20 @@ exports.postVisitor = (data, callback) => {
     }
   );
 };
+
+exports.deleteVisitor = (id, callback) => {
+  console.log('model >>', id); // front에서 알려준 삭제할 데이터의 pk
+
+  conn.query(`delete from visitor where id=${id}`, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+
+    console.log('model >>', rows);
+
+    //_ 삭제가 성공되었다
+    // (1) 불린 값 : true
+    // (2) { id: id }
+    callback(true); // 삭제 성공
+  });
+};
