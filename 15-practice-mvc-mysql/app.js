@@ -10,8 +10,14 @@ app.use(express.json());
 
 // TODO: 라우팅 분리
 // 기본 주소: localhost:PORT/user <- 주의!!
+const indexRouter = require('./routes/user.js'); // index 생략 가능 !
+// indexRouter에서는 localhost:PORT/ 기본 경로 설정 !
+app.use('/user', indexRouter);
 
 // TODO: 404 에러 처리
+app.get('*', (req, res) => {
+  res.render('404');
+});
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}/user`);
