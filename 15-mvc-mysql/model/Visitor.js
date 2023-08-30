@@ -19,7 +19,7 @@ exports.getVisitors1 = (callback) => {
   // };
 
   //--- [ 변경 후 ]
-  conn.query('select * from visitor', (err, rows) => {
+  conn.query('select * from visitor order by id desc', (err, rows) => {
     if (err) {
       throw err;
     }
@@ -72,5 +72,30 @@ exports.deleteVisitor = (id, callback) => {
     // (1) 불린 값 : true
     // (2) { id: id }
     callback(true); // 삭제 성공
+  });
+};
+
+exports.getVisitor = (id, callback) => {
+  conn.query(`select * from visitor where id=${id}`, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+
+    console.log('rows >>>', rows); // rows >>> [ { ... } ]
+    callback(rows[0]); // result >>> { ... }
+  });
+};
+
+exports.updateVisitor = (updateData, callback) => {
+  const { id, name, comment } = updateData;
+
+  const sql = `update visitor set name="${name}", comment="${comment}" where id=${id}`;
+  conn.query(sql, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+
+    console.log('rows >>>', rows); // rows >>> [ { ... } ]
+    callback();
   });
 };

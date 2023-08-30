@@ -74,3 +74,38 @@ exports.deleteVisitor = (req, res) => {
     res.send(result); // res.send(true);
   });
 };
+
+exports.getVisitor = (req, res) => {
+  //: 쿼리스트링
+  //_ GET /visitor?id=1
+  // controller에서는
+  // console.log("req.query >>> ", req.query);
+  // {  }
+
+  //: param
+  //_ GET /visitor/:id
+  // controller에서는
+  console.log('req.params >>> ', req.params);
+  // { id : 5 }
+
+  const { id } = req.params; // {}
+
+  Visitor.getVisitor(id, (result) => {
+    // result : 모델의 getVisitor callback의 인자
+    // rows[]
+    console.log('result >>>', result); //  { }
+    res.send(result);
+  });
+};
+
+//; UPDATE /visitor
+exports.updateVisitor = (req, res) => {
+  console.log(req.body); // { id: x, name: x, commnet: x }
+
+  Visitor.updateVisitor(req.body, (result) => {
+    // console.log('update result >>>', result);
+    // res.send(result);
+
+    res.send({ isUpdated: true });
+  });
+};
