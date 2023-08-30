@@ -40,15 +40,15 @@ exports.postSignup = (req, res) => {
 exports.postSignin = (req, res) => {
   console.log('postSignin controller >>', req.body);
   // .postSignin = (data, cb) => {}
-  // User.postSignin(req.body, (result) => {
-  //   console.log('postSignin controller req.body >>', req.body);
-  //   console.log('postSignin controller result >>', result);
-  // const { userid, pw } = req.body;
-  // res.send({
-  //   userid: userid,
-  //   pw: pw,
-  //   resultId: result.id,
-  //   resultPW: result.pw,
-  // });
-  // });
+  User.postSignin(req.body, (result) => {
+    //   console.log('postSignin controller req.body >>', req.body);
+    //   console.log('postSignin controller result >>', result);
+    // const { userid, pw } = req.body;
+    // res.send({
+    //   userid: userid,
+    //   pw: pw,
+    //   resultId: result.id,
+    //   resultPW: result.pw,
+    // });
+  });
 };

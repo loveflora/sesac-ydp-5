@@ -20,7 +20,7 @@ exports.getVisitors1 = (callback) => {
   // };
 
   //--- [ 변경 후 ]
-  conn.query('select * from visitor order by id desc', (err, rows) => {
+  conn.query('select * from visitor order', (err, rows) => {
     if (err) {
       throw err;
     }
