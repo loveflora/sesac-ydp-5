@@ -41,10 +41,10 @@ exports.postSignup = (data, callback) => {
   // 1) data : 프론트에서 유저가 입력한 값 (req.body)
   // 2) callback : query 실행 후 호출할 함수
 
-  const { id, pw } = data;
+  const { userid, name, pw } = data;
 
   conn.query(
-    `insert into visitor values (null, "${id}", "${pw}")`,
+    `insert into user values (null, "${userid}", "${name}","${pw}")`,
     (err, rows) => {
       if (err) {
         throw err;
@@ -54,4 +54,25 @@ exports.postSignup = (data, callback) => {
       callback(rows.insertId);
     }
   );
+};
+
+exports.postSignin = (data, callback) => {
+  const { userid, pw } = data;
+
+  console.log(data);
+
+  //   conn.query(
+  //     `select * from user userid="${userid}" AND pw = "${pw}"`,
+  //     (err, rows) => {
+  //       if (err) {
+  //         throw err;
+  //       }
+
+  //       console.log('model >>', rows);
+  //       console.log('model >>', userid);
+  //       console.log('model >>', pw);
+
+  //       callback(rows);
+  //     }
+  //   );
 };

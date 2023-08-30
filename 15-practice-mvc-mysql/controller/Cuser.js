@@ -13,7 +13,7 @@ exports.main = (req, res) => {
 // //; GET /signup
 exports.signup = (req, res) => {
   User.signup((result) => {
-    console.log('controller >>', result);
+    console.log('signup controller >>', result);
     res.render('signup', { data: result });
   });
 };
@@ -21,41 +21,34 @@ exports.signup = (req, res) => {
 // //; GET /signin
 exports.signin = (req, res) => {
   User.signin((result) => {
-    console.log('controller >>', result);
+    console.log('signin controller >>', result);
     res.render('signin', { data: result });
-  });
-};
-
-//; POST /signin
-exports.postSignin = (req, res) => {
-  User.postSignin(req.body, (insertId) => {
-    console.log('controller >>', req.body);
-
-    const { id, pw } = req.body;
-    res.send({ id: insertId, id: id, pw: pw });
   });
 };
 
 //; POST /signup
 exports.postSignup = (req, res) => {
   User.postSignup(req.body, (insertId) => {
-    console.log('controller >>', req.body);
+    console.log('postSignup controller >>', req.body);
 
-    const { id, pw } = req.body;
-    res.send({ id: insertId, id: id, pw: pw });
+    const { userid, name, pw } = req.body;
+    res.send({ id: insertId, userid: userid, name: name, pw: pw });
   });
 };
 
-// // localhost:PORT/visitor
-// exports.getVisitors = (req, res) => {
-//   // console.log(Visitor.getVisitors());
-
-//   //-- [ 변경 전 ]
-//   // res.render('visitor', { data: Visitor.getVisitors() });
-
-//   //-- [ 변경 후 ]
-//   Visitor.getVisitors1((result) => {
-//     console.log('controller >>', result);
-//     res.render('visitor', { data: result });
-//   });
-// };
+//; POST /signin
+exports.postSignin = (req, res) => {
+  console.log('postSignin controller >>', req.body);
+  // .postSignin = (data, cb) => {}
+  // User.postSignin(req.body, (result) => {
+  //   console.log('postSignin controller req.body >>', req.body);
+  //   console.log('postSignin controller result >>', result);
+  // const { userid, pw } = req.body;
+  // res.send({
+  //   userid: userid,
+  //   pw: pw,
+  //   resultId: result.id,
+  //   resultPW: result.pw,
+  // });
+  // });
+};
