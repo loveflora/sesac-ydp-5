@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const PORT = 8000;
 
-//] [ 16 ]
+//>> [ 16. sequelize ]
 const db = require('./models'); // ./models/index.js
 
 app.set('view engine', 'ejs');
@@ -33,7 +33,7 @@ app.get('*', (req, res) => {
   res.render('404');
 });
 
-//] [ 16 ]
+//>> [ 16. sequelize ]
 db.sequelize.sync({ force: false }).then(() => {
   //-- force: false;
   // 실제 DB에 테이블이 존재하지 않으면,
