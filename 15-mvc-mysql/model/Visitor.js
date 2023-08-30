@@ -7,6 +7,7 @@ const conn = mysql.createConnection({
   user: 'user', // DB 접속 유저이름
   password: '1234', // DB 접속 비번
   database: 'mvc',
+  charset: 'utf8mb4', // 유니코드 인코딩
 });
 
 // model(server) => db로 쿼리 전송

@@ -23,6 +23,8 @@ function createVisitor() {
     // res : id, name, comment
     console.log('post /visitor 요청에 대한 응답', res.data);
 
+    const { id, name, comment } = res.data;
+
     //] create
     //; 방금 추가한 방명록 정보 보이기
     // newVisitor 변수에 tr 요소 생성하고, tbody의 맨마지막 요소 추가
@@ -49,7 +51,15 @@ function createVisitor() {
     // (O) insertAdjacentElement(position, element)
     // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
     // beforeend : table 태그 닫기 직전
-    tbody.insertAdjacentElement('beforeend', newVisitor);
+    tbody.insertAdjacentHTML('beforeend', newVisitor);
+    //# string `` 형식은 insertAdjacentElement가 아닌, insertAdjacentHTML 형식이어야 함.
+    // 'beforebegin': targetElement 외부 앞 (트리 요소의 부모가 있는 경우에만 작동)
+    // 'afterbegin': targetElement 내부의 첫번째 자식 앞
+    // 'beforeend': targetElement 외부의 마지막 자식 뒤
+    // 'afterend': targetElement 외부 뒤 (트리 요소의 부모가 있는 경우에만 작동)
+
+    form.name.value = '';
+    form.comment.value = '';
   });
 }
 
