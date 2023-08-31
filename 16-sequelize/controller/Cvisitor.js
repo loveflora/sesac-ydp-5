@@ -8,11 +8,11 @@
 //>> [ 16. sequelize ]
 //) db = { sequelize, Sequelize, Visitor: 모델(테이블)}
 // => 구조분해할당 사용
-const { Visitor } = require('../models');
+const { Visitor } = require("../models");
 
 //; GET /
 exports.main = (req, res) => {
-  res.render('index');
+  res.render("index");
 };
 
 //; GET /visitor
@@ -28,8 +28,8 @@ exports.getVisitors = async (req, res) => {
 
   //>> [ 16. sequelize ] : async, await 사용
   const result = await Visitor.findAll();
-  console.log('result >>> ', result);
-  res.render('visitor', { data: result });
+  console.log("result >>> ", result);
+  res.render("visitor", { data: result });
 };
 
 //] CREATE
@@ -68,7 +68,7 @@ exports.deleteVisitor = async (req, res) => {
   });
 
   //_ result :  destroy한 결과
-  console.log('result >>>', result);
+  console.log("result >>>", result);
   //'' res.send(result);
   //'' ===> [ERR_HTTP_INVALID_STATUS_CODE]: Invalid status code: 1
   // 프론트에 'destroy한 결과'를 넘기는 처리는 에러남
@@ -88,7 +88,7 @@ exports.getVisitor = async (req, res) => {
   //: param
   //_ GET /visitor/:id
   // controller에서는
-  console.log('req.params >>> ', req.params);
+  console.log("req.params >>> ", req.params);
   // { id : 5 }
 
   const { id } = req.params; // {}
@@ -106,7 +106,7 @@ exports.getVisitor = async (req, res) => {
     where: { id: id },
   });
 
-  console.log('result >>>', result);
+  console.log("result >>>", result);
   res.send(result);
 };
 
@@ -129,7 +129,7 @@ exports.updateVisitor = async (req, res) => {
     { name: req.body.name, comment: req.body.comment },
     {
       where: { id: req.body.id },
-    }
+    },
   );
   res.send({ isUpdated: true });
 };

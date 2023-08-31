@@ -1,25 +1,31 @@
 // TODO: 컨트롤러 코드
 //] Model과 연결
-const User = require('../model/User');
+//>> [ 15. mvc-sql ]
+// const User = require("../model/User");
+
+//>> [ 16. sequelize ]
+//) db = { sequelize, Sequelize, Visitor: 모델(테이블)}
+// => 구조분해할당 사용
+const { User } = require("../models");
 
 //; GET /signup
 exports.signup = (req, res) => {
-  res.render('signup');
+  res.render("signup");
 };
 
 //; GET /signin
 exports.signin = (req, res) => {
-  res.render('signin');
+  res.render("signin");
 };
 
+//] CREATE
 //; POST /signup
 exports.postSignup = (req, res) => {
-  User.postSignup(req.body, (insertId) => {
-    console.log('postSignup controller >>', req.body);
-
-    const { userid, name, pw } = req.body;
-    res.send({ id: insertId, userid: userid, name: name, pw: pw });
-  });
+  // User.postSignup(req.body, (insertId) => {
+  //   console.log("postSignup controller >>", req.body);
+  //   const { userid, name, pw } = req.body;
+  //   res.send({ id: insertId, userid: userid, name: name, pw: pw });
+  // });
 };
 
 //; POST /signin
@@ -43,13 +49,13 @@ exports.postSignin = (req, res) => {
       res.send(false);
     }
 
-    console.log('postSignin >>>', req.body.userid, req.body.pw);
+    console.log("postSignin >>>", req.body.userid, req.body.pw);
   });
 };
 
 exports.postProfile = (req, res) => {
   User.postProfile(req.body.userid, (result) => {
-    res.render('profile', { data: result[0] });
+    res.render("profile", { data: result[0] });
   });
 };
 

@@ -1,13 +1,12 @@
-const mysql = require('mysql');
+const mysql = require("mysql");
 
 // db 연결 설정
 // conn : db 연결 객체
 const conn = mysql.createConnection({
-  host: 'localhost', // DB가 설치된 호스트 IP주소
-  user: 'user', // DB 접속 유저이름
-  password: '1234', // DB 접속 비번
-  database: 'mvc',
-  charset: 'utf8mb4', // 유니코드 인코딩
+  host: "localhost", // DB가 설치된 호스트 IP주소
+  user: "user", // DB 접속 유저이름
+  password: "1234", // DB 접속 비번
+  database: "mvc",
 });
 
 // model(server) => db로 쿼리 전송
@@ -20,12 +19,12 @@ exports.getVisitors1 = (callback) => {
   // };
 
   //--- [ 변경 후 ]
-  conn.query('select * from visitor order', (err, rows) => {
+  conn.query("select * from visitor order", (err, rows) => {
     if (err) {
       throw err;
     }
 
-    console.log('model >>', rows);
+    console.log("model >>", rows);
     //  [  RowDataPacket { id: 1, name: '김나나', comment: '안녕하세요' },
     //   RowDataPacket { id: 2, name: '김하하', comment: '반갑습니다' } ]
 
@@ -53,21 +52,21 @@ exports.postVisitor = (data, callback) => {
         throw err;
       }
 
-      console.log('model >>', rows);
+      console.log("model >>", rows);
       callback(rows.insertId);
-    }
+    },
   );
 };
 
 exports.deleteVisitor = (id, callback) => {
-  console.log('model >>', id); // front에서 알려준 삭제할 데이터의 pk
+  console.log("model >>", id); // front에서 알려준 삭제할 데이터의 pk
 
   conn.query(`delete from visitor where id=${id}`, (err, rows) => {
     if (err) {
       throw err;
     }
 
-    console.log('model >>', rows);
+    console.log("model >>", rows);
 
     //_ 삭제가 성공되었다
     // (1) 불린 값 : true
@@ -82,7 +81,7 @@ exports.getVisitor = (id, callback) => {
       throw err;
     }
 
-    console.log('rows >>>', rows); // rows >>> [ { ... } ]
+    console.log("rows >>>", rows); // rows >>> [ { ... } ]
     callback(rows[0]); // result >>> { ... }
   });
 };
@@ -96,7 +95,7 @@ exports.updateVisitor = (updateData, callback) => {
       throw err;
     }
 
-    console.log('rows >>>', rows); // rows >>> [ { ... } ]
+    console.log("rows >>>", rows); // rows >>> [ { ... } ]
     callback();
   });
 };
