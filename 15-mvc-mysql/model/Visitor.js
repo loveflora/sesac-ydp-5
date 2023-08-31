@@ -26,7 +26,7 @@ exports.getVisitors1 = (callback) => {
     }
 
     console.log('model >>', rows);
-    //  [  RowDataPacket { id: 1, name: '김나나', comment: '안녕하세요' },
+    //:  [  RowDataPacket { id: 1, name: '김나나', comment: '안녕하세요' },
     //   RowDataPacket { id: 2, name: '김하하', comment: '반갑습니다' } ]
 
     callback(rows);

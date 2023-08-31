@@ -1,6 +1,6 @@
 // TODO: DB(mysql) 연결
 // TODO: 모델 코드
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 // db 연결 설정
 // conn : db 연결 객체
@@ -12,34 +12,22 @@ const conn = mysql.createConnection({
 });
 
 //; model(server) => db로 쿼리 전송
-exports.signup = (callback) => {
-  conn.query('select * from user', (err, rows) => {
-    if (err) {
-      throw err;
-    }
+// exports.signup = (callback) => {
+//   conn.query('select * from user', (err, rows) => {
+//     if (err) {
+//       throw err;
+//     }
 
-    console.log('model >>', rows);
+//     console.log('model >>', rows);
 
-    callback(rows);
-  });
-};
+//     callback(rows);
+//   });
+// };
 
-exports.signin = (callback) => {
-  conn.query('select * from user', (err, rows) => {
-    if (err) {
-      throw err;
-    }
-
-    console.log('model >>', rows);
-
-    callback(rows);
-  });
-};
-
-exports.postSignup = (data, callback) => {
+exports.postSignup = (data, cb) => {
   // 매개변수
   // 1) data : 프론트에서 유저가 입력한 값 (req.body)
-  // 2) callback : query 실행 후 호출할 함수
+  // 2) cb : query 실행 후 호출할 함수
 
   const { userid, name, pw } = data;
 
@@ -51,28 +39,60 @@ exports.postSignup = (data, callback) => {
       }
 
       console.log('model >>', rows);
-      callback(rows.insertId);
+      cb(rows.insertId);
     }
   );
 };
 
-exports.postSignin = (data, callback) => {
+exports.postSignin = (data, cb) => {
   const { userid, pw } = data;
 
-  console.log(data);
+  //-- id랑 pw 일치하는지 확인 !!!
+  conn.query(
+    // LIMIT 1 : 최소 한 자리
+    `SELECT * FROM user WHERE userid='${userid}' AND pw='${pw}' LIMIT 1`,
+    (err, rows) => {
+      if (err) {
+        throw err;
+      }
 
-  //   conn.query(
-  //     `select * from user userid="${userid}" AND pw = "${pw}"`,
-  //     (err, rows) => {
-  //       if (err) {
-  //         throw err;
-  //       }
+      console.log(rows);
+      cb(rows);
+    }
+  );
+};
 
-  //       console.log('model >>', rows);
-  //       console.log('model >>', userid);
-  //       console.log('model >>', pw);
+//; 로그인한 유저 한 명 가져옴 !
+exports.postProfile = (userid, cb) => {
+  const sql = `SELECT * FROM user WHERE userid='${userid}' LIMIT 1`;
+  conn.query(sql, (err, rows) => {
+    if (err) {
+      throw err;
+    }
 
-  //       callback(rows);
-  //     }
-  //   );
+    cb(rows);
+  });
+};
+
+exports.editProfile = (data, cb) => {
+  const { id, userid, name, pw } = data;
+
+  const sql = `UPDATE user SET userid='${userid}', name='${name}', pw='${pw}' WHERE id='${id}'`;
+  conn.query(sql, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+
+    cb();
+  });
+};
+
+exports.deleteProfile = (id, cb) => {
+  conn.query(`DELETE FROM user WHERE id='${id}'`, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+
+    cb();
+  });
 };

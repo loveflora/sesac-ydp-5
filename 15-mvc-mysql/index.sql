@@ -3,6 +3,7 @@ show databases;
 
 -- emoji, 특수문자도 지원
 -- https://sys970717.tistory.com/12
+drop database mvc;
 create database mvc character set utf8mb4 collate utf8mb4_unicode_ci;
 
 use mvc;
@@ -45,3 +46,9 @@ ALTER USER 'user'@'%' IDENTIFIED WITH mysql_native_password BY '1234';
 set global validate_password.policy=LOW;
 
 SET GLOBAL validate_password.length = 4;
+
+
+
+
+--
+select version();

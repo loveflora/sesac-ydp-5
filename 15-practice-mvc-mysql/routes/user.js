@@ -1,32 +1,41 @@
 // TODO: 라우트 설정
 const express = require('express');
+const controller = require('../controller/Cuser');
 const router = express.Router();
-const controller = require('../controller/Cuser.js');
 
 // 기본 주소
 // localhost:PORT/user
 
 //; GET /user
-// localhost:PORT/user
-router.get('/', controller.main);
+// localhost:PORT/
+
+//\ router.get('/', controller.main);  ---> 삭제
+//\ app.js에서 localhost:8000 설정함
+// app.get('/', (req, res) => {
+//     res.render('index');
+//   });
 
 //; GET /user/signup
 // localhost:PORT/user/signup
 router.get('/signup', controller.signup);
 
+//; POST /user/signup
+router.post('/signup', controller.postSignup);
+
 //; GET /user/signin
 // localhost:PORT/user/signin
 router.get('/signin', controller.signin);
 
-//; POST /user/signup
-router.post('/signup', controller.postSignup);
-
 //; POST /user/signin
 router.post('/signin', controller.postSignin);
 
-module.exports = router;
+//; POST /user/profile
+router.post('/profile', controller.postProfile);
 
-// router.post('/signup', controller.postSignup);
-// router.post('/profile', controller.profile);
-// router.post('/profile/edit', controller.editProfile);
-// router.post('/profile/delete', controller.deleteUser);
+//; POST /user/profile/edit
+router.post('/profile/edit', controller.editProfile);
+
+//; POST /user/profile/delete
+router.post('/profile/delete', controller.deleteProfile);
+
+module.exports = router;

@@ -1,29 +1,15 @@
 // TODO: 컨트롤러 코드
 //] Model과 연결
-// (임시) DB로부터 받아온 댓글 목록
-const User = require('../model/User.js');
+const User = require('../model/User');
 
-//] View와 연결 (index.js)
-//; GET /
-// localhost:PORT/user
-exports.main = (req, res) => {
-  res.render('index');
-};
-
-// //; GET /signup
+//; GET /signup
 exports.signup = (req, res) => {
-  User.signup((result) => {
-    console.log('signup controller >>', result);
-    res.render('signup', { data: result });
-  });
+  res.render('signup');
 };
 
-// //; GET /signin
+//; GET /signin
 exports.signin = (req, res) => {
-  User.signin((result) => {
-    console.log('signin controller >>', result);
-    res.render('signin', { data: result });
-  });
+  res.render('signin');
 };
 
 //; POST /signup
@@ -38,17 +24,43 @@ exports.postSignup = (req, res) => {
 
 //; POST /signin
 exports.postSignin = (req, res) => {
-  console.log('postSignin controller >>', req.body);
-  // .postSignin = (data, cb) => {}
+  //.. model < User
+  // exports.postSignin = (data, cb) => { ... }
+
   User.postSignin(req.body, (result) => {
-    //   console.log('postSignin controller req.body >>', req.body);
-    //   console.log('postSignin controller result >>', result);
-    // const { userid, pw } = req.body;
-    // res.send({
-    //   userid: userid,
-    //   pw: pw,
-    //   resultId: result.id,
-    //   resultPW: result.pw,
-    // });
+    //) 1) 첫 번째 인자 data : req.body
+    //) 2) 두 번째 인자 cb : (result) => {}
+    // 콜백인자로 rows 결과 받음 : rows --> result
+    // cb(rows);
+    // [  RowDataPacket { id: 1, name: '김나나', comment: '안녕하세요' },
+    //: result가 있으면 !
+    console.log(result);
+    console.log(req.body);
+
+    if (result.length > 0) {
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+
+    console.log('postSignin >>>', req.body.userid, req.body.pw);
+  });
+};
+
+exports.postProfile = (req, res) => {
+  User.postProfile(req.body.userid, (result) => {
+    res.render('profile', { data: result[0] });
+  });
+};
+
+exports.editProfile = (req, res) => {
+  User.editProfile(req.body, () => {
+    res.send(true);
+  });
+};
+
+exports.deleteProfile = (req, res) => {
+  User.deleteProfile(req.body.id, () => {
+    res.send(true);
   });
 };
