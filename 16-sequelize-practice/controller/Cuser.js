@@ -20,53 +20,114 @@ exports.signin = (req, res) => {
 
 //] CREATE
 //; POST /signup
-exports.postSignup = (req, res) => {
+exports.postSignup = async (req, res) => {
+  //>> [ 15. mvc-sql ]
   // User.postSignup(req.body, (insertId) => {
   //   console.log("postSignup controller >>", req.body);
   //   const { userid, name, pw } = req.body;
   //   res.send({ id: insertId, userid: userid, name: name, pw: pw });
   // });
+
+  //>> [ 16. sequelize ]
+  const result = await User.create({
+    userid,
+    name,
+    pw,
+  });
+  //_ result : create메서드가 실행된 결과 (== insert 한 데이터 값)
+  res.send(result);
 };
 
 //; POST /signin
-exports.postSignin = (req, res) => {
+exports.postSignin = async (req, res) => {
   //.. model < User
   // exports.postSignin = (data, cb) => { ... }
 
-  User.postSignin(req.body, (result) => {
-    //) 1) 첫 번째 인자 data : req.body
-    //) 2) 두 번째 인자 cb : (result) => {}
-    // 콜백인자로 rows 결과 받음 : rows --> result
-    // cb(rows);
-    // [  RowDataPacket { id: 1, name: '김나나', comment: '안녕하세요' },
-    //: result가 있으면 !
-    console.log(result);
-    console.log(req.body);
+  //>> [ 15. mvc-sql ]
+  // User.postSignin(req.body, (result) => {
+  // // 콜백인자로 rows 결과 받음 : rows --> result
+  // // cb(rows);
+  // // [  RowDataPacket { id: 1, name: '김나나', comment: '안녕하세요' },
+  // console.log(result);
+  // console.log(req.body);
 
-    if (result.length > 0) {
-      res.send(true);
-    } else {
-      res.send(false);
+  // if (result.length > 0) {
+  //   res.send(true);
+  // } else {
+  //   res.send(false);
+  // }
+
+  // console.log("postSignin >>>", req.body.userid, req.body.pw);
+
+  //>> [ 16. sequelize ]
+  try {
+    const result = await User.findOne({
+      where: { userid: req.body.userid, pw: req.body.pw },
+    });
+    res.send(true);
+    console.log("postSignin_result>>>", result);
+  } catch (err) {
+    res.send(false);
+  }
+
+  console.log("postSignin >>>", req.body.userid, req.body.pw);
+};
+
+exports.postProfile = async (req, res) => {
+  //>> [ 15. mvc-sql ]
+  // User.postProfile(req.body.userid, (result) => {
+  //   res.render("profile", { data: result[0] });
+  // });
+
+  //>> [ 16. sequelize ]
+  try {
+    const result = await User.findOne({
+      where: { id: req.body.id },
+    });
+    console.log("postProfile_result>>>", result);
+
+    if (result) {
+      res.render("profile", { data: result });
     }
-
-    console.log("postSignin >>>", req.body.userid, req.body.pw);
-  });
+  } catch (err) {
+    res.status(500).send("Internal Server Error");
+  }
 };
 
-exports.postProfile = (req, res) => {
-  User.postProfile(req.body.userid, (result) => {
-    res.render("profile", { data: result[0] });
-  });
+exports.editProfile = async (req, res) => {
+  //>> [ 15. mvc-sql ]
+  // User.editProfile(req.body, () => {
+  //   res.send(true);
+  // });
+
+  //>> [ 16. sequelize ]
+  // update(변경될 값, where절)
+  await User.update(
+    { userid: req.body.userid, name: req.body.name, pw: req.body.pw },
+    {
+      where: { id: req.body.id },
+    },
+  );
+  res.send({ isUpdated: true });
 };
 
-exports.editProfile = (req, res) => {
-  User.editProfile(req.body, () => {
-    res.send(true);
-  });
-};
+//] DELETE
+exports.deleteProfile = async (req, res) => {
+  //>> [ 15. mvc-sql ]
+  // User.deleteProfile(req.body.id, () => {
+  //   res.send(true);
+  // });
 
-exports.deleteProfile = (req, res) => {
-  User.deleteProfile(req.body.id, () => {
-    res.send(true);
+  //>> [ 16. sequelize ]
+  const result = await User.destroy({
+    where: { id },
   });
+
+  //_ result :  destroy한 결과
+  console.log("result >>>", result);
+  //'' res.send(result);
+  //'' ===> [ERR_HTTP_INVALID_STATUS_CODE]: Invalid status code: 1
+  // 프론트에 'destroy한 결과'를 넘기는 처리는 에러남
+
+  res.send(true); // '삭제 성공(true)'을 프론트로 넘김
 };
