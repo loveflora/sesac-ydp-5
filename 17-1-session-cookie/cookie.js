@@ -17,6 +17,7 @@ app.set('view engine', 'ejs');
 const COOKIE_SECRET_KEY = 'This is my secret key';
 app.use(cookieParser(COOKIE_SECRET_KEY));
 
+// 쿠키 옵션
 const myCookieConf = {
   httpOnly: true, // 웹 서버를 통해서만 쿠키 접근 가능 (FE에서 document.cookie로 접근하는 것을 차단)
   maxAge: 20 * 1000, // 쿠키 수명 (단위 ms) : 20초
@@ -36,6 +37,7 @@ app.get('/', (req, res) => {
   res.render('cookie');
 });
 
+//; cookie 생성
 app.get('/setCookie', (req, res) => {
   // res.cookie(쿠키 이름, 쿠키 값, 쿠키 옵션)
   res.cookie('myCookie', 'myValue', myCookieConf); // 쿠키를 헤더에 설정 (응답 X)
@@ -43,7 +45,7 @@ app.get('/setCookie', (req, res) => {
   res.send('Cookie 설정 완료!');
 });
 
-//; 쿠키 가져오기
+//; cookie 가져오기
 app.get('/getCookie', (req, res) => {
   //) res.render(req.cookies);
   // 클라이언트가 가지고 있는 쿠키를 확인하기 위함
@@ -55,6 +57,7 @@ app.get('/getCookie', (req, res) => {
   res.send(req.signedCookies);
 });
 
+//; cookie 삭제
 app.get('/clearCookie', (req, res) => {
   res.clearCookie('myCookie', 'myValue', myCookieConf);
   res.send('Cookie 삭제 완료!');

@@ -11,6 +11,11 @@
     <form name="form_info" action="/user/profile" method="POST">
       <input type="hidden" name="userid" />
     </form>
+    <!-- 
+      hidden이 있는 이유는 ! Session을 아직 안배웠기 때문에.
+      profile로 데이터 넘기기 위함.      
+      res는 맞는지 확인만 함. 
+    -->
 
     <form name="form_login">
       <label for="userid">ID</label>
