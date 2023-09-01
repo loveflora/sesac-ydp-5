@@ -4,18 +4,18 @@
 //~ 작동 전 꼭 확인 !!!
 
 //! 아이맥
-// const mysql = require('mysql2');
+const mysql = require('mysql2');
 
 //! 맥북 M1
-const mysql = require("mysql");
+// const mysql = require('mysql');
 
 // db 연결 설정
 // conn : db 연결 객체
 const conn = mysql.createConnection({
-  host: "localhost", // DB가 설치된 호스트 IP주소
-  user: "user", // DB 접속 유저이름
-  password: "1234", // DB 접속 비번
-  database: "codingon",
+  host: 'localhost', // DB가 설치된 호스트 IP주소
+  user: 'user', // DB 접속 유저이름
+  password: '1234', // DB 접속 비번
+  database: 'codingon',
 });
 
 //; model(server) => db로 쿼리 전송
@@ -45,9 +45,9 @@ exports.postSignup = (data, cb) => {
         throw err;
       }
 
-      console.log("model >>", rows);
+      console.log('model >>', rows);
       cb(rows.insertId);
-    },
+    }
   );
 };
 
@@ -65,7 +65,7 @@ exports.postSignin = (data, cb) => {
 
       console.log(rows);
       cb(rows);
-    },
+    }
   );
 };
 
