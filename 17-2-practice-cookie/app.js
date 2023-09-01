@@ -14,6 +14,7 @@ app.use(cookieParser(cookieParser));
 // 쿠키 옵션
 const myCookieConf = {
   httpOnly: true, // 웹 서버를 통해서만 쿠키 접근 가능 (FE에서 document.cookie로 접근하는 것을 차단)
+  // httpOnly: false ---> document.cookie
 
   //-- 오늘 그만보기
   // 쿠키 수명 (단위 ms)
