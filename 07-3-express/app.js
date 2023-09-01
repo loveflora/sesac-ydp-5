@@ -24,7 +24,7 @@ app.set('views', './views'); // 템플릿 엔진 파일을 저장할 위치 등�
 app.use('/public', express.static(__dirname + '/static'));
 // '/public' : 실행이 될 주소
 
-app.use('/views', express.static(__dirname + '/views'));
+app.set('views', './views');
 
 // 폴더경로
 // console.log(__dirname); // /Users/user/Documents/sesac-ydp-5/06-3-express

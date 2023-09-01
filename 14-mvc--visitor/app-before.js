@@ -6,7 +6,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/views', express.static(__dirname + '/views'));
+app.set('views', './views');
 app.use('/static', express.static(__dirname + '/static'));
 
 // (임시) DB로부터 받아온 댓글 목록
