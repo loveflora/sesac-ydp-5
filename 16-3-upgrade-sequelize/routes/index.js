@@ -37,4 +37,8 @@ router.get('/teams', controller.getTeams);
 // 특정 팀 조회
 router.get('/teams/:team_id', controller.getTeam);
 
+//; GET /teams/:team_id/players
+// 특정 팀의 모든 선수 조회
+router.get('/teams/:team_id/players', controller.getTeamPlayers);
+
 module.exports = router;

@@ -1,4 +1,8 @@
 const { Player, Profile, Team } = require('../models');
+const { search } = require('../routes');
+// sequelize에서 지원하는 연산자 불러오기
+// https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#operators
+const { Op } = require('sequelize');
 
 //] TODO: 컨트롤러
 
@@ -89,9 +93,39 @@ exports.deletePlayer = async (req, res) => {
 
 exports.getTeams = async (req, res) => {
   try {
-    const teams = await Team.findAll({
-      attributes: ['team_id', 'name'],
-    });
+    // 쿼리 스트링 꺼내오기 (req.query)
+    //.. api.http
+    // GET {{server}}/teams?sort=name_asc
+    const { sort, search } = req.query;
+    console.log(sort); //
+    let teams;
+
+    //) sort 키가 있으면, name 기준 오름차순 정렬
+    if (sort === 'name_asc') {
+      teams = await Team.findAll({
+        attributes: ['team_id', 'name'],
+        order: [['name', 'asc']], // name 속성 기준 오름차순
+      });
+    } else if (search) {
+      // search key에 대한 값이 있다면
+      teams = await Team.findAll({
+        attributes: ['team_id', 'name'],
+        where: {
+          name: {
+            // LIKE '%search%'
+            // sequelize의 like 연산자 사용
+            [Op.like]: `%${search}%`,
+          },
+        },
+        // select * from teams where name = "%KT%";
+      });
+    } else {
+      // 없으면 findAll()
+      teams = await Team.findAll({
+        attributes: ['team_id', 'name'],
+      });
+    }
+
     res.send(teams);
   } catch (err) {
     console.log(err);
@@ -101,10 +135,27 @@ exports.getTeams = async (req, res) => {
 
 exports.getTeam = async (req, res) => {
   try {
-    const teams = await Team.findOne({
+    const { team_id } = req.params;
+    const team = await Team.findOne({
       attributes: ['team_id', 'name'],
+      where: { team_id: team_id },
     });
-    res.send(teams);
+    res.send(team);
+  } catch (err) {
+    console.log(err);
+    res.send('Internet Server Error!!!');
+  }
+};
+
+exports.getTeamPlayers = async (req, res) => {
+  try {
+    const { team_id } = req.params;
+    const team = await Team.findOne({
+      where: { team_id: team_id },
+      // include: JOIN
+      include: [{ model: Player }],
+    });
+    res.send(team);
   } catch (err) {
     console.log(err);
     res.send('Internet Server Error!!!');

@@ -1,7 +1,7 @@
 @server = http://localhost:8000
 @player_id = 6
 # FE가 변경하기 쉽게 변수로 선언
-@team_id = 1
+@team_id = 2
 
 ###; '전체' 선수 조회
 # GET http://localhost:8000/players
@@ -40,5 +40,14 @@ DELETE {{server}}/players/{{player_id}}
 ###; 전체 팀 조회
 GET {{server}}/teams
 
+###; 전체 팀 조회 - 이름순, 오름차순 
+GET {{server}}/teams?sort=name_asc
+
+###; 전체 팀 조회 - 팀 이름 검색
+GET {{server}}/teams?search=lg
+
 ###; 특정 팀 조회
 GET {{server}}/teams/{{team_id}}
+
+###; 특정 팀의 모든 선수 조회
+GET {{server}}/teams/{{team_id}}/players
