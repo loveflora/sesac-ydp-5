@@ -1,5 +1,7 @@
 @server = http://localhost:8000
-
+@player_id = 6
+# FE가 변경하기 쉽게 변수로 선언
+@team_id = 1
 
 ###; '전체' 선수 조회
 # GET http://localhost:8000/players
@@ -8,7 +10,7 @@ GET {{server}}/players
 
 ###; '특정' 선수 조회
 # GET http://localhost:8000/players/1
-GET {{server}}/players/9
+GET {{server}}/players/{{player_id}}
 
 ###; 선수 추가
 POST {{server}}/players
@@ -23,9 +25,20 @@ Content-Type: application/json; charset=utf-8
 }
 
 ###; 특정 선수의 소속 팀 변경 : 요청 주소에서 1은 player_id를 의미
-PATCH {{server}}/players/1/team
+PATCH {{server}}/players/{{player_id}}/team
 Content-Type: application/json; charset=utf-8
 
+# 성공하면 1, 실패하면 0
 {
     "team_id": 1
 }
+
+###; 특정 선수 삭제
+# player_id에 해당하는 Player와 Profile 연쇄 삭제
+DELETE {{server}}/players/{{player_id}}
+
+###; 전체 팀 조회
+GET {{server}}/teams
+
+###; 특정 팀 조회
+GET {{server}}/teams/{{team_id}}

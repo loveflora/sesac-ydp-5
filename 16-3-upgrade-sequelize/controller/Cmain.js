@@ -65,3 +65,48 @@ exports.patchPlayer = async (req, res) => {
     res.send('Internet Server Error!!!');
   }
 };
+
+exports.deletePlayer = async (req, res) => {
+  try {
+    const { player_id } = req.params;
+
+    const isDeleted = await Player.destroy({
+      where: { player_id: player_id },
+    });
+
+    console.log('isDeleted >>>', isDeleted); // 성공 시 1, 실패 시 0
+
+    if (isDeleted) {
+      return res.send(true);
+    } else {
+      return res.send(false);
+    }
+  } catch (err) {
+    console.log(err);
+    res.send('Internet Server Error!!!');
+  }
+};
+
+exports.getTeams = async (req, res) => {
+  try {
+    const teams = await Team.findAll({
+      attributes: ['team_id', 'name'],
+    });
+    res.send(teams);
+  } catch (err) {
+    console.log(err);
+    res.send('Internet Server Error!!!');
+  }
+};
+
+exports.getTeam = async (req, res) => {
+  try {
+    const teams = await Team.findOne({
+      attributes: ['team_id', 'name'],
+    });
+    res.send(teams);
+  } catch (err) {
+    console.log(err);
+    res.send('Internet Server Error!!!');
+  }
+};
