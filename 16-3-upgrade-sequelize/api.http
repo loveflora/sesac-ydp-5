@@ -1,0 +1,31 @@
+@server = http://localhost:8000
+
+
+###; '전체' 선수 조회
+# GET http://localhost:8000/players
+# {{ 변수명 }}
+GET {{server}}/players
+
+###; '특정' 선수 조회
+# GET http://localhost:8000/players/1
+GET {{server}}/players/9
+
+###; 선수 추가
+POST {{server}}/players
+# 인코딩
+Content-Type: application/json; charset=utf-8
+
+# body 쓸 때는 한 줄 띄어줘야 함
+{
+    "name": "손흥민",
+    "age": 30,
+    "team_id": 2
+}
+
+###; 특정 선수의 소속 팀 변경 : 요청 주소에서 1은 player_id를 의미
+PATCH {{server}}/players/1/team
+Content-Type: application/json; charset=utf-8
+
+{
+    "team_id": 1
+}

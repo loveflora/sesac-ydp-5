@@ -87,11 +87,19 @@ exports.postProfile = async (req, res) => {
 
   //>> [ 16. sequelize ]
   try {
+    console.log('postProfile_req.body>>', req.body);
+    // { userid: 'sean' }
+    //.. signin.ejs 파일에서 userid만 넘겨서 userid만 존재
+
+    // <form name="form_info" action="/user/profile" method="POST">
+    //  <input type="hidden" name="userid" />
+    // </form>
+
     const result = await User.findOne({
       where: { userid: req.body.userid },
     });
     console.log('postProfile_result>>>', result);
-    console.log(req.body.id);
+    console.log('id>>', req.body.id);
 
     // if (result) {
     res.render('profile', { data: result });
