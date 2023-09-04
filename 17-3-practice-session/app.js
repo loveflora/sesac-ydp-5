@@ -30,11 +30,9 @@ app.get('/', (req, res) => {
   // user 키 값 없다면; index.ejs 랜더 + isLoggin 을 false 로 하여 전달
 
   if (req.session.user) {
-    res.render('index');
-    req.session.isLoggin = true;
+    res.render('index', { isLogin: true, user: req.session.user });
   } else if (!req.session.user) {
-    res.render('index');
-    req.session.isLoggin = false;
+    res.render('index', { isLogin: false });
   }
 });
 
@@ -53,9 +51,11 @@ app.post('/login', (req, res) => {
   if (userInfo.id === req.body.id && userInfo.pw === req.body.pw) {
     req.session.user = req.body.id;
     console.log('req.session>>>', req.session);
-    res.send('index', { user: req.session.user });
-  } else if (userInfo.id !== req.body.id && userInfo.pw === req.body.pw) {
-    res.send("<script > alert('로그인 실패!'); location.href='/';</script>");
+    res.render('index', { isLogin: true, user: req.session.user });
+  } else {
+    res.send(
+      "<script > alert('로그인 실패!'); document.location.href='/';</script>"
+    );
   }
 });
 
@@ -68,7 +68,7 @@ app.get('/logout', (req, res) => {
       return;
     }
 
-    res.redirect('/index');
+    res.redirect('/');
   });
 });
 
