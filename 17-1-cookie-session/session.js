@@ -8,6 +8,10 @@ const PORT = 8000;
 app.set('view engine', 'ejs');
 
 //; 미들웨어 등록
+//) .env 파일의 환경변수를 읽어옴
+const dotenv = require('dotenv');
+dotenv.config();
+
 //-- 세션 옵션 객체
 // secret: 안전하게 쿠키를 전송하기 위한 쿠키 서명 값
 // resave: 세션에 수정사항이 생기지 않더라도 매 요청(req)마다 세션을 다시 저장할 것인지
@@ -16,7 +20,7 @@ app.set('view engine', 'ejs');
 // maxAge: 쿠키 수명 (단위 ms)
 app.use(
   session({
-    secret: 'MySessionSecretKey',
+    secret: process.env.SESSION_SECRET_KEY,
     resave: false,
     saveUninitialized: true,
     cookie: {

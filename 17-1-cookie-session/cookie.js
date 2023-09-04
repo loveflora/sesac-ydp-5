@@ -10,12 +10,16 @@ app.set('view engine', 'ejs');
 
 //; 미들웨어 등록 : 중간 역할
 // 요청 들어오면 (?) 서버를 싹 세팅
+
+//] .env 파일의 환경변수를 읽어옴
+const dotenv = require('dotenv');
+dotenv.config();
+
 //-- 일반 쿠키
 // app.use(cookieParser(cookieParser));
 
 //-- 암호화 쿠키
-const COOKIE_SECRET_KEY = 'This is my secret key';
-app.use(cookieParser(COOKIE_SECRET_KEY));
+app.use(cookieParser(process.env.COOKIE_SECRET_KEY)); // 환경변수
 
 // 쿠키 옵션
 const myCookieConf = {
@@ -34,6 +38,7 @@ const myCookieConf = {
 };
 
 app.get('/', (req, res) => {
+  console.log(process.env.COOKIE_SECRET_KEY);
   res.render('cookie');
 });
 
