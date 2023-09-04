@@ -10,7 +10,7 @@ const User = (Sequelize, DataTypes) => {
   // Sequelize : models/index.js 에서 sequelize
   // DataTypes
   const model = Sequelize.define(
-    "user",
+    'user',
     {
       // model의 column 정의
 
@@ -41,11 +41,11 @@ const User = (Sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "user", // 실제 db 테이블명
+      tableName: 'user', // 실제 db 테이블명
       freezeTableName: true, // 테이블명 고정 (모델 이름 테이블로 바꿀 때 복수형으로 바뀜)
       //  timestamps: true, // true : createdAt, updatedAt 컬럼 자동 생성 --> 일대일 매칭 안됨
       timestamps: false,
-    },
+    }
   );
 
   return model;
