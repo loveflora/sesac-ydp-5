@@ -80,41 +80,39 @@
       // - hide(): 수동으로 모달 숨김
       // https://getbootstrap.com/docs/5.2/components/modal/#passing-options
 
-      const myModal = new bootstrap.Modal('#exampleModal');
+      const myModal = new bootstrap.Modal("#exampleModal");
       console.log(myModal); // _element: div#exampleModal.modal.fade
 
       // 서버에서 render 할 때 두번째 인자로 보내는 popup 키에 대한 데이터
-      console.log('popup >> ', '<%= popup %>');
+      console.log("popup >> ", "<%= popup %>");
       // checkbox.checked === true (체크시); ''
       // checkbox.checked === false (미체크시); 'hide'
 
-      if (checkbox.checked) {
-        console.log('true');
-
-        // axios({
-        //   method: 'POST',
-        //   url: '/',
-        //   data: {
-        //     popup: true,
-        //   },
-        // }).then((res) => {
-        //     console.log('post 요청에 대한 응답', res.data);
-        //     return res.data;
-        //   })
-      } else {
-        console.log('false');
-      }
+      const cookie = document.querySelector("#cookie");
+      let popup = `<%= popup %>`;
 
       // TODO: popup 쿠키 값이 ''이라면, 모달 보여주기
-      // if() {
-
-      // }
+      if (popup === "") {
+        myModal.show();
+      }
 
       // TODO: 모달 닫기 버튼 클릭 함수 완성
       function closeModal() {
         // 1. 체크 박스가 체크되어 있다면 (오늘 하루 보지 않음을 선택했다면)
         // POST /setCookie 요청 보내기 (back에서 popup 쿠키 설정하기)
         // 2. js로 모달 닫기 수행 (위 참고 링크 확인)
+
+        if (cookie.checked) {
+          // 쿠키 설정
+          axios({
+            url: "/setCookie",
+            method: "post",
+          }).then((res) => {
+            myModal.hide();
+          });
+        } else {
+          myModal.hide();
+        }
       }
     </script>
   </body>
