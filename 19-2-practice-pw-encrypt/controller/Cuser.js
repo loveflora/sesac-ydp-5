@@ -64,9 +64,11 @@ exports.postLogin = async (req, res) => {
     where: { userid },
   });
 
+  // console.log(result);
   // console.log('result.pw>>>>>>>>', result.pw);
   // console.log('pw>>>>>>>>', pw);
   // console.log(comparePassword(pw, result.pw));
+
   //) Step2. 입력된 비밀번호 암호화하여 기존 데이터와 비교
 
   // 2-1. 유저 있음
