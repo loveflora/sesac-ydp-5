@@ -1,5 +1,4 @@
 //; TODO: User 모델 정의
-
 const User = (Sequelize, DataTypes) => {
   const model = Sequelize.define(
     'user',
@@ -16,7 +15,7 @@ const User = (Sequelize, DataTypes) => {
 
       // pw VARCHAR(255) NOT NULL
       pw: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
 
