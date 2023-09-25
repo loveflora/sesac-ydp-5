@@ -6,21 +6,21 @@ import reportWebVitals from './reportWebVitals';
 import Clock from './Clock';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
 // root.render(<h1>Hello, world</h1>);
 
-setInterval(() => {
-  root.render(
-    <React.StrictMode>
-      <Clock />
-    </React.StrictMode>
-  );
-}, 2000);
+// setInterval(() => {
+//   root.render(
+//     <React.StrictMode>
+//       <Clock />
+//     </React.StrictMode>
+//   );
+// }, 2000);
 // 새로고침 안해도 컴포넌트 리렌더링이 되도록 함
 
 // If you want to start measuring performance in your app, pass a function
