@@ -37,9 +37,11 @@ class ClassBind extends Component {
     console.log(e.target);
   };
 
-  printConsole3(msg, e) {
+  // e는 마지막에 !
+  printConsole3(msg, hi, e) {
     console.log(this);
     console.log(msg);
+    console.log(hi);
     console.log(e.target);
   }
 
@@ -56,9 +58,10 @@ class ClassBind extends Component {
           print Console (인자 O)
         </button>
         <br />
-        <button onClick={this.printConsole3.bind(this, 'msg')}>
-          {/* bind(this, '인자1', '인자2', ... , e)  */}
-          {/* bind(null, '인자1', '인자2', ... , e)  */}
+        <button onClick={this.printConsole3.bind(null, 'msg', 'hi')}>
+          {/* bind(this, '인자1', '인자2', ... )  */}
+          {/* bind(null, '인자1', '인자2', ... )  */}
+          {/* e 는 printConsole3에서 마지막에 사용 */}
           print Console (인자 O, bind)
         </button>
       </div>
