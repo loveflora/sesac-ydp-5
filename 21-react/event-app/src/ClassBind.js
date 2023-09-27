@@ -32,9 +32,16 @@ class ClassBind extends Component {
   //     console.log('this', this);
   //   };
 
-  printConsole2 = (msg) => {
+  printConsole2 = (msg, e) => {
     console.log('msg : ', msg);
+    console.log(e.target);
   };
+
+  printConsole3(msg, e) {
+    console.log(this);
+    console.log(msg);
+    console.log(e.target);
+  }
 
   render() {
     return (
@@ -42,11 +49,16 @@ class ClassBind extends Component {
         <h1>Class Component Event</h1>
         <button onClick={this.printConsole}>print Console (인자 X)</button>
         <br />
-        <button onClick={(e) => this.printConsole2(e, 'msg')}>
+        <button onClick={(e) => this.printConsole2('msg', e)}>
+          {/* bind(this, '인자1', '인자2', ... , e) : e를 제일 뒤에 적으므로, 
+           this도 e를 제일 뒤에
+            (e) => this.printConsole2('msg', e) */}
           print Console (인자 O)
         </button>
         <br />
-        <button onClick={this.printConsole2.bind(null, 'msg')}>
+        <button onClick={this.printConsole3.bind(this, 'msg')}>
+          {/* bind(this, '인자1', '인자2', ... , e)  */}
+          {/* bind(null, '인자1', '인자2', ... , e)  */}
           print Console (인자 O, bind)
         </button>
       </div>
