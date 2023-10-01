@@ -25,21 +25,21 @@ async function f2() {
 }
 
 // f1 함수는 async 키워드가 붙어 있으므로, promise를 반환
-console.log('1 >>', f1()); // Promise { 1 }
+console.log("1 >>", f1()); // 1 >> Promise { <fulfilled>: 1 }
 
 // 시간이 걸려서 나중에 출력된거임
 f1().then(function (result) {
   // async 키워드가 붙은 f1 함수에서 값만 반환
-  console.log('2 >>', result); // 1
+  console.log("2 >>", result); // 1
 });
 
-console.log('3 >>', f2()); // Promise { <pending> }
+console.log("3 >>", f2()); // Promise { <pending> }
 
 f2().then(function (result) {
-  console.log('4 >>', result); // 1
+  console.log("4 >>", result); // 1
 });
 
-// 1 >> Promise { 1 }
+// 1 >> Promise { <fulfilled>: 1 }
 // 3 >> Promise { <pending> }
 // 2 >> 1
 // 4 >> 1
@@ -48,7 +48,7 @@ f2().then(function (result) {
 function fetchFruits() {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
-      const fruits = ['사과', '레몬', '수박'];
+      const fruits = ["사과", "레몬", "수박"];
       resolve(fruits); // 성공 값
       //   reject(new Error('알 수 없는 에러 발생!! 아이템을 가져올 수 없음!!'));
     }, 1000);
@@ -79,14 +79,14 @@ printItems();
 
 //] 예문
 function goMart() {
-  console.log('마트에 가서 어떤 음료를 살지 고민한다.');
+  console.log("마트에 가서 어떤 음료를 살지 고민한다.");
 }
 
 function pickDrink() {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
-      console.log('고민 끝 !');
-      product = '제로 콜라';
+      console.log("고민 끝 !");
+      product = "제로 콜라";
       price = 2000;
       resolve(); // 성공에 대한 값이 없이, 그냥 "성공"을 의미
     }, 3000);
