@@ -32,6 +32,20 @@ const uploadDetail = multer({
   limits: { fileSize: 5 * 1024 * 1024 }, // file size 제한 : 5MB (5bytes * 1024* 1024)
 });
 
+//) 세부설정 이후의 req.file 객체 자세히 보기 !
+// {
+//   fieldname: 'userfile',
+//   originalname: '바다.jpg',
+//   encoding: '7bit',
+//   mimetype: 'image/jpeg',
+//   destination: 'uploads/',
+//   filename: '바다1696240243632.jpg',
+//   path: 'uploads/바다1696240243632.jpg',
+//   size: 1492104
+// }
+// ------
+// [Object: null prototype] { title: '' }
+
 app.set("view engine", "ejs");
 app.set("/views", express.static(__dirname + "/views"));
 
@@ -89,6 +103,30 @@ app.post("/upload/array", uploadDetail.array("userfiles"), (req, res) => {
   res.send("하나의 인풋에 여러 파일 업로드 완료!");
 });
 
+//) array()의 req.file 객체 자세히 보기 !
+// [
+//   {
+//     fieldname: 'userfiles',
+//     originalname: 'IMG_7752.PNG',
+//     encoding: '7bit',
+//     mimetype: 'image/png',
+//     destination: 'uploads/',
+//     filename: 'IMG_77521696243328995.PNG',
+//     path: 'uploads/IMG_77521696243328995.PNG',
+//     size: 105119
+//   },
+//   {
+//     fieldname: 'userfiles',
+//     originalname: 'oh-its-on-5b08be.jpg',
+//     encoding: '7bit',
+//     mimetype: 'image/jpeg',
+//     destination: 'uploads/',
+//     filename: 'oh-its-on-5b08be1696243329003.jpg',
+//     path: 'uploads/oh-its-on-5b08be1696243329003.jpg',
+//     size: 34549
+//   }
+// ]
+
 //] 3. fields() : 여러 파일을 각각 인풋에 업로드
 // req.files에서 파일 정보를 확인
 // fields() 매개 변수로 input 태그의 name을 각각 넣기
@@ -101,6 +139,35 @@ app.post(
     res.send("하나의 인풋에 여러 파일 업로드 완료!");
   },
 );
+
+//) fields()의 req.file 객체 자세히 보기 !
+// [Object: null prototype] {
+//   userfile1: [
+//     {
+//       fieldname: 'userfile1',
+//       originalname: '142-1423886_html5-css3-js-html-css-javascript-removebg-preview.png',
+//       encoding: '7bit',
+//       mimetype: 'image/png',
+//       destination: 'uploads/',
+//       filename: '142-1423886_html5-css3-js-html-css-javascript-removebg-preview1696244648005.png',
+//       path: 'uploads/142-1423886_html5-css3-js-html-css-javascript-removebg-preview1696244648005.png',
+//       size: 87196
+//     }
+//   ],
+//   userfile2: [
+//     {
+//       fieldname: 'userfile2',
+//       originalname: '1024px-MySQL.ff87215b43fd7292af172e2a5d9b844217262571.png',
+//       encoding: '7bit',
+//       mimetype: 'image/png',
+//       destination: 'uploads/',
+//       filename: '1024px-MySQL.ff87215b43fd7292af172e2a5d9b8442172625711696244648008.png',
+//       path: 'uploads/1024px-MySQL.ff87215b43fd7292af172e2a5d9b8442172625711696244648008.png',
+//       size: 28185
+//     }
+//   ]
+// }
+// [Object: null prototype] { title1: '', title2: '' }
 
 //] 4. 동적 폼 전송
 app.post("/dynamicFile", uploadDetail.single("dynamicUserFile"), (req, res) => {
