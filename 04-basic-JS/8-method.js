@@ -178,9 +178,9 @@ for (let key in me) {
 }
 
 // === reduce 메서드 ===
-// 배열의 각 요소에 대해 주어진 reducer 함수를 실행하고, '하나의 결과값' 반환
+//-- 배열의 각 요소에 대해 주어진 reducer 함수를 실행하고, '하나의 결과값' 반환
 
-//-- reduce((acc, cur) => { ... }, initValue);
+//] reduce((acc, cur) => { ... }, initValue);
 // acc : 누적되는 값
 // cur : 현재 요소
 // initValue : 초기값
@@ -193,3 +193,13 @@ const result = numberArr.reduce((accumulator, currentValue) => {
 
 // console.log(result); // 15 (initialValue 추가하기 전)
 console.log(result); // 115 (initialValue 추가한 후)
+
+//=== 여러 배열을 합치는 방법 ===
+//] 1. concat()
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+
+console.log(array1.concat(array2)); // [ 1, 2, 3, 4, 5, 6 ]
+
+//] 2. ...spread
+console.log([...array1, ...array2]); // [ 1, 2, 3, 4, 5, 6 ]
