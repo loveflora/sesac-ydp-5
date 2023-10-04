@@ -9,6 +9,14 @@ function App() {
   const [bgColor, setBgColor] = useState('black');
   const [color, setColor] = useState('white');
 
+  // 상태
+  // const [data, setData] = useState({
+  //   fruit: 'apple',
+  //   background: 'black',
+  //   color: 'white',
+  //   content: 'text',
+  // });
+
   return (
     <>
       <div
