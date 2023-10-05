@@ -1,23 +1,41 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 
 export default function Map_Ref_ex2() {
-  const [data, setData] = useState([]);
-  const [inputUser, setInputUser] = useState('');
-  const [inputTitle, setInputTitle] = useState('');
-  const [inputSearch, setInputSearch] = useState('');
-  const [field, setField] = useState('user');
+  // 하나의 state로 input 여러개 관리하기
+  const [inputs, setInputs] = useState({
+    user: "", // 작성자
+    title: "", // 제목
+    type: "user", // 검색 타입
+    search: "", // 검색
+  });
 
+  // input의 입력값
+  const { user, title, search, type } = inputs;
+
+  // 등록 데이터
+  const [resultData, setResultData] = useState([]);
+
+  // 검색 데이터
+  const [searchData, setSearchData] = useState("");
+
+  // 검색 기능
+  const [searchOn, setSearchOn] = useState(false);
+
+  // input useRef
   const inputUserRef = useRef();
   const inputTitleRef = useRef();
 
+  ////////////////////////////////////////
+
+  //] 등록
   const addHandler = () => {
     // 입력 안했을 경우, focus 처리
 
-    if (!inputUser.trim()) {
+    if (!user.trim()) {
       return inputUserRef.current.focus();
     }
 
-    if (!inputTitle.trim()) {
+    if (!title.trim()) {
       return inputTitleRef.current.focus();
     }
 
@@ -27,107 +45,155 @@ export default function Map_Ref_ex2() {
     // if (!inputTitle.trim()) return alert('이메일을 입력해주세요');
 
     const newItem = {
-      id: data.length + 1,
-      user: inputUser,
-      title: inputTitle,
+      id: resultData.length + 1,
+      user,
+      title,
     };
 
     // 기존 데이터 배열과 새로운 아이템을 합친 새 배열 생성
-    const newData = [...data, newItem];
+    const newResultData = [...resultData, newItem];
 
     // setData를 사용하여 상태를 업데이트
-    setData(newData);
+    setResultData(newResultData);
 
-    // 입력 필드를 초기화 (선택 사항)
-    setInputUser('');
-    setInputTitle('');
+    // input 초기화
+    setInputs({
+      ...inputs, // type, search
+      user: "",
+      title: "",
+    });
   };
 
-  const handleKeyDown = (e) => {
-    if (e.nativeEvent.isComposing) {
-      return;
-    }
-
-    if (e.code === 'Enter') {
-      addHandler();
-      return;
-    }
+  //] 입력
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
   };
 
+  //] 검색
   const searchHandler = () => {
-    console.log(field);
-
-    if (field === 'user') {
-      const searchData = data.filter((e) => e.user === inputSearch);
-      setData(searchData);
-      console.log(searchData);
-    } else if (field === 'title') {
-      const searchData = data.filter((e) => e.title === inputSearch);
-      setData(searchData);
-      console.log(searchData);
+    //-- 예외 처리
+    // 등록된 데이터가 없는데 '검색' 버튼 눌렀을 경우, focus 처리
+    if (!resultData.length) {
+      return inputUserRef.current.focus();
     }
+
+    setSearchOn(true);
+
+    const searchResult = resultData.filter((e) => {
+      if (!e[type].includes(search)) {
+        return null; // 검색결과 없음; null 반환
+      } else return e; // 검색결과 있음; 검색결과(배열) 반환
+    });
+
+    setSearchData(searchResult);
+
+    // input 초기화
+    setInputs({
+      ...inputs,
+      search: "",
+    });
   };
 
-  const showAllHandler = () => {};
+  //] 전체
+  const showAllHandler = () => {
+    //-- 예외 처리
+    // 등록된 데이터가 없는데 '검색' 버튼 눌렀을 경우
+    if (!resultData.length) {
+      return inputUserRef.current.focus();
+    }
+
+    setSearchOn(false);
+
+    setSearchData("");
+  };
 
   return (
     <div>
       <fieldset>
-        작성자 :{' '}
+        작성자 :{" "}
         <input
-          onChange={(e) => {
-            setInputUser(e.target.value);
-          }}
-          value={inputUser}
+          onChange={onChange}
+          name="user"
+          value={user}
           ref={inputUserRef}
         />
-        제목 :{' '}
+        제목 :{" "}
         <input
-          onChange={(e) => {
-            setInputTitle(e.target.value);
-          }}
-          value={inputTitle}
+          onChange={onChange}
+          name="title"
+          value={title}
           ref={inputTitleRef}
         />
-        <button onClick={addHandler} onKeyDown={handleKeyDown}>
-          등록
-        </button>
+        <button onClick={addHandler}>등록</button>
       </fieldset>
-      <select
-        onChange={(e) => {
-          setField(e.target.value);
-        }}
-      >
+      <select name="type" value={type} onChange={onChange}>
         <option value="user">작성자</option>
         <option value="title">제목</option>
       </select>
       <input
         placeholder="검색어"
-        value={inputSearch}
-        onChange={(e) => {
-          setInputSearch(e.target.value);
-        }}
+        name="search"
+        value={search}
+        onChange={onChange}
       />
       <button onClick={searchHandler}>검색</button>
       <button onClick={showAllHandler}>전체</button>
-      <table>
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((e) => (
-            <tr key={e.id}>
-              <td>{e.id}</td>
-              <td>{e.user}</td>
-              <td>{e.title}</td>
+
+      {/* 검색 */}
+      {searchOn ? (
+        searchData.length ? (
+          <table>
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>작성자</th>
+                <th>제목</th>
+              </tr>
+            </thead>
+            <tbody>
+              {searchData.map((e) => {
+                return (
+                  <tr key={e.id}>
+                    <td>{e.id}</td>
+                    <td>{e.user}</td>
+                    <td>{e.title}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <h5> 검색 결과가 없습니다. </h5>
+        )
+      ) : // 등록
+      resultData.length ? (
+        <table>
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>작성자</th>
+              <th>제목</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {resultData.map((e) => {
+              return (
+                <tr key={e.id}>
+                  <td>{e.id}</td>
+                  <td>{e.user}</td>
+                  <td>{e.title}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      ) : (
+        <h5> 등록된 댓글이 없습니다. </h5>
+      )}
     </div>
   );
 }
