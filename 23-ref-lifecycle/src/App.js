@@ -1,3 +1,5 @@
+import LifeCycleClass from './LifeCycleClass';
+import LifeCycleFunc from './LifeCycleFunc';
 import RefSample1 from './RefSample1';
 import RefSample2 from './RefSample2';
 import RefSample3 from './RefSample3';
@@ -18,6 +20,15 @@ function App() {
       <hr />
       <h3>4. 클래스형 컴포넌트 (2) : 내장 함수 createRef</h3>
       <RefSample4 />
+      <hr />
+      <hr />
+      <h1>LifeCycle</h1>
+      <h3>1. 함수형 - 부모 컴포넌트</h3>
+      <LifeCycleFunc />
+      <hr />
+      <h1>LifeCycle</h1>
+      <h3>2. 클래스형 - 부모 컴포넌트</h3>
+      <LifeCycleClass />
     </div>
   );
 }

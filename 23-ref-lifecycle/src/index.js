@@ -4,7 +4,8 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>
+  // 콘솔 두번 찍힘
+  <App />
+  // </React.StrictMode>
 );
