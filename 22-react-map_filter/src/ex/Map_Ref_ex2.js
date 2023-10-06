@@ -1,12 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 
 export default function Map_Ref_ex2() {
   // 하나의 state로 input 여러개 관리하기
   const [inputs, setInputs] = useState({
-    user: "", // 작성자
-    title: "", // 제목
-    type: "user", // 검색 타입
-    search: "", // 검색
+    user: '', // 작성자
+    title: '', // 제목
+    type: 'user', // 검색 타입
+    search: '', // 검색
   });
 
   // input의 입력값
@@ -16,7 +16,7 @@ export default function Map_Ref_ex2() {
   const [resultData, setResultData] = useState([]);
 
   // 검색 데이터
-  const [searchData, setSearchData] = useState("");
+  const [searchData, setSearchData] = useState('');
 
   // 검색 기능
   const [searchOn, setSearchOn] = useState(false);
@@ -59,8 +59,8 @@ export default function Map_Ref_ex2() {
     // input 초기화
     setInputs({
       ...inputs, // type, search
-      user: "",
-      title: "",
+      user: '',
+      title: '',
     });
   };
 
@@ -94,7 +94,7 @@ export default function Map_Ref_ex2() {
     // input 초기화
     setInputs({
       ...inputs,
-      search: "",
+      search: '',
     });
   };
 
@@ -108,20 +108,20 @@ export default function Map_Ref_ex2() {
 
     setSearchOn(false);
 
-    setSearchData("");
+    setSearchData('');
   };
 
   return (
     <div>
       <fieldset>
-        작성자 :{" "}
+        작성자 :{' '}
         <input
           onChange={onChange}
           name="user"
           value={user}
           ref={inputUserRef}
         />
-        제목 :{" "}
+        제목 :{' '}
         <input
           onChange={onChange}
           name="title"
@@ -130,7 +130,7 @@ export default function Map_Ref_ex2() {
         />
         <button onClick={addHandler}>등록</button>
       </fieldset>
-      <select name="type" value={type} onChange={onChange}>
+      <select name="type" onChange={onChange}>
         <option value="user">작성자</option>
         <option value="title">제목</option>
       </select>
@@ -142,6 +142,8 @@ export default function Map_Ref_ex2() {
       />
       <button onClick={searchHandler}>검색</button>
       <button onClick={showAllHandler}>전체</button>
+
+      {/* 검색 ? { (검색O : 검색X) : 데이터 ? (데이터O : 데이터X) } */}
 
       {/* 검색 */}
       {searchOn ? (
