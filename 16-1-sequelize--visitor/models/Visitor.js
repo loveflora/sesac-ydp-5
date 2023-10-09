@@ -34,7 +34,7 @@ const Visitor = (Sequelize, DataTypes) => {
     {
       tableName: "visitor", // 실제 db 테이블명
       freezeTableName: true, // 테이블명 고정 (모델 이름 테이블로 바꿀 때 복수형으로 바뀜)
-      //  timestamps: true, // true : createdAt, updatedAt 컬럼 자동 생성 --> 일대일 매칭 안됨
+      //  timestamps: true, // true (default) : createdAt, updatedAt 컬럼 자동 생성 --> 일대일 매칭 안됨
       timestamps: false,
     },
   );

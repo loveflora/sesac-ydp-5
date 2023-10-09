@@ -7,16 +7,13 @@ const PORT = 8000;
 //>> [ 16. sequelize ]
 const db = require("./models"); // ./models/index.js
 
+//_ 기본
 app.set("view engine", "ejs");
 app.use("/views", express.static(__dirname + "/views"));
 app.use("/static", express.static(__dirname + "/static"));
 app.use(express.urlencoded({ extended: true }));
+// post 요청으로 들어오는 모든 형식의 데이터를 파싱(분해)
 app.use(express.json());
-
-//.. localhost:PORT로 express 앱이 실행 !
-// 외부 index 파일의
-// 'const router = express.Router();' 4번줄 코드에서
-// router 변수의 값을 indexRouter에 담음
 
 //; 라우터 분리
 const indexRouter = require("./routes"); // index 생략 가능 !

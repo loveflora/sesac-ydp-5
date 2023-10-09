@@ -2,14 +2,13 @@
 //-- Controller은 View와 Model과 연결
 
 //] Model과 연결
-// (임시) DB로부터 받아온 댓글 목록
-const Visitor = require('../model/Visitor');
+const Visitor = require("../model/Visitor");
 
 //] View와 연결 (index.js)
 //; GET /
 // localhost:PORT/
 exports.main = (req, res) => {
-  res.render('index');
+  res.render("index");
 };
 
 //; GET /visitor
@@ -22,8 +21,8 @@ exports.getVisitors = (req, res) => {
 
   //-- [ 변경 후 ]
   Visitor.getVisitors1((result) => {
-    console.log('controller >>', result);
-    res.render('visitor', { data: result });
+    console.log("controller >>", result);
+    res.render("visitor", { data: result });
   });
 };
 
@@ -55,7 +54,7 @@ exports.postVisitor = (req, res) => {
   //.. 1) data : req.body
   //.. 2) callback : (insertId)=>{...}
   Visitor.postVisitor(req.body, (insertId) => {
-    console.log('controller >>', req.body);
+    console.log("controller >>", req.body);
     // 프론트로 보낼 데이터
     // res.send({ result: true });
 
@@ -70,7 +69,7 @@ exports.deleteVisitor = (req, res) => {
   const { id } = req.body;
 
   Visitor.deleteVisitor(id, (result) => {
-    console.log('controller >>', result); // true
+    console.log("controller >>", result); // true
     res.send(result); // res.send(true);
   });
 };
@@ -85,7 +84,7 @@ exports.getVisitor = (req, res) => {
   //: param
   //_ GET /visitor/:id
   // controller에서는
-  console.log('req.params >>> ', req.params);
+  console.log("req.params >>> ", req.params);
   // { id : 5 }
 
   const { id } = req.params; // {}
@@ -93,7 +92,7 @@ exports.getVisitor = (req, res) => {
   Visitor.getVisitor(id, (result) => {
     // result : 모델의 getVisitor callback의 인자
     // rows[]
-    console.log('result >>>', result); //  { }
+    console.log("result >>>", result); //  { }
     res.send(result);
   });
 };
