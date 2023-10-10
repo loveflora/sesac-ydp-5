@@ -1,6 +1,6 @@
 //=== Custom Hook 1 ===
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 export default function useTitle(title) {
   //_ 1. 라우터 사용하면 prevTitle 필요함
