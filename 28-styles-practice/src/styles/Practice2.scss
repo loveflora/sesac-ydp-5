@@ -1,0 +1,81 @@
+@import './variables';
+@import './utils';
+
+.practice2 {
+  height: 600px;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+  &.one {
+    background-color: $color-first;
+    animation: moveClockwiseOne 1s infinite;
+  }
+
+  &.two {
+    background-color: $color-second;
+    animation: moveClockwiseTwo 1s infinite;
+  }
+
+  &.three {
+    background-color: $color-third;
+    animation: moveClockwiseThree 1s infinite;
+  }
+}
+
+@keyframes moveClockwiseOne {
+  0% {
+    @include movementXY(0, 0);
+  }
+  25% {
+    @include movementXY(100px, 0);
+  }
+  50% {
+    @include movementXY(100px, 100px);
+  }
+  75% {
+    @include movementXY(0, 100px);
+  }
+  100% {
+    @include movementXY(0, 0);
+  }
+}
+
+@keyframes moveClockwiseTwo {
+  0% {
+    @include movementXY(0, 0);
+  }
+  25% {
+    @include movementXY(200px, 0);
+  }
+  50% {
+    @include movementXY(200px, 200px);
+  }
+  75% {
+    @include movementXY(0, 200px);
+  }
+  100% {
+    @include movementXY(0, 0);
+  }
+}
+
+@keyframes moveClockwiseThree {
+  0% {
+    @include movementXY(0, 0);
+  }
+  25% {
+    @include movementXY(300px, 0);
+  }
+  50% {
+    @include movementXY(300px, 300px);
+  }
+  75% {
+    @include movementXY(0, 300px);
+  }
+  100% {
+    @include movementXY(0, 0);
+  }
+}
