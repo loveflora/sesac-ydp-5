@@ -3,7 +3,7 @@
 // 로컬변수 = 랜더링되어도 값이 그대로 유지 (컴포넌트 내에서만 유효)
 // => ref 안의 변경되어도 컴포넌트는 랜더링되지 않음!!!
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 
 export default function RefSample2() {
   //-- 1. ref 객체 만들기
@@ -11,6 +11,7 @@ export default function RefSample2() {
 
   const [number, setNumber] = useState(10);
 
+  //-- 3. useRef()를 이용해서 만든 객체 안의 current는 실제 요소를 가르킵니다.
   const plusIdRef = () => {
     id.current += 1;
     console.log(id.current);
