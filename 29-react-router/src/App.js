@@ -4,6 +4,7 @@ import NotFound from './pages/NotFound';
 import ProductPage from './pages/ProductPage';
 import Header from './components/Header';
 import ProductDetailPage from './pages/ProductDetailPage';
+import PhotoPage from './pages/PhotoPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/products" element={<ProductPage />} />
           <Route path="/products/:productId" element={<ProductDetailPage />} />
+          <Route path="/photos" element={<PhotoPage />} />
 
           {/* 404 처리는 제일 밑에 있어야 함 */}
           <Route path="*" element={<NotFound />} />

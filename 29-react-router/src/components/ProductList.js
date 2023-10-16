@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
+// import axios from 'axios';
 
 //-- export
 // ProductItem
+
+// export const productInfos = [];
+
 export const productInfos = [
   {
     id: 1,
@@ -67,7 +71,27 @@ export const productInfos = [
 ];
 
 export default function ProductList() {
-  console.log(productInfos);
+  // const [data, setData] = useState([]);
+
+  // const getData = async () => {
+  //   const response = await axios.get(
+  //     'https://jsonplaceholder.typicode.com/photos'
+  //   );
+  //   setData(response.data);
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+
+  // useEffect(() => {
+  //   // 데이터가 업데이트될 때마다 productInfos 배열을 업데이트합니다.
+  //   productInfos.length = 0; // 기존 데이터를 비우고
+  //   productInfos.push(...data); // 새로운 데이터로 채웁니다.
+  // }, [data]);
+
+  // console.log(productInfos);
+  // console.log(data);
 
   return (
     <div>

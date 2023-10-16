@@ -12,6 +12,9 @@ export default function Header() {
         <li>
           <Link to="/products">Products</Link>
         </li>
+        <li>
+          <Link to="/photos">Photo</Link>
+        </li>
       </ul>
     </header>
   );
