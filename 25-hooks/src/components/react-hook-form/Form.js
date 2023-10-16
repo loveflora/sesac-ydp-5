@@ -84,8 +84,19 @@ export default function Form() {
         <input
           type="password"
           placeholder="password"
-          {...register('password')}
+          {...register('password', {
+            pattern: {
+              minLength: {
+                message: '비밀번호는 최소 6글자 이상 작성해주세요.',
+                value: 6,
+              },
+              value: /.*\d+.*/,
+              message: '비밀번호에 숫자가 포함되어야 합니다.',
+            },
+          })}
         />
+        {errors.password?.message}
+
         <br />
 
         <button type="submit">Submit</button>

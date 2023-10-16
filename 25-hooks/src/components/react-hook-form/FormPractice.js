@@ -17,7 +17,8 @@ export default function FormPractice() {
   return (
     <div>
       <h1>react-hook-form 실습</h1>
-      <form onSubmit={handleSubmit(onValid)}>
+      {/* <form onSubmit={handleSubmit(onValid)}> */}
+      <form onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
         <input
           type="text"
           placeholder="name"
@@ -34,7 +35,8 @@ export default function FormPractice() {
           placeholder="age"
           {...register('age', {
             validate: {
-              moreThanZero: (v) => v >= 0 || '0 이상의 숫자만 입력 가능합니다.',
+              positiveNumber: (v) =>
+                v >= 0 || '0 이상의 숫자만 입력 가능합니다.',
             },
           })}
         />
@@ -47,3 +49,5 @@ export default function FormPractice() {
     </div>
   );
 }
+
+// https://www.daleseo.com/react-hook-form/
