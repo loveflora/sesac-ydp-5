@@ -17,10 +17,10 @@ import {
   Box2Container,
   Box3Container,
   Box4Container,
+  BankContainer,
 } from './containers/BoxesContainer';
-import { minus, plus } from './store/counterReducer';
 
-// import { useState } from 'react';
+import { useState } from 'react';
 
 function App() {
   //_ [ BEFORE : Props Drilling ]
@@ -29,6 +29,7 @@ function App() {
   // const minus = () => setNumber(number - 1);
 
   const number = useSelector((state) => state.counter.number);
+  // const money = useSelector((state) => state.money.money);
 
   return (
     <div className="App">
@@ -38,6 +39,9 @@ function App() {
       <Box1Container />
 
       <h2>number: {number}</h2>
+
+      <hr />
+      <BankContainer />
     </div>
   );
 }
@@ -93,6 +97,28 @@ export const Box4 = ({ number, onPlus, onMinus }) => {
 
       {/* <button onClick={() => dispatch({ type: 'PLUS' })}>PLUS</button>
       <button onClick={() => dispatch({ type: 'MINUS' })}>MINUS</button> */}
+    </div>
+  );
+};
+
+////////////////////////////////////
+
+//] 컴포넌트 실습 5. 은행 입출금
+export const Bank = ({ money, onIncome, onOutcome }) => {
+  const [inputValue, setInputValue] = useState(0);
+
+  const inputValueHandler = (e) => {
+    setInputValue(Number(e.target.value));
+  };
+
+  return (
+    <div className="Bank">
+      <h2>Bank</h2>
+
+      <h3>잔액 : {money}원</h3>
+      <input type="number" value={inputValue} onChange={inputValueHandler} />
+      <button onClick={onIncome(inputValue)}>입금</button>
+      <button onClick={onOutcome(inputValue)}>출금</button>
     </div>
   );
 };
