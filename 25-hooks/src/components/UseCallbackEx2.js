@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 
 export default function UseCallbackEx2({ postId }) {
   const [post, setPost] = useState({});
@@ -21,11 +21,8 @@ export default function UseCallbackEx2({ postId }) {
 
   //] [ AFTER ]
   const getPost = useCallback(async () => {
-    //_ console.log('1');
-    //_ 콘솔 찍으면 무한히 출력됨 (요청이 계속 날라감)
-
     const res = await axios.get(
-      `https://jsonplaceholder.typicode.com/todos/${postId}`
+      `https://jsonplaceholder.typicode.com/todos/${postId}`,
     );
     setPost(res.data);
   });
@@ -55,7 +52,7 @@ export default function UseCallbackEx2({ postId }) {
   return (
     <div>
       <h1>useCallback Ex2</h1>
-      {post.id ? post.title : '로딩 중...'}
+      {post.id ? post.title : "로딩 중..."}
     </div>
   );
 }
