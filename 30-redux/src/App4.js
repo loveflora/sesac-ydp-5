@@ -19,6 +19,7 @@ import {
   Box4Container,
   BankContainer,
 } from './containers/BoxesContainer';
+import { minus, plus } from './store/moneyReducer';
 
 import { useState } from 'react';
 
@@ -29,7 +30,7 @@ function App() {
   // const minus = () => setNumber(number - 1);
 
   const number = useSelector((state) => state.counter.number);
-  // const money = useSelector((state) => state.money.money);
+  const money = useSelector((state) => state.money.money);
 
   return (
     <div className="App">
@@ -104,21 +105,21 @@ export const Box4 = ({ number, onPlus, onMinus }) => {
 ////////////////////////////////////
 
 //] 컴포넌트 실습 5. 은행 입출금
-export const Bank = ({ money, onIncome, onOutcome }) => {
+export const Bank = ({ money, onPlus, onMinus }) => {
   const [inputValue, setInputValue] = useState(0);
-
-  const inputValueHandler = (e) => {
-    setInputValue(Number(e.target.value));
-  };
 
   return (
     <div className="Bank">
       <h2>Bank</h2>
 
       <h3>잔액 : {money}원</h3>
-      <input type="number" value={inputValue} onChange={inputValueHandler} />
-      <button onClick={onIncome(inputValue)}>입금</button>
-      <button onClick={onOutcome(inputValue)}>출금</button>
+      <input
+        type="number"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <button onClick={onPlus}>입금</button>
+      <button onClick={onMinus}>출금</button>
     </div>
   );
 };
