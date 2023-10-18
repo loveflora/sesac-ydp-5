@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App3 from './App3';
+import App4 from './App4'; // 1 2 3 4 변경하기
 
 //=== Redux ===
 import { Provider } from 'react-redux';
@@ -17,7 +17,8 @@ const store = configureStore({ reducer: rootReducer }, composeWithDevTools());
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App3 />
+      <App4 />
+      {/* 1 2 3 4 변경하기  */}
     </Provider>
   </React.StrictMode>
 );
