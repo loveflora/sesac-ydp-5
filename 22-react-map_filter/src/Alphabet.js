@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function Alphabet() {
   // 1.
@@ -8,27 +8,27 @@ export default function Alphabet() {
   const [alphabet, setAlphabet] = useState([
     {
       id: 1,
-      alpha: 'a',
+      alpha: "a",
     },
     {
       id: 2,
-      alpha: 'p',
+      alpha: "p",
     },
     {
       id: 3,
-      alpha: 'p',
+      alpha: "p",
     },
     {
       id: 4,
-      alpha: 'l',
+      alpha: "l",
     },
     {
       id: 5,
-      alpha: 'e',
+      alpha: "e",
     },
   ]);
 
-  const [inputAlpha, setInputAlpha] = useState('');
+  const [inputAlpha, setInputAlpha] = useState("");
 
   const addAlpha = () => {
     if (!inputAlpha.trim()) return; // trim() : 긴 공백도 추가 안되게
@@ -42,12 +42,12 @@ export default function Alphabet() {
       alpha: inputAlpha,
     });
 
-    //) 1. concat 메소드
+    //) 2. spread
     // const newAlpha = { ... }
     // const newData = [...alphabet, newAlpha];
 
     setAlphabet(newAlpha);
-    setInputAlpha('');
+    setInputAlpha("");
   };
   //   };
 
@@ -75,7 +75,7 @@ export default function Alphabet() {
     // onKeyUp, onKeyDown 이벤트는 유지하고 isComposing 반환값을 이용
     // true인 경우 실행할 동작에 접근하지 못하도록 함수를 종료한다.
 
-    if (e.code === 'Enter') {
+    if (e.code === "Enter") {
       addAlpha();
       return;
     }
