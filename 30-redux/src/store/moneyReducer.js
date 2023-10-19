@@ -1,10 +1,10 @@
-const PLUS = 'money/PLUS';
-const MINUS = 'money/MINUS';
+const PLUS = "money/PLUS";
+const MINUS = "money/MINUS";
 
 // PLUS() , MINUS()
 // 나중에 컴포넌트에서 액션을 쉽게 발생시킬 수 있도록
-export const plus = (money) => ({ type: PLUS, payload: money });
-export const minus = (money) => ({ type: MINUS, payload: money });
+export const income = (money) => ({ type: PLUS, payload: money });
+export const outcome = (money) => ({ type: MINUS, payload: money });
 
 // state 초기값 정의
 const initialState = {

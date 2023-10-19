@@ -10,18 +10,17 @@
 
 ///////////////////////////////////////
 
-import { useSelector, useDispatch } from 'react-redux';
-import './styles/Box.css';
+import { useSelector, useDispatch } from "react-redux";
+import "./styles/Box.css";
 import {
   Box1Container,
   Box2Container,
   Box3Container,
   Box4Container,
   BankContainer,
-} from './containers/BoxesContainer';
-import { minus, plus } from './store/moneyReducer';
+} from "./containers/BoxesContainer";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 function App() {
   //_ [ BEFORE : Props Drilling ]
@@ -30,7 +29,6 @@ function App() {
   // const minus = () => setNumber(number - 1);
 
   const number = useSelector((state) => state.counter.number);
-  const money = useSelector((state) => state.money.money);
 
   return (
     <div className="App">
@@ -43,6 +41,7 @@ function App() {
 
       <hr />
       <BankContainer />
+      {/* <Bank /> */}
     </div>
   );
 }
@@ -118,8 +117,8 @@ export const Bank = ({ money, onPlus, onMinus }) => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <button onClick={onPlus}>입금</button>
-      <button onClick={onMinus}>출금</button>
+      <button onClick={() => onPlus(inputValue)}>입금</button>
+      <button onClick={() => onMinus(inputValue)}>출금</button>
     </div>
   );
 };
