@@ -97,3 +97,27 @@ console.log(galaxy23);
 //     createdAt: 2023-10-05T00:00:00.000Z,
 //     option: { color: 'blue', isBuz: true }
 //   }
+
+////////////////////////////////////
+//] 실습
+
+// 1.
+function sum2(a: number, b: number): number {
+  return a + b;
+}
+
+console.log(sum2(5, 11)); // 16
+
+// 2.
+function sum3(...arr: number[]): number {
+  return arr.reduce((acc, cur) => acc + cur, 0);
+}
+
+console.log(sum3(1, 2, 3, 4, 10)); // 20
+
+// 3.
+function arrElement<T>(arr: T[], idx: number): boolean {
+  return arr.length > idx ? true : false;
+}
+
+console.log(arrElement<string>(['a'], 1)); // false
