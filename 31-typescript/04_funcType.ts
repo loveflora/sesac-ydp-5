@@ -76,3 +76,41 @@ const sesac: Greet = {
 
 console.log(sesac.hi()); // 여기는 sesac캠퍼스
 console.log(sesac.bye(5)); // 작별 인사를 5번 했습니다.
+
+//] never
+// 함수의 끝에 절대 도달하지 않는 경우의 타입
+function goingOn(): never {
+  while (true) {
+    console.log('go!');
+  }
+} // 무한루프에 빠져, 함수의 끝에 도달할 수 없음
+
+//] 오버라이딩 vs. 오버로딩
+//-- 1. 오버라이딩
+// Class에서 "상속" -> 하위 클래스가 상위 클래스의 메소드를 상속받을 때 같은 이름의 함수(메서드)를 재정의
+// 부모와 자식 클래스 존재, 상속 -> 업어준다
+
+//-- 2. 오버로딩
+// 함수 이름은 같지만, 매개변수 or 반환타입이 다른 여러 함수들을 가질 수 있음
+
+//_ typescript 오버로딩
+// - 선언부 : 매개변수의 타입과 반환 타입만 지정 (무슨 일을 하는지는 쓰지 않음)
+// - 구현부 : 실제 함수의 구현 (function body)
+// => '함수 이름이 동일'
+
+function sum1(a: string, b: string): string; // 선언부
+function sum1(a: number, b: number): number; // 선언부
+// function sum1(a: number, b: string): string; // 선언부
+
+// 구현부
+// string 이랑 number 타입 둘 다 있으므로,
+// 'any' 타입으로 지정하여 오버로딩
+function sum1(a: any, b: any): any {
+  return a + b;
+}
+
+console.log(sum1('가', '나')); // 가나
+console.log(sum1(10, 20)); // 30
+// console.log(sum1(10, '안돼요')); //\ error ! --> string 과 number 타입 동시에 사용
+
+// console.log(sum1(10, '안돼요')); //\ error ! --> string 과 number 타입 동시에 사용
