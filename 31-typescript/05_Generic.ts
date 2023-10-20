@@ -28,3 +28,72 @@ function arrLen<T>(arr: T[]): number {
 console.log(arrLen<string>(['1', '2', '3', '4'])); // 4
 console.log(arrLen<number>([1, 2, 3])); // 3
 console.log(arrLen<string | number>(['원', 2])); // 2
+
+/////////////////////////////////////////////////
+
+function printSome<T>(x: T, y: T): void {
+  console.log(x, y);
+}
+
+printSome<string>('hi', 'hello'); // hi hello
+printSome<number>(100, 200); // 100 200
+printSome<boolean[]>([true, false], [false, false]); // [true, false] [false, false]
+
+// T: Type
+// U: usually
+function printSome2<T, U>(x: T, y: U): void {
+  console.log(x, y);
+}
+
+printSome2<string, number>('1', 1);
+
+///////////////////////////////////////////////
+
+//] interface와 generic
+interface Phone<T> {
+  company: string;
+  createdAt: Date;
+  option: T;
+}
+
+type iphoneOption = {
+  color: string;
+  storage: number;
+};
+
+const iphone15: Phone<iphoneOption> = {
+  company: 'apple',
+  createdAt: new Date('2023-10-05'),
+  option: {
+    color: 'white',
+    storage: 128,
+  },
+};
+
+console.log(iphone15);
+// {
+//     company: 'apple',
+//     createdAt: 2023-10-05T00:00:00.000Z,
+//     option: { color: 'white', storage: 128 }
+//  }
+
+type galaxyOption = {
+  color: string;
+  isBuz: boolean;
+};
+
+const galaxy23: Phone<galaxyOption> = {
+  company: 'samsung',
+  createdAt: new Date('2023-10-05'),
+  option: {
+    color: 'blue',
+    isBuz: true,
+  },
+};
+
+console.log(galaxy23);
+// {
+//     company: 'samsung',
+//     createdAt: 2023-10-05T00:00:00.000Z,
+//     option: { color: 'blue', isBuz: true }
+//   }
