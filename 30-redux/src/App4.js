@@ -1,10 +1,13 @@
 //=== Redux 최적화하기 (분리) ===
 //] containers 폴더 추가
 //-- presentational component
-// “뷰” 집중 ⇒ components/ ⇒ 뷰에 관련된 것만
+// “뷰” 집중
+// ⇒ components/ ⇒ 뷰에 관련된 것만
 
 //-- container component
-// "presentational + container" ⇒ containers/ ⇒ 그외 로직 확인 가능
+// "presentational + container"
+// ⇒ "로직" 집중
+// ⇒ containers/
 
 // → 유지 보수가 쉬워짐
 
