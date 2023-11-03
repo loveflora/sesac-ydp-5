@@ -9,10 +9,10 @@ const multerS3 = require('multer-s3');
 
 dotenv.config();
 
+const app = express();
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-const app = express();
 
 // AWS S3 설정
 const s3 = new aws.S3({
