@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Socket 채팅</title>
+  </head>
+  <body>
+    <h1>채팅</h1>
+
+    <!-- 채팅 내용 -->
+    <ul></ul>
+
+    <!-- 채팅 인풋 -->
+    <form id="chat">
+        이름 <input type="text" id="name" class="name"/></form>
+        내용 <input type="text" id="name" class="message"/></br>
+    <button>전송</button>
+    </form>
+  </body>
+
+  <script>
+    const socket = new WebSocket('ws://localhost:8080')
+    // console.log(socket);  // 클라이언트 소켓 객체
+
+    const chatForm = document.querySelector('#chat')  // 폼 가져오기
+    const ul = document.querySelector('ul')  // 채팅 내역을 보여주기 위한 ul 요소
+
+    socket.addEventListener('open', (event) => {
+        console.log('[ 서버 연결 완료 ]')
+    })
+
+    socket.addEventListener('close', (event) => {
+        console.log('[ 서버 연결 종료 ]')
+    })
+
+    chatForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+    })
+
+    const msg = chatForm.querySelector('#message')
+    const name = chatForm.querySelector('#name')
+    const data = {msg: msg.value, name: name.value};
+    console.log("보내려는 메세지 데이터 :: ", data);
+
+    // 메세지 데이터를 웹 소켓 서버로 전송
+    socket.send();
+
+    // input 초기화
+    msg.value = "";
+    name.value = "";
+
+  </script>
+</html>
