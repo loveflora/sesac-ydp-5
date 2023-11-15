@@ -35,13 +35,14 @@ io.on('connection', (socket) => {
 
   //]  [ 실습 3-2 ]
   // emit() from server
-  //; socket.emit(event_name, data) : 해당 클라이언트에게만 이벤트, 데이터를 전송
-  //; io.emit(event_name, data) : 서버에 접속된 모든 클라이언트 전송
+  //-- socket.emit(event_name, data) : 해당 클라이언트에게만 이벤트, 데이터를 전송
+  //-- io.emit(event_name, data) : 서버에 접속된 모든 클라이언트 전송
+  //-- io.to(소켓아이디).emit(event_name, data): 소켓아이디에 해당하는 클라이언트에게 데이터를 전송
   socket.on('setNick', (nick) => {
     console.log(`닉네임 설정 완료 :: ${nick}님 입장`);
 
     //-- 프론트에서 입력한 nick이 nickObjs 객체에 존재하는지 검사
-    if (Object.values(nick).indexOf(nick) > -1) {
+    if (Object.values(nickObjs).indexOf(nick) > -1) {
       // 1) 이미 존재 : error 이벤트 + '이미 존재하는 닉네임입니다.'
       socket.emit('error', '이미 존재하는 닉네임입니다.');
     } else {
@@ -54,16 +55,27 @@ io.on('connection', (socket) => {
     }
   });
 
-  // [ 실습 3-3 ] 클라이언트 퇴장 시
+  //] [ 실습 3-3 ] 클라이언트 퇴장 시
   // "notice" 이벤트로 퇴장 공지
   socket.on('disconnect', () => {
-    console.log('접속 끊김 ::', `${nickObjs[socket.id]} 님이 퇴장하셨습니다.`);
+    console.log(
+      '접속 끊김 :: ',
+      `${nickObjs[socket.id]} 님 퇴장 :: `,
+      socket.id
+    );
 
     io.emit('notice', `${nickObjs[socket.id]} 님이 퇴장하셨습니다.`);
     delete nickObjs[socket.id];
     updateList();
   });
 
+  //] [ 실습 4 ] 채팅창 메세지 전송 Step 1.
+  //  send 이벤트를 받아서,
+  //  모두에게 newMessage 이벤트로 { 닉네임, 입력창 내용 } 데이터를 전송
+  socket.on('sendMessage', (data) => {
+    // 받은 메시지를 다시 모든 클라이언트에게 전송
+    io.emit('newMessage', data);
+  });
   //   socket.on('sendMessage', (data) => {
   //     // 클라이언트에서 받은 메시지를 기록합니다
   //     console.log(`${data.who} : ${data.msg}`);

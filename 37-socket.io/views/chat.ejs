@@ -9,7 +9,6 @@
     <style>
       .chat-list {
         background-color: rgb(30, 30, 30);
-
         width: 50%;
         height: 500px;
         padding: 10px;
@@ -25,33 +24,23 @@
         padding: 3px;
       }
 
-      .my-chat-wrapper {
+      .my-chat {
         text-align: right;
       }
 
-      .my-chat {
+      .my-chat div {
         background-color: rgb(247, 214, 53);
-        display: inline-block;
         margin-left: 0;
         padding: 0.4rem;
         border-radius: 0.4rem;
+        display: inline-block;
       }
 
-      .other-chat {
+      .other-chat div {
         background-color: white;
         display: inline-block;
         padding: 0.4rem;
-
         border-radius: 0.4rem;
-      }
-
-      .input-wrapper {
-        text-align: center;
-      }
-
-      input {
-        width: 60%;
-        margin-top: 1rem;
       }
 
       /* [실습3] 채팅창 입장 안내 문구 */
@@ -62,6 +51,7 @@
       }
 
       .d-none {
+        display: none;
       }
     </style>
   </head>
@@ -89,18 +79,16 @@
     </div>
 
     <!-- [ 실습 2 ] 채팅 UI -->
-    <main class="chat-box">
-      <div id="entryMessage"></div>
+    <main class="chat-box d-none">
       <div class="chat-list">
+        <!-- <div id="entryMessage"></div> -->
         <!-- 임시 대화 데이터 -->
-        <!-- <div class="my-chat-wrapper">
-          <div class="my-chat">
-            <div>user1 : msg1</div>
-          </div>
+        <div class="my-chat">
+          <!-- <div>user1 : msg1</div> -->
         </div>
         <div class="other-chat">
-          <div>user2 : msg2</div>
-        </div> -->
+          <!-- <div>user2 : msg2</div> -->
+        </div>
       </div>
 
       <!-- 메세지 전송 영역 -->
@@ -111,7 +99,7 @@
         id="message"
         onkeypress="if(window.event.keyCode==13){send()}"
       />
-      <button type="button" onclick="send();">전송</button>
+      <button type="button" onclick="send()">전송</button>
     </main>
     <!-- <div class="input-wrapper">
       <input id="myInput" onchange="onChange()" />
@@ -133,7 +121,7 @@
         document.querySelector('.chat-list').insertAdjacentHTML(
           'beforeend',
           `<div class=
-              "notice">${message}</div>`
+                "notice">${message}</div>`
         );
       });
 
@@ -172,6 +160,39 @@
         document.querySelector('#nick-list').innerHTML = options;
       });
 
+      // [ 실습 4 ] 채팅창 메세지 전송 Step 1.
+      function send() {
+        // "send" 이벤트 전송 { 닉네임, 입력창내용 }
+
+        const nick = myNick;
+        const messageInput = document.getElementById('message');
+        const msg = messageInput.value;
+
+        socket.emit('sendMessage', { nick, msg });
+
+        messageInput.value = '';
+
+        // const myChat = document.createElement('div');
+        // myChat.className = 'my-chat';
+
+        // const chatList = document.querySelector('.chat-list');
+        // chatList.appendChild(myChat);
+
+        document
+          .querySelector('.my-chat')
+          .insertAdjacentHTML('beforeend', `<div>${msg}</div>`);
+      }
+
+      // [ 실습 4 ] 채팅창 메세지 전송 Step 2.
+      // newMessage 이벤트를 받아서 { 닉네임, 입력창내용 }
+      // 내가 보낸 메세지 : 오른쪽
+      // 다른 사람이 보낸 메세지 : 왼쪽
+
+      socket.on('sendMessage', (data) => {
+        // 클라이언트에게 받은 메시지를 모든 클라이언트에게 전송
+        io.emit('newMessage', data);
+      });
+
       // [ 실습 1 ]
       //   function sayHello() {
       //     socket.emit('hello', { who: 'client', msg: 'hello' });
@@ -207,42 +228,42 @@
         console.log('입력값이 변경되었습니다:', inputValue);
       };
 
-      const sendHandler = () => {
-        // socket.emit('bye', { who: 'client', msg: 'bye' });
-        // socket.on('byeKr', (data) => {
-        //   document.getElementById(
-        //     'myInput'
-        //   ).value = `${data.who} : ${data.msg}`;
-        // });
+      //   const sendHandler = () => {
+      //     // socket.emit('bye', { who: 'client', msg: 'bye' });
+      //     // socket.on('byeKr', (data) => {
+      //     //   document.getElementById(
+      //     //     'myInput'
+      //     //   ).value = `${data.who} : ${data.msg}`;
+      //     // });
 
-        var inputValue = document.getElementById('myInput').value;
-        // Emit the message to the server
-        socket.emit('sendMessage', { who: 'client', msg: inputValue });
-        // Clear the input field
-        document.getElementById('myInput').value = '';
+      //     var inputValue = document.getElementById('myInput').value;
+      //     // Emit the message to the server
+      //     socket.emit('sendMessage', { who: 'client', msg: inputValue });
+      //     // Clear the input field
+      //     document.getElementById('myInput').value = '';
 
-        // Add the sent message to the chat list
-        const chatList = document.getElementById('chatList');
-        const myChatWrapper = document.createElement('div');
-        myChatWrapper.className = 'my-chat-wrapper';
+      //     // Add the sent message to the chat list
+      //     const chatList = document.getElementById('chatList');
+      //     const myChatWrapper = document.createElement('div');
+      //     myChatWrapper.className = 'my-chat-wrapper';
 
-        const myChat = document.createElement('div');
-        myChat.className = 'my-chat';
-        myChat.textContent = `${inputValue}`;
+      //     const myChat = document.createElement('div');
+      //     myChat.className = 'my-chat';
+      //     myChat.textContent = `${inputValue}`;
 
-        myChatWrapper.appendChild(myChat);
-        chatList.appendChild(myChatWrapper);
-      };
+      //     myChatWrapper.appendChild(myChat);
+      //     chatList.appendChild(myChatWrapper);
+      //   };
 
-      socket.on('receiveMessage', (data) => {
-        // Handle received messages from the server
-        const chatList = document.getElementById('chatList');
-        const otherChat = document.createElement('div');
-        otherChat.className = 'other-chat';
-        otherChat.textContent = `${data.who}: ${data.msg}`;
+      //   socket.on('receiveMessage', (data) => {
+      //     // Handle received messages from the server
+      //     const chatList = document.getElementById('chatList');
+      //     const otherChat = document.createElement('div');
+      //     otherChat.className = 'other-chat';
+      //     otherChat.textContent = `${data.who}: ${data.msg}`;
 
-        chatList.appendChild(otherChat);
-      });
+      //     chatList.appendChild(otherChat);
+      //   });
     </script>
   </body>
 </html>
