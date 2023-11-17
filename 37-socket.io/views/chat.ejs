@@ -24,6 +24,23 @@
         padding: 3px;
       }
 
+      .my-chat div,
+      .other-chat div,
+      .private-chat div {
+        max-width: 70%;
+        padding: 8px;
+        border-radius: 8px;
+        margin: 5px;
+        word-wrap: break-word;
+      }
+
+      .private-chat div {
+        background-color: #ffcccb; 
+        color: #333;
+        text-align: left;
+        margin-right: auto;
+      }
+
       .my-chat {
         text-align: right;
       }
@@ -53,6 +70,21 @@
       .d-none {
         display: none;
       }
+
+      select,
+      input,
+      button {
+        margin: 8px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      #nickname {
+        padding: 8px;
+        margin-bottom: 8px;
+      }
+
     </style>
   </head>
 
@@ -89,9 +121,13 @@
         <div class="other-chat">
           <!-- <div>user2 : msg2</div> -->
         </div>
+        <div class="private-chat">
+              <!-- <div>user2 : msg2</div> -->
+        </div>
       </div>
 
       <!-- 메세지 전송 영역 -->
+      <div class="input-container">
       <select id="nick-list"></select
       >에게
       <input
@@ -100,54 +136,52 @@
         onkeypress="if(window.event.keyCode==13){send()}"
       />
       <button type="button" onclick="send()">전송</button>
+    </div>
     </main>
-    <!-- <div class="input-wrapper">
-      <input id="myInput" onchange="onChange()" />
-      <button onclick="sendHandler()">전송</button>
-    </div> -->
+  </body>
 
     <script>
       let socket = io.connect(); // 소켓 사용을 위한 객체 생성
       let myNick; // 내 닉네임
 
-      socket.on('connect', () => {
-        console.log('클라리언트 연결 완료 ::', socket.id);
+      socket.on("connect", () => {
+        console.log("클라리언트 연결 완료 ::", socket.id);
       });
 
       // [ 실습 3 ] 채팅창 입장 문구
-      socket.on('notice', (message) => {
+      socket.on("notice", (message) => {
         console.log(message);
         // document.getElementById('entryMessage').innerHTML = message;
-        document.querySelector('.chat-list').insertAdjacentHTML(
-          'beforeend',
+        document.querySelector(".chat-list").insertAdjacentHTML(
+          "beforeend",
           `<div class=
-                "notice">${message}</div>`
+                "notice">${message}</div>`,
         );
       });
 
       // [ 실습 3-2 ] 채팅창 입장 문구 socket.id -> nickname
       function join() {
-        socket.emit('setNick', document.querySelector('#nickname').value);
+        socket.emit("setNick", document.querySelector("#nickname").value);
       }
 
       // [ 실습 3-2 ] 채팅창 입장 문구 socket.id -> nickname
       // 닉네임 중복 : alert 띄우기
-      socket.on('error', (data) => {
+      socket.on("error", (data) => {
         alert(data);
       });
 
       // [ 실습 3-2 ] 채팅창 입장 문구 socket.id -> nickname
       // 입장 성공 : 닉네임 입력창 비활성화
-      socket.on('entrySuccess', (nick) => {
+      socket.on("entrySuccess", (nick) => {
         myNick = nick; // 내 닉네임 저장
-        document.querySelector('#nickname').disabled = true; // input 비활성화
-        document.querySelector('.entry-box > button').disabled = true; // 버튼 비활성화
-        document.querySelector('.chat-box').classList.remove('d-none'); // 채팅창 보이기
+        document.querySelector("#nickname").disabled = true; // input 비활성화
+        document.querySelector(".entry-box > button").disabled = true; // 버튼 비활성화
+        document.querySelector(".chat-box").classList.remove("d-none"); // 채팅창 보이기
       });
 
       // [ 실습 3-2 ] 채팅창 입장 문구 socket.id -> nickname
       // 유저 목록 업데이트 : select 박스의 option 태그 개수 변경
-      socket.on('updateNicks', (nickObjs) => {
+      socket.on("updateNicks", (nickObjs) => {
         // nickObjs : { socket.id: nick1, socket.id: nick2, ... }
         let options = `<option value="all">전체</option>`;
 
@@ -157,7 +191,7 @@
           options += `<option value="${key}">${nickObjs[key]}</option>`;
         }
 
-        document.querySelector('#nick-list').innerHTML = options;
+        document.querySelector("#nick-list").innerHTML = options;
       });
 
       // [ 실습 4 ] 채팅창 메세지 전송 Step 1.
@@ -165,22 +199,31 @@
         // "send" 이벤트 전송 { 닉네임, 입력창내용 }
 
         const nick = myNick;
-        const messageInput = document.getElementById('message');
+        const messageInput = document.getElementById("message");
         const msg = messageInput.value;
 
-        socket.emit('sendMessage', { nick, msg });
+        const receiver = document.getElementById("nick-list").value;
 
-        messageInput.value = '';
+        if (receiver === "all") {
+          socket.emit("sendToAll", {
+            nickName: document.querySelector("#nickname").value,
+            content: messageInput.value,
+          });
+          messageInput.value = "";
+        } else {
+          socket.emit("sendToOne", {
+            receiver,
+            content: messageInput.value,
+            nickName: document.querySelector("#nickname").value,
+          });
 
+          messageInput.value = "";
+        }
         // const myChat = document.createElement('div');
         // myChat.className = 'my-chat';
 
         // const chatList = document.querySelector('.chat-list');
         // chatList.appendChild(myChat);
-
-        document
-          .querySelector('.my-chat')
-          .insertAdjacentHTML('beforeend', `<div>${msg}</div>`);
       }
 
       // [ 실습 4 ] 채팅창 메세지 전송 Step 2.
@@ -188,9 +231,32 @@
       // 내가 보낸 메세지 : 오른쪽
       // 다른 사람이 보낸 메세지 : 왼쪽
 
-      socket.on('sendMessage', (data) => {
-        // 클라이언트에게 받은 메시지를 모든 클라이언트에게 전송
-        io.emit('newMessage', data);
+      socket.on("message", (data) => {
+        const { nickName, content } = data;
+
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add(
+          myNick === nickName ? "my-chat" : "other-chat",
+        );
+        messageDiv.innerHTML = `<div>${data.nickName} : ${data.content}</div>`;
+
+        document.querySelector(".chat-list").appendChild(messageDiv);
+
+        const chatList = document.querySelector('.chat-list');
+        chatList.scrollTop = chatList.scrollHeight;
+      });
+
+      socket.on('privateMessage', (data) => {
+        console.log('귓속말: ', data, myNick);
+        const { nickName, content } = data;
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add(
+          myNick === nickName ? 'my-chat' : 'private-chat'
+        );
+        messageDiv.innerHTML = `<div>(귓속말)${data.nickName} : ${data.content}</div>`;
+        document.querySelector('.chat-list').appendChild(messageDiv);
+        const chatList = document.querySelector('.chat-list');
+        chatList.scrollTop = chatList.scrollHeight;
       });
 
       // [ 실습 1 ]
@@ -224,8 +290,8 @@
       //   }
 
       const onChange = () => {
-        var inputValue = document.getElementById('myInput').value;
-        console.log('입력값이 변경되었습니다:', inputValue);
+        var inputValue = document.getElementById("myInput").value;
+        console.log("입력값이 변경되었습니다:", inputValue);
       };
 
       //   const sendHandler = () => {
