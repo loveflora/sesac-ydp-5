@@ -144,6 +144,8 @@
       let socket = io.connect(); // 소켓 사용을 위한 객체 생성
       let myNick; // 내 닉네임
 
+    
+
       socket.on("connect", () => {
         console.log("클라리언트 연결 완료 ::", socket.id);
       });
@@ -185,9 +187,15 @@
         // nickObjs : { socket.id: nick1, socket.id: nick2, ... }
         let options = `<option value="all">전체</option>`;
 
+   
+
         // TODO : nickObjs 반복 돌아서, option 태그 추가
         // option 태그의 value 속성 값은 socket.id, option 태그의 컨텐츠는 nick 값
         for (const key in nickObjs) {
+if(nickObjs[key] === undefined) {
+  nickObjs[key] = "알 수 없음"
+}
+
           options += `<option value="${key}">${nickObjs[key]}</option>`;
         }
 
@@ -256,7 +264,7 @@
         messageDiv.innerHTML = `<div>(귓속말)${data.nickName} : ${data.content}</div>`;
         document.querySelector('.chat-list').appendChild(messageDiv);
         const chatList = document.querySelector('.chat-list');
-        chatList.scrollTop = chatList.scrollHeight;
+        chatList.scrollTop = chatList.scrollHeight;  //  스크롤 위치를 최하단
       });
 
       // [ 실습 1 ]
