@@ -7,12 +7,16 @@
     <!-- cdn -->
     <script src="/socket.io/socket.io.js"></script>
     <style>
+  .chat-box {
+    width: 60%;
+    }
+
       .chat-list {
-        background-color: rgb(30, 30, 30);
-        width: 50%;
+  background-color: rgb(30, 30, 30);
         height: 500px;
         padding: 10px;
-        overflow-y: auto;
+        overflow-y: auto;  
+        /* 화면 길어지면 스크롤 생김 */
       }
 
       .chat-list div {
@@ -21,36 +25,41 @@
 
       .chat-list div div {
         display: inline-block;
-        padding: 3px;
+        padding: 6px;
       }
 
       .my-chat div,
       .other-chat div,
-      .private-chat div {
+      .secret-chat div {
         max-width: 70%;
         padding: 8px;
         border-radius: 8px;
         margin: 5px;
         word-wrap: break-word;
+        transition: all 1s;
       }
 
-      .private-chat div {
-        background-color: #ffcccb; 
+      .secret-chat div {
+        background-color: #ffcccb !important; 
         color: #333;
         text-align: left;
         margin-right: auto;
+        transition: all 1s;
       }
 
       .my-chat {
         text-align: right;
+        transition: all 1s;
+
       }
 
       .my-chat div {
         background-color: rgb(247, 214, 53);
         margin-left: 0;
-        padding: 0.4rem;
+        padding: 1rem;
         border-radius: 0.4rem;
         display: inline-block;
+        transition: all 1s;
       }
 
       .other-chat div {
@@ -58,6 +67,8 @@
         display: inline-block;
         padding: 0.4rem;
         border-radius: 0.4rem;
+        transition: all 1s;
+
       }
 
       /* [실습3] 채팅창 입장 안내 문구 */
@@ -65,6 +76,8 @@
         text-align: center;
         color: white;
         font-size: 12px;
+        transition: all 1s;
+
       }
 
       .d-none {
@@ -74,7 +87,7 @@
       select,
       input,
       button {
-        margin: 8px;
+        margin: 15px;
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -84,6 +97,31 @@
         padding: 8px;
         margin-bottom: 8px;
       }
+
+.input-container {
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#message {
+  width: 40%;
+  display: flex;
+}
+
+#send-btn {
+  background-color: rgb(247, 214, 53);
+  color: #333;
+  border: none;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+}
+
+#send-btn:hover {
+  box-shadow: 3px 3px 5px #888888; /* 그림자 설정: 수평 거리, 수직 거리, 흐림 정도, 색상 */
+transition: 0.4s all;
+}
 
     </style>
   </head>
@@ -113,17 +151,6 @@
     <!-- [ 실습 2 ] 채팅 UI -->
     <main class="chat-box d-none">
       <div class="chat-list">
-        <!-- <div id="entryMessage"></div> -->
-        <!-- 임시 대화 데이터 -->
-        <div class="my-chat">
-          <!-- <div>user1 : msg1</div> -->
-        </div>
-        <div class="other-chat">
-          <!-- <div>user2 : msg2</div> -->
-        </div>
-        <div class="private-chat">
-              <!-- <div>user2 : msg2</div> -->
-        </div>
       </div>
 
       <!-- 메세지 전송 영역 -->
@@ -135,7 +162,7 @@
         id="message"
         onkeypress="if(window.event.keyCode==13){send()}"
       />
-      <button type="button" onclick="send()">전송</button>
+      <button id="send-btn" type="button" onclick="send()">전송</button>
     </div>
     </main>
   </body>
@@ -143,8 +170,6 @@
     <script>
       let socket = io.connect(); // 소켓 사용을 위한 객체 생성
       let myNick; // 내 닉네임
-
-    
 
       socket.on("connect", () => {
         console.log("클라리언트 연결 완료 ::", socket.id);
@@ -187,46 +212,55 @@
         // nickObjs : { socket.id: nick1, socket.id: nick2, ... }
         let options = `<option value="all">전체</option>`;
 
-   
-
         // TODO : nickObjs 반복 돌아서, option 태그 추가
         // option 태그의 value 속성 값은 socket.id, option 태그의 컨텐츠는 nick 값
-        for (const key in nickObjs) {
-if(nickObjs[key] === undefined) {
-  nickObjs[key] = "알 수 없음"
-}
-
+        for (let key in nickObjs) {
           options += `<option value="${key}">${nickObjs[key]}</option>`;
         }
 
         document.querySelector("#nick-list").innerHTML = options;
       });
 
+
       // [ 실습 4 ] 채팅창 메세지 전송 Step 1.
       function send() {
         // "send" 이벤트 전송 { 닉네임, 입력창내용 }
+
+        const data = {
+          // 전체: all
+          // 그 외 다른 닉네임: socket.id
+          dm: document.querySelector("#nick-list").value,
+          myNick, // 내 닉네임
+          msg: document.querySelector("#message").value // 메세지 내용
+        }
 
         const nick = myNick;
         const messageInput = document.getElementById("message");
         const msg = messageInput.value;
 
-        const receiver = document.getElementById("nick-list").value;
+        //-- 1. 한 번에 진행
+        socket.emit('send', data);
+        document.querySelector('#message').value = ''; // input 초기화
 
-        if (receiver === "all") {
-          socket.emit("sendToAll", {
-            nickName: document.querySelector("#nickname").value,
-            content: messageInput.value,
-          });
-          messageInput.value = "";
-        } else {
-          socket.emit("sendToOne", {
-            receiver,
-            content: messageInput.value,
-            nickName: document.querySelector("#nickname").value,
-          });
+        //-- 2. 나눠서 진행
+        // const receiver = document.getElementById("nick-list").value;
+        // if (receiver === "all") {
+        //   socket.emit("sendToAll", {
+        //     nickName: document.querySelector("#nickname").value,
+        //     content: messageInput.value,
+        //   });
+        //   messageInput.value = "";
+        // } else {
+        //   socket.emit("sendToOne", {
+        //     receiver,
+        //     content: messageInput.value,
+        //     nickName: document.querySelector("#nickname").value,
+        //   });
 
-          messageInput.value = "";
-        }
+        //   messageInput.value = "";
+        // }
+
+
         // const myChat = document.createElement('div');
         // myChat.className = 'my-chat';
 
@@ -240,32 +274,94 @@ if(nickObjs[key] === undefined) {
       // 다른 사람이 보낸 메세지 : 왼쪽
 
       socket.on("message", (data) => {
-        const { nickName, content } = data;
+        const { nick, msg } = data;
 
-        const messageDiv = document.createElement("div");
-        messageDiv.classList.add(
-          myNick === nickName ? "my-chat" : "other-chat",
+        let chatList = document.querySelector('.chat-list');
+        let div = document.createElement("div");  // 부모 div (.my-chat 혹은 .other-chat)
+        let divChat = document.createElement("div");  // 가장 안쪽 div
+      
+        // div.classList.add("show");
+
+        console.log("######", data)
+
+        div.classList.add(
+          myNick === nick ? "my-chat" : "other-chat",
         );
-        messageDiv.innerHTML = `<div>${data.nickName} : ${data.content}</div>`;
 
-        document.querySelector(".chat-list").appendChild(messageDiv);
 
-        const chatList = document.querySelector('.chat-list');
-        chatList.scrollTop = chatList.scrollHeight;
+        if(data.dm) {
+          div.classList.add("secret-chat");
+          divChat.textContent = data.dm // "(속닥속닥)"
+        }
+
+        divChat.textContent += `${nick} : ${msg}`;
+        div.append(divChat);
+        chatList.appendChild(div);
+
+         // 채팅창이 나타날 때 opacity를 변경하는 클래스 추가
+        //  const myChatDiv = document.querySelector('.my-chat div');
+        //  myChatDiv.classList.add('show');
+
+
+    //     const { nickName, content } = data;
+    //     const messageDiv = document.createElement('div');
+    //     messageDiv.classList.add(
+    //       myNick === nickName ? 'my-chat' : 'private-chat'
+    //     );
+    //     messageDiv.innerHTML = `<div>(귓속말)${data.nickName} : ${data.content}</div>`;
+    //     document.querySelector('.chat-list').appendChild(messageDiv);
+    //    
+
+
+        // 메세지가 많아져서, 스크롤이 생기더라도 하단에 고정
+        chatList.scrollTop = chatList.scrollHeight; // 나 자신의 높이로 맞춤            
       });
 
-      socket.on('privateMessage', (data) => {
-        console.log('귓속말: ', data, myNick);
-        const { nickName, content } = data;
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add(
-          myNick === nickName ? 'my-chat' : 'private-chat'
-        );
-        messageDiv.innerHTML = `<div>(귓속말)${data.nickName} : ${data.content}</div>`;
-        document.querySelector('.chat-list').appendChild(messageDiv);
-        const chatList = document.querySelector('.chat-list');
-        chatList.scrollTop = chatList.scrollHeight;  //  스크롤 위치를 최하단
-      });
+
+    //   // [ 실습 5 ] DM 기능 추가
+    //  socket.on('send', (data) => {
+    //     console.log('귓속말: ', data, myNick);
+    //     const { nickName, content } = data;
+    //     const messageDiv = document.createElement('div');
+    //     messageDiv.classList.add(
+    //       myNick === nickName ? 'my-chat' : 'private-chat'
+    //     );
+    //     messageDiv.innerHTML = `<div>(귓속말)${data.nickName} : ${data.content}</div>`;
+    //     document.querySelector('.chat-list').appendChild(messageDiv);
+    //     const chatList = document.querySelector('.chat-list');
+    //     chatList.scrollTop = chatList.scrollHeight;  //  스크롤 위치를 최하단
+    //   });
+    
+    
+    
+      // socket.on('privateMessage', (data) => {
+      //   console.log('귓속말: ', data, myNick);
+      //   const { nickName, content } = data;
+      //   const messageDiv = document.createElement('div');
+      //   messageDiv.classList.add(
+      //     myNick === nickName ? 'my-chat' : 'private-chat'
+      //   );
+      //   messageDiv.innerHTML = `<div>(귓속말)${data.nickName} : ${data.content}</div>`;
+      //   document.querySelector('.chat-list').appendChild(messageDiv);
+      //   const chatList = document.querySelector('.chat-list');
+      //   chatList.scrollTop = chatList.scrollHeight;  //  스크롤 위치를 최하단
+      // });
+
+
+      // ################ CSS 수정 ##############
+//   .my-chat div {
+//   opacity: 0;
+//   background-color: rgb(247, 214, 53);
+//   margin-left: 0;
+//   padding: 1rem;
+//   border-radius: 0.4rem;
+//   display: inline-block;
+//   transition: opacity 0.4s ease; 
+// }
+
+// .my-chat div.show {
+//   opacity: 1;
+// }
 
       // [ 실습 1 ]
       //   function sayHello() {
@@ -301,43 +397,6 @@ if(nickObjs[key] === undefined) {
         var inputValue = document.getElementById("myInput").value;
         console.log("입력값이 변경되었습니다:", inputValue);
       };
-
-      //   const sendHandler = () => {
-      //     // socket.emit('bye', { who: 'client', msg: 'bye' });
-      //     // socket.on('byeKr', (data) => {
-      //     //   document.getElementById(
-      //     //     'myInput'
-      //     //   ).value = `${data.who} : ${data.msg}`;
-      //     // });
-
-      //     var inputValue = document.getElementById('myInput').value;
-      //     // Emit the message to the server
-      //     socket.emit('sendMessage', { who: 'client', msg: inputValue });
-      //     // Clear the input field
-      //     document.getElementById('myInput').value = '';
-
-      //     // Add the sent message to the chat list
-      //     const chatList = document.getElementById('chatList');
-      //     const myChatWrapper = document.createElement('div');
-      //     myChatWrapper.className = 'my-chat-wrapper';
-
-      //     const myChat = document.createElement('div');
-      //     myChat.className = 'my-chat';
-      //     myChat.textContent = `${inputValue}`;
-
-      //     myChatWrapper.appendChild(myChat);
-      //     chatList.appendChild(myChatWrapper);
-      //   };
-
-      //   socket.on('receiveMessage', (data) => {
-      //     // Handle received messages from the server
-      //     const chatList = document.getElementById('chatList');
-      //     const otherChat = document.createElement('div');
-      //     otherChat.className = 'other-chat';
-      //     otherChat.textContent = `${data.who}: ${data.msg}`;
-
-      //     chatList.appendChild(otherChat);
-      //   });
     </script>
   </body>
 </html>
